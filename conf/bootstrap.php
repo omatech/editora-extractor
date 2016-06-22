@@ -1,6 +1,8 @@
 <?php
 //à
 
+
+
 $config = new \Doctrine\DBAL\Configuration();
 //..
 $connectionParams = array(
