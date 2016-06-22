@@ -1,6 +1,7 @@
 {
     "name": "omatech/editora-extractor",
     "description": "Extract information from Editora in powerful and misterious ways using Facebook GraphQL",
+		"minimum-stability":"dev",
     "require": {
         "webonyx/graphql-php": "dev-master"
         , "doctrine/dbal": "~2.5"
