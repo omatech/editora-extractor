@@ -1,8 +1,8 @@
 <?php
 
-require '../vendor/autoload.php';
-require_once '../conf/config.php';
-require_once '../conf/bootstrap.php';
+require __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/conf/config.php';
+require_once __DIR__.'/conf/bootstrap.php';
 
 use GraphQL\GraphQL;
 use Omatech\Editora\Extractor\EditoraData;
