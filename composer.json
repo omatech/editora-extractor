@@ -1,0 +1,14 @@
+{
+    "name": "Omatech/editora-extractor",
+    "description": "Extract information from Editora in powerful and misterious ways using Facebook GraphQL",
+    "require": {
+        "webonyx/graphql-php": "dev-master"
+        , "doctrine/dbal": "~2.5"
+    },
+		"autoload": {
+    "psr-4": {
+        "Omatech\\": "vendor/Omatech"
+				}
+    }
+}
+
