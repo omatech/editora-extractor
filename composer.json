@@ -3,9 +3,7 @@
     "description": "Extract information from Editora in powerful and misterious ways using Facebook GraphQL",
 		"minimum-stability":"dev",
     "require": {
-        "doctrine/dbal": "~2.5"
-    },
-    "require-dev": {
+        "doctrine/dbal": "~2.5",
         "webonyx/graphql-php": "dev-master"
     },
 		"autoload": {
