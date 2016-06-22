@@ -1,5 +1,5 @@
 {
-    "name": "Omatech/editora-extractor",
+    "name": "omatech/editora-extractor",
     "description": "Extract information from Editora in powerful and misterious ways using Facebook GraphQL",
     "require": {
         "webonyx/graphql-php": "dev-master"
