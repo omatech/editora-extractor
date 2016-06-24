@@ -173,7 +173,7 @@ class EditoraData
 						if ($memcacheAvailable)
 						{
 								$instance_last_update_date=self::instanceLastUpdateDate ($id);
-								echo "MEMCACHE:: instance last updated at $instance_last_update_date !!!\n";
+								echo "MEMCACHE:: instance last updated at $instance_last_update_date !!\n";
 								$memcache_value=$mc->get($memcache_key);
 								if ($memcache_value)
 								{// existe, retornamos directamente
