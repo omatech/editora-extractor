@@ -165,7 +165,7 @@ class EditoraData
 				
 				$insert_in_cache=false;
 				$memcache_key=dbname.':'.$id.':'.serialize($args);
-				echo "MEMCACHE:: using key $memcache_key\n";
+				//echo "MEMCACHE:: using key $memcache_key\n";
 				if (!self::$preview)
 				{// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
 						
@@ -177,28 +177,28 @@ class EditoraData
 								if ($memcache_value)
 								{// existe, retornamos directamente
 										$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
-										echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !!!!\n";
-										echo "MEMCACHE:: value for key $memcache_key\n";
-										print_r($memcache_value);
+										//echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !!!!\n";
+										//echo "MEMCACHE:: value for key $memcache_key\n";
+										//print_r($memcache_value);
 										if (isset($memcache_value['cached_timestamp']))
 										{// tenim el timestamp a l'objecte
 										  if ($instance_last_update_timestamp<$memcache_value['cached_timestamp'])
 											{// l'objecte es fresc, el retornem
-												echo "MEMCACHE:: HIT lo renovamos!!!\n";
+												//echo "MEMCACHE:: HIT lo renovamos!!!\n";
 												$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, 3600);
 											  return $memcache_value;	
 											}		
 											else
 											{// no es fresc, l'esborrem i donem ordres de refrescar-lo
 													
-											  echo "MEMCACHE:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n";
+											  //echo "MEMCACHE:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n";
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;
 											}
 										}
 										else
 										{// no te el format correcte, l'expirem
-											  echo "MEMCACHE:: purgamos el objeto ya que no tiene cached_timestamp\n";
+											  //echo "MEMCACHE:: purgamos el objeto ya que no tiene cached_timestamp\n";
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;												
 										}
@@ -292,7 +292,7 @@ class EditoraData
 				{
 					$attrs['cached_timestamp']=time();
 			    $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
-					echo "MEMCACHE:: insertamos el objeto $memcache_key \n";
+					//echo "MEMCACHE:: insertamos el objeto $memcache_key \n";
 				}
 				return $attrs;
     }
