@@ -141,7 +141,7 @@ class EditoraData
 		
 		static function instanceLastUpdateTimeStamp ($id)
 		{
-				$sql="select timestamp(update_date) update_timestamp 
+				$sql="select unix_timestamp(update_date) update_timestamp 
 				from omp_instances where id=$id";
 				$inst_row=self::$conn->fetchAssoc($sql);
 				return $inst_row['update_timestamp'];
