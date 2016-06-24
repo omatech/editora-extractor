@@ -139,11 +139,12 @@ class EditoraData
 				return $row;
     }
 		
-		static function instanceLastUpdateDate ($id)
+		static function instanceLastUpdateTimeStamp ($id)
 		{
-				$sql="select update_date from omp_instances where id=$id";
+				$sql="select timestamp(update_date) update_timestamp 
+				from omp_instances where id=$id";
 				$inst_row=self::$conn->fetchAssoc($sql);
-				return $inst_row['update_date'];
+				return $inst_row['update_timestamp'];
 		}
 		
 		
@@ -172,8 +173,8 @@ class EditoraData
 						$memcacheAvailable=$mc->connect('localhost', 11211);
 						if ($memcacheAvailable)
 						{
-								$instance_last_update_date=self::instanceLastUpdateDate ($id);
-								echo "MEMCACHE:: instance last updated at $instance_last_update_date !!!!\n";
+								$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
+								echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !!!!\n";
 								$memcache_value=$mc->get($memcache_key);
 								if ($memcache_value)
 								{// existe, retornamos directamente
