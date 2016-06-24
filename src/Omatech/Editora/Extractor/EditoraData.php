@@ -180,8 +180,21 @@ class EditoraData
 										echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !\n";
 										echo "MEMCACHE:: value for key $memcache_key\n";
 										print_r($memcache_value);
-										
-										return $memcache_value;
+										if (isset($memcache_value['cached_timestamp']))
+										{// tenim el timestamp a l'objecte
+										  if ($instance_last_update_timestamp<$memcache_value['cached_timestamp'])
+											{// l'objecte es fresc, el retornem
+												echo "MEMCACHE:: HIT lo renovamos!!!\n";
+												$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, 3600);
+											  return $memcache_value;	
+											}		
+											else
+											{// no es fresc, l'esborrem i donem ordres de refrescar-lo
+													
+											  echo "MEMCACHE:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n";
+												$mc->delete($memcache_key);
+												$insert_in_cache=true;
+											}
 								}
 								else
 								{// lo insertamos al final
