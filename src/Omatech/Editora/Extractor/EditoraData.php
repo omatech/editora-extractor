@@ -139,6 +139,13 @@ class EditoraData
 				return $row;
     }
 		
+		static function instanceLastUpdateDate ($id)
+		{
+				$sql="select update_date from omp_instances where id=$id";
+				$inst_row=self::$conn->fetchAssoc($sql);
+				return $inst_row['update_date'];
+		}
+		
 		
     static function getValues($id, $args)
     {// $id = inst_id 
@@ -159,12 +166,14 @@ class EditoraData
 				$memcache_key=dbname.':'.$id.':'.serialize($args);
 				echo "MEMCACHE:: using key $memcache_key\n";
 				if (!self::$preview)
-				{// mirem si esta activada la memcache i si existeix la key
+				{// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
 						
 						$mc=new \Memcache;
 						$memcacheAvailable=$mc->connect('localhost', 11211);
 						if ($memcacheAvailable)
 						{
+								$instance_last_update_date=self::instanceLastUpdateDate ($id);
+								echo "MEMCACHE:: instance last updated at $instance_last_update_date\n";
 								$memcache_value=$mc->get($memcache_key);
 								if ($memcache_value)
 								{// existe, retornamos directamente
