@@ -160,6 +160,7 @@ class EditoraData
 				echo "MEMCACHE:: using key $memcache_key\n";
 				if (!self::$preview)
 				{// mirem si esta activada la memcache i si existeix la key
+						
 						$mc=new \Memcache;
 						$memcacheAvailable=$mc->connect('localhost', 11211);
 						if ($memcacheAvailable)
