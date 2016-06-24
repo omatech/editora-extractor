@@ -155,6 +155,31 @@ class EditoraData
 								
 				self::parse_args($args);
 				
+				$insert_in_cache=false;
+				$memcache_key=dbname.':'.$inst_id.':'.serialize($args);
+				echo "MEMCACHE:: using key $memcache_key\n";
+				if (!self::$preview)
+				{// mirem si esta activada la memcache i si existeix la key
+						$mc=new Memcache;
+						$memcacheAvailable=$mc->connect('localhost', 11211);
+						if ($memcacheAvailable)
+						{
+								$memcache_value=$mc->get($memcache_key);
+								if ($memcache_value)
+								{// existe, retornamos directamente
+										echo "MEMCACHE:: value for key $memcache_key\n";
+										print_r($memcache_value);
+										
+										return $memcache_value;
+								}
+								else
+								{// lo insertamos al final
+										$insert_in_cache=true;
+								}
+						}
+				}
+				
+				
 				$filter='all';
 				if (isset($args['filter'])) $filter=$args['filter'];
 				
@@ -231,6 +256,8 @@ class EditoraData
 				//echo $sql;die;
 				//$attrs=Model::get_data($sql);
 				$attrs=self::$conn->fetchAll($sql);
+				
+			  $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
 				return $attrs;
     }
 
