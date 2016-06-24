@@ -177,7 +177,7 @@ class EditoraData
 								if ($memcache_value)
 								{// existe, retornamos directamente
 										$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
-										echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !\n";
+										echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !!!!\n";
 										echo "MEMCACHE:: value for key $memcache_key\n";
 										print_r($memcache_value);
 										if (isset($memcache_value['cached_timestamp']))
