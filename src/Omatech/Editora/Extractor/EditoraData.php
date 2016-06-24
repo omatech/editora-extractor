@@ -195,6 +195,13 @@ class EditoraData
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;
 											}
+										}
+										else
+										{// no te el format correcte, l'expirem
+											  echo "MEMCACHE:: purgamos el objeto ya que no tiene cached_timestamp\n";
+												$mc->delete($memcache_key);
+												$insert_in_cache=true;												
+										}
 								}
 								else
 								{// lo insertamos al final
