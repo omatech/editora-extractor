@@ -156,11 +156,11 @@ class EditoraData
 				self::parse_args($args);
 				
 				$insert_in_cache=false;
-				$memcache_key=dbname.':'.$inst_id.':'.serialize($args);
+				$memcache_key=dbname.':'.$id.':'.serialize($args);
 				echo "MEMCACHE:: using key $memcache_key\n";
 				if (!self::$preview)
 				{// mirem si esta activada la memcache i si existeix la key
-						$mc=new Memcache;
+						$mc=new \Memcache;
 						$memcacheAvailable=$mc->connect('localhost', 11211);
 						if ($memcacheAvailable)
 						{
