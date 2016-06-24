@@ -292,6 +292,7 @@ class EditoraData
 				{
 					$attrs['cached_timestamp']=time();
 			    $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
+					echo "MEMCACHE:: insertamos el objeto $memcache_key \n";
 				}
 				return $attrs;
     }
