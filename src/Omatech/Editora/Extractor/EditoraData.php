@@ -173,11 +173,11 @@ class EditoraData
 						$memcacheAvailable=$mc->connect('localhost', 11211);
 						if ($memcacheAvailable)
 						{
-								$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
-								echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !\n";
 								$memcache_value=$mc->get($memcache_key);
 								if ($memcache_value)
 								{// existe, retornamos directamente
+										$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
+										echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !\n";
 										echo "MEMCACHE:: value for key $memcache_key\n";
 										print_r($memcache_value);
 										
@@ -268,7 +268,11 @@ class EditoraData
 				//$attrs=Model::get_data($sql);
 				$attrs=self::$conn->fetchAll($sql);
 				
-			  $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
+				if ($insert_in_cache)
+				{
+					$attrs['cached_timestamp']=time();
+			    $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
+				}
 				return $attrs;
     }
 
