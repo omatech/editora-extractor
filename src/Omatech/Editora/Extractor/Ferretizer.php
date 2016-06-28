@@ -3,7 +3,7 @@ namespace Omatech\Editora\Extractor;
 class Ferretizer {
 		//put your code here
 		
-		function FerretizeRel ($relation, $metadata=false)
+		static function FerretizeRel ($relation, $metadata=false)
 		{
 				$una_rel=array();
 				if ($metadata)
@@ -27,7 +27,7 @@ class Ferretizer {
 				return $una_rel;		
 		}
 
-		function FerretizeInstance ($instance, $metadata=false)
+		static function FerretizeInstance ($instance, $metadata=false)
 		{
 				$una_instancia=array();
 				$una_instancia['id']=$instance['id'];
@@ -93,7 +93,7 @@ class Ferretizer {
 				return $una_instancia;
 		}
 		
-		function FerretizeClass ($class, $metadata=false)
+		static function FerretizeClass ($class, $metadata=false)
 		{
 				$una_class=array();
 				$una_class['id']=$class['class_id'];
@@ -118,7 +118,7 @@ class Ferretizer {
 				return $una_class;
 		}
 		
-		function Ferretize ($data, $metadata=false)
+		static function Ferretize ($data, $metadata=false)
 		{
 				if (isset($data['class'])) return self::FerretizeClass($data['class'], $metadata);
 				if (isset($data['instance'])) return self::FerretizeInstance($data['instance'], $metadata);	
