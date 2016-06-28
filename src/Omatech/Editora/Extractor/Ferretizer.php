@@ -42,6 +42,8 @@ class Ferretizer {
 								}
 						}
 				}
+				echo "!!! info de la instancia al ferretizer\n";
+				print_r($instance);
 				if (isset($instance['all_values']))
 				{
 						foreach ($instance['all_values'] as $attr_key=>$attr_value)

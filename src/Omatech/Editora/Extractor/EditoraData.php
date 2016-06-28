@@ -15,6 +15,7 @@ class EditoraData
 		private static $sql_class_id="";
 		private static $conn;
 		private static $debug=false;
+		private static $cache_time=3600;
 		
 		static function set_connection($conn)
 		{
@@ -199,7 +200,7 @@ class EditoraData
 						{
 								$memcache_value=$mc->get($memcache_key);
 								if ($memcache_value)
-								{// existe, retornamos directamente
+								{// existe, retornamos directamente si la info esta actualizada
 										$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
 										self::debug("$type_of_cache:: instance last updated at $instance_last_update_timestamp !!!!\n");
 										self::debug("$type_of_cache:: value for key $memcache_key\n");
@@ -211,11 +212,11 @@ class EditoraData
 												self::debug("$type_of_cache:: HIT lo renovamos!!!\n");
 												if ($type_of_cache=='memcached')
 												{
-													$mc->set($memcache_key, $memcache_value, 3600);
+													$mc->set($memcache_key, $memcache_value, self::$cache_time);
 												}
 												else
 												{// memcache standard
-													$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, 3600);
+													$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, self::$cache_time);
 												}
 											  return $memcache_value;	
 											}		
@@ -327,11 +328,11 @@ class EditoraData
 					self::debug("$type_of_cache:: insertamos el objeto $memcache_key \n");
 					if ($type_of_cache=='memcached')
 					{
-			      $mc->set($memcache_key, $attrs, 3600);
+			      $mc->set($memcache_key, $attrs, self::$cache_time);
 					}
 					else
 					{// memcache standard
-			      $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
+			      $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, self::$cache_time);
 					}
 				}
 				return $attrs;
