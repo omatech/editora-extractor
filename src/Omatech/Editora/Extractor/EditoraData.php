@@ -201,12 +201,10 @@ class EditoraData
 												if ($type_of_cache=='memcached')
 												{
 													$mc->set($memcache_key, $memcache_value, 3600);
-													echo "$type_of_cache:: insertamos el objeto $memcache_key \n";
 												}
 												else
 												{// memcache standard
 													$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, 3600);
-													echo "$type_of_cache:: insertamos el objeto $memcache_key \n";							
 												}
 											  return $memcache_value;	
 											}		
@@ -315,15 +313,14 @@ class EditoraData
 					$cache_metadata['timestamp']=time();
 					$cache_metadata['key']=$memcache_key;
 					$attrs['cache_metadata']=$cache_metadata;
+					echo "$type_of_cache:: insertamos el objeto $memcache_key \n";
 					if ($type_of_cache=='memcached')
 					{
 			      $mc->set($memcache_key, $attrs, 3600);
-					  echo "$type_of_cache:: insertamos el objeto $memcache_key \n";
 					}
 					else
 					{// memcache standard
 			      $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
-					  echo "$type_of_cache:: insertamos el objeto $memcache_key \n";							
 					}
 				}
 				return $attrs;
