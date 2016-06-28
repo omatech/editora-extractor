@@ -173,6 +173,7 @@ class EditoraData
 						if (class_exists('\Memcached'))
 						{
 							$mc=new \Memcached;
+						  $mc->setOption(Memcached::OPT_COMPRESSION, true);
 						  $memcacheAvailable=$mc->addServer('localhost', 11211);
 							$type_of_cache='memcached';
 						}
@@ -185,7 +186,6 @@ class EditoraData
 								
 						if ($memcacheAvailable)
 						{
-						    $mc->setOption(Memcached::OPT_COMPRESSION, true);
 								$memcache_value=$mc->get($memcache_key);
 								if ($memcache_value)
 								{// existe, retornamos directamente
