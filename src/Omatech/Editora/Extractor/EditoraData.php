@@ -170,14 +170,14 @@ class EditoraData
 				{// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
 						
 						$memcacheAvailable=false;
-						if (class_exists('Memcached'))
+						if (extension_loaded('Memcached'))
 						{
 							$mc=new \Memcached;
 						  $mc->setOption(Memcached::OPT_COMPRESSION, true);
 						  $memcacheAvailable=$mc->addServer('localhost', 11211);
 							$type_of_cache='memcached';
 						}
-						elseif (class_exists('Memcache'))
+						elseif (extension_loaded('Memcache'))
 						{
 								$mc=new \Memcache;
 								$memcacheAvailable=$mc->connect('localhost', 11211);	
