@@ -44,26 +44,22 @@ class Ferretizer {
 				}
 				if (isset($instance['all_values']))
 				{
-						foreach ($instance['all_values'] as $values)
+						foreach ($instance['all_values'] as $attr_key=>$attr_value)
 						{
-/*
- 								if (is_array($values))
- 
+ 								if ($attr_key=='cache_metadata')
 								{// cache_metadata
 										if ($metadata)
 										{
-										  foreach ($values as $key => $value) 
+										  foreach ($attr_value as $cache_key => $cache_value) 
 										  {
-												$una_instancia['metadata']['attr-cache-'.$key]=$val;
+												$una_instancia['metadata']['attr-cache-'.$cache_key]=$cache_value;
 										  }
 										}
 								}
 								else
-								{// cas normal, attribute
- 
- */
-										$una_instancia[$values['atri_tag']]=$values['text_val'];
-								//}
+								{// cas normal, attribute 
+										$una_instancia[$attr_value['atri_tag']]=$attr_value['text_val'];
+								}
 						}
 				}
 				
