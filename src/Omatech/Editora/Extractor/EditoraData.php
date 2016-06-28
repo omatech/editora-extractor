@@ -210,6 +210,11 @@ class EditoraData
 										{// tenim el timestamp a l'objecte
 										  if ($instance_last_update_timestamp<$memcache_value['cache_timestamp'])
 											{// l'objecte es fresc, el retornem
+												$cache_timestamp=array();
+												$cache_timestamp['atri_tag']='meta_cache_timestamp';
+												$cache_timestamp['text_val']=time();
+												array_push($memcache_value, $cache_timestamp);							
+												
 												self::debug("$type_of_cache:: HIT lo renovamos!!!\n");
 												if ($type_of_cache=='memcached')
 												{
