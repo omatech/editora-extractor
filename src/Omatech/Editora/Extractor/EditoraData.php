@@ -321,8 +321,9 @@ class EditoraData
 				and a.id=ca.atri_id
 				$add_sql
 				";
-				//echo $sql;die;
+				echo $sql;
 				//$attrs=Model::get_data($sql);
+				
 				$attrs=self::$conn->fetchAll($sql);
 				
 				if ($insert_in_cache)
