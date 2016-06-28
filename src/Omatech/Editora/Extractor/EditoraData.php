@@ -186,6 +186,7 @@ class EditoraData
 						  $mc->setOption(\Memcached::OPT_COMPRESSION, true);
 						  $memcacheAvailable=$mc->addServer('localhost', 11211);
 							$type_of_cache='memcached';
+							
 						}
 						elseif (extension_loaded('Memcache'))
 						{
