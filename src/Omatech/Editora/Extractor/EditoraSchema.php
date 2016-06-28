@@ -109,7 +109,7 @@ class EditoraSchema
                     'type' => function () use (&$InstanceType) {
                         return Type::listOf($InstanceType);
                     },
-                    'description' => 'The related childs or parents of this relation.',
+                    'description' => 'The related children or parents of this relation.',
 											
                     'args' => [
                         'filter' => [
@@ -317,7 +317,7 @@ class EditoraSchema
                 ],
                 'relation1' => [
                     'type' => Type::listOf($RelationType),
-                    'description' => 'The childs of the instance.',
+                    'description' => 'The children of the instance.',
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
@@ -326,7 +326,7 @@ class EditoraSchema
                         ],
                         'limit' => [
                             'name' => 'limit',
-                            'description' => 'number of childs to get, default 1000',
+                            'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
                         'filter' => [
@@ -364,7 +364,7 @@ class EditoraSchema
 											
                 'relation2' => [
                     'type' => Type::listOf($RelationType),
-                    'description' => 'The childs of the instance.',
+                    'description' => 'The children of the instance.',
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
@@ -373,7 +373,7 @@ class EditoraSchema
                         ],
                         'limit' => [
                             'name' => 'limit',
-                            'description' => 'number of childs to get, default 1000',
+                            'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
                         'filter' => [
@@ -408,7 +408,7 @@ class EditoraSchema
 
                 'relation3' => [
                     'type' => Type::listOf($RelationType),
-                    'description' => 'The childs of the instance.',
+                    'description' => 'The children of the instance.',
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
@@ -417,7 +417,7 @@ class EditoraSchema
                         ],
                         'limit' => [
                             'name' => 'limit',
-                            'description' => 'number of childs to get, default 1000',
+                            'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
                         'filter' => [
@@ -452,7 +452,7 @@ class EditoraSchema
 											
                 'relation4' => [
                     'type' => Type::listOf($RelationType),
-                    'description' => 'The childs of the instance.',
+                    'description' => 'The children of the instance.',
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
@@ -461,7 +461,7 @@ class EditoraSchema
                         ],
                         'limit' => [
                             'name' => 'limit',
-                            'description' => 'number of childs to get, default 1000',
+                            'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
                         'filter' => [
@@ -496,7 +496,7 @@ class EditoraSchema
 											
                 'relation5' => [
                     'type' => Type::listOf($RelationType),
-                    'description' => 'The childs of the instance.',
+                    'description' => 'The children of the instance.',
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
@@ -505,7 +505,7 @@ class EditoraSchema
                         ],
                         'limit' => [
                             'name' => 'limit',
-                            'description' => 'number of childs to get, default 1000',
+                            'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
                         'filter' => [

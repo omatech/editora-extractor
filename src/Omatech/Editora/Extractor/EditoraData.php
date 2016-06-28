@@ -329,7 +329,7 @@ class EditoraData
 				$rel_row=self::$conn->fetchAssoc($sql);
 				if ($rel_row)
 				{// la instancie es pare, treiem els fills
-						$rel_row['direction']='childs';
+						$rel_row['direction']='children';
 						$rel_row['limit']=self::$limit;
 						$rel_row['inst_id']=$inst_id;
 						//$rel_row['limit']=$args['limit'];
@@ -387,9 +387,9 @@ class EditoraData
 		{
 				self::parse_args($args);
 				//echo "getRelated $direction, $rel_id, $inst_id, $limit\n";die;
-				if ($direction=='childs')
+				if ($direction=='children')
 				{
-				  return self::get_childs ($rel_id, $inst_id, $args);
+				  return self::get_children ($rel_id, $inst_id, $args);
 				}
 				if ($direction=='parents')
 				{
@@ -398,7 +398,7 @@ class EditoraData
 				
 		}
 		
-		function get_childs ($rel_id, $inst_id, $args)
+		function get_children ($rel_id, $inst_id, $args)
 		{
 				self::parse_args($args);
 				
@@ -416,7 +416,7 @@ class EditoraData
 				order by weight
 				limit ".self::$limit."
 				";
-				//echo "get_childs $rel_id, $inst_id\n";
+				//echo "get_children $rel_id, $inst_id\n";
 				//print_r($args);
 				//echo $sql."\n";
 				return self::$conn->fetchAll($sql);
