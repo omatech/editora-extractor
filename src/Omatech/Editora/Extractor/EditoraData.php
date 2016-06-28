@@ -14,7 +14,7 @@ class EditoraData
 		private static $sql_tag="";
 		private static $sql_class_id="";
 		private static $conn;
-		private static $debug=false;
+		private static $debug=true;
 		private static $cache_time=3600;
 		
 		static function set_connection($conn)
@@ -337,6 +337,7 @@ class EditoraData
 					//print_r($attrs);
 					
 					self::debug("$type_of_cache:: insertamos el objeto $memcache_key \n");
+					self::debug(print_r($attrs, true));
 					if ($type_of_cache=='memcached')
 					{
 			      $mc->set($memcache_key, $attrs, self::$cache_time);
