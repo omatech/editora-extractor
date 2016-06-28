@@ -14,6 +14,7 @@ class EditoraData
 		private static $sql_tag="";
 		private static $sql_class_id="";
 		private static $conn;
+		private static $debud=false;
 		
 		static function set_connection($conn)
 		{
@@ -165,7 +166,7 @@ class EditoraData
 				
 				$insert_in_cache=false;
 				$memcache_key=dbname.':'.$id.':'.serialize($args);
-				//echo "MEMCACHE:: using key $memcache_key\n";
+				self::debug("MEMCACHE:: using key $memcache_key\n");
 				if (!self::$preview)
 				{// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
 						
@@ -190,14 +191,14 @@ class EditoraData
 								if ($memcache_value)
 								{// existe, retornamos directamente
 										$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
-										echo "$type_of_cache:: instance last updated at $instance_last_update_timestamp !!!!\n";
-										echo "$type_of_cache:: value for key $memcache_key\n";
-										print_r($memcache_value);
+										self::debug("$type_of_cache:: instance last updated at $instance_last_update_timestamp !!!!\n");
+										self::debug("$type_of_cache:: value for key $memcache_key\n");
+										self::debug(print_r($memcache_value, FALSE));
 										if (isset($memcache_value['cache_metadata']['timestamp']))
 										{// tenim el timestamp a l'objecte
 										  if ($instance_last_update_timestamp<$memcache_value['cache_metadata']['timestamp'])
 											{// l'objecte es fresc, el retornem
-												echo "$type_of_cache:: HIT lo renovamos!!!\n";
+												self::debug("$type_of_cache:: HIT lo renovamos!!!\n");
 												if ($type_of_cache=='memcached')
 												{
 													$mc->set($memcache_key, $memcache_value, 3600);
@@ -210,14 +211,14 @@ class EditoraData
 											}		
 											else
 											{// no es fresc, l'esborrem i donem ordres de refrescar-lo												
-											  echo "$type_of_cache:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n";
+											  self::debug("$type_of_cache:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n");
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;
 											}
 										}
 										else
 										{// no te el format correcte, l'expirem
-											  echo "$type_of_cache:: purgamos el objeto ya que no tiene cached_timestamp\n";
+											  self::debug("$type_of_cache:: purgamos el objeto ya que no tiene cached_timestamp\n");
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;												
 										}
@@ -313,7 +314,7 @@ class EditoraData
 					$cache_metadata['timestamp']=time();
 					$cache_metadata['key']=$memcache_key;
 					$attrs['cache_metadata']=$cache_metadata;
-					echo "$type_of_cache:: insertamos el objeto $memcache_key \n";
+					self::debug("$type_of_cache:: insertamos el objeto $memcache_key \n");
 					if ($type_of_cache=='memcached')
 					{
 			      $mc->set($memcache_key, $attrs, 3600);
