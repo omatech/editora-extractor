@@ -210,7 +210,6 @@ class EditoraData
 										  if ($instance_last_update_timestamp<$memcache_value['cache_timestamp'])
 											{// l'objecte es fresc, el retornem
 												self::debug("$type_of_cache:: HIT lo renovamos!!!\n");
-												$memcache_value['cache_timestamp']=time();
 												if ($type_of_cache=='memcached')
 												{
 													$mc->set($memcache_key, $memcache_value, self::$cache_time);
@@ -331,8 +330,8 @@ class EditoraData
 					array_push($attrs, $cache_timestamp, $cache_key);
 					$attrs['cache_timestamp']=time();
 					
-					echo "!!! abans de guardar a cache";
-					print_r($attrs);
+					//echo "!!! abans de guardar a cache";
+					//print_r($attrs);
 					
 					self::debug("$type_of_cache:: insertamos el objeto $memcache_key \n");
 					if ($type_of_cache=='memcached')
