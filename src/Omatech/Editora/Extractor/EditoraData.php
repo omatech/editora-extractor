@@ -193,16 +193,11 @@ class EditoraData
 										echo "$type_of_cache:: instance last updated at $instance_last_update_timestamp !!!!\n";
 										echo "$type_of_cache:: value for key $memcache_key\n";
 										print_r($memcache_value);
-										if (isset($memcache_value['cached_timestamp']))
+										if (isset($memcache_value['cache_metadata']['timestamp']))
 										{// tenim el timestamp a l'objecte
-											$cache_timestamp=0;
-											if (isset($memcache_value['cache_metadata']['timestamp']))
-											{
-													$cache_timestamp=$memcache_value['cache_metadata']['timestamp'];
-											}
-										  if ($instance_last_update_timestamp<$cache_timestamp)
+										  if ($instance_last_update_timestamp<$memcache_value['cache_metadata']['timestamp'])
 											{// l'objecte es fresc, el retornem
-												//echo "MEMCACHE:: HIT lo renovamos!!!\n";
+												echo "$type_of_cache:: HIT lo renovamos!!!\n";
 												$mc->set($memcache_key, $memcache_value, 3600);
 											  return $memcache_value;	
 											}		
