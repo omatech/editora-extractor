@@ -50,14 +50,11 @@ class Ferretizer {
 						{
 								//echo "attr_key=$attr_key\n";
 								//print_r($attr_value);
- 								if ($attr_key=='cache_metadata')
+ 								if ($attr_value['atri_tag']=='meta_cache_timestamp' || $attr_value['atri_tag']=='meta_cache_key')
 								{// cache_metadata
 										if ($metadata)
 										{
-										  foreach ($attr_value as $cache_key => $cache_value) 
-										  {
-												$una_instancia['metadata']['attr-cache-'.$cache_key]=$cache_value;
-										  }
+												$una_instancia['metadata'][$attr_value['atri_tag']]=$attr_value['text_val'];
 										}
 								}
 								else
