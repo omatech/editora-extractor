@@ -198,7 +198,16 @@ class EditoraData
 										  if ($instance_last_update_timestamp<$memcache_value['cache_metadata']['timestamp'])
 											{// l'objecte es fresc, el retornem
 												echo "$type_of_cache:: HIT lo renovamos!!!\n";
-												$mc->set($memcache_key, $memcache_value, 3600);
+												if ($type_of_cache=='memcached')
+												{
+													$mc->set($memcache_key, $memcache_value, 3600);
+													echo "$type_of_cache:: insertamos el objeto $memcache_key \n";
+												}
+												else
+												{// memcache standard
+													$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, 3600);
+													echo "$type_of_cache:: insertamos el objeto $memcache_key \n";							
+												}
 											  return $memcache_value;	
 											}		
 											else
