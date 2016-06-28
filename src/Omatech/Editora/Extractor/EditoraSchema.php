@@ -281,6 +281,10 @@ class EditoraSchema
                 'update_date' => [
                     'type' => Type::string(),
                     'description' => 'The update of the instance.',
+                ],							
+                'update_timestamp' => [
+                    'type' => Type::int(),
+                    'description' => 'The update of the instance in unix timestamp.',
                 ],
                 'nice_url' => [
                     'type' => Type::string(),
@@ -309,7 +313,8 @@ class EditoraSchema
 												//print_r($args);
 												//print_r($instance);
 												//die;
-                        $attrs=EditoraData::getValues($instance['id'], $args);
+                        $attrs=EditoraData::getValues($instance['id'], $args, &$cache_time);
+												echo "cache_time=$cache_time\n";
 												print_r($attrs);
 												if ($attrs) return $attrs;
 												return null;

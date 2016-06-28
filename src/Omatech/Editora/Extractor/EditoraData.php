@@ -81,7 +81,7 @@ class EditoraData
 				//print_r($args);
 				self::parse_args($args);
 				
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern 
+				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, unix_timestamp(update_date) update_timestamp  
 				from omp_instances i 
 				, omp_classes c
 				where i.id=".self::$id."
@@ -160,7 +160,7 @@ class EditoraData
 		}
 		
 		
-    static function getValues($id, $args)
+    static function getValues($id, $args, &$cache_time)
     {// $id = inst_id 
 		// $lang = ALL | es | ca | en ...
 		// $filter = detail | resume | small | only-X | except-Y | thinnier-than-i | bigger-than-i | fields:fieldname1|fieldname2
@@ -210,10 +210,6 @@ class EditoraData
 										{// tenim el timestamp a l'objecte
 										  if ($instance_last_update_timestamp<$memcache_value['cache_timestamp'])
 											{// l'objecte es fresc, el retornem
-												$cache_timestamp=array();
-												$cache_timestamp['atri_tag']='meta_cache_timestamp';
-												$cache_timestamp['text_val']=time();
-												array_push($memcache_value, $cache_timestamp);							
 												
 												self::debug("$type_of_cache:: HIT lo renovamos!!!\n");
 												if ($type_of_cache=='memcached')
@@ -328,17 +324,8 @@ class EditoraData
 				
 				if ($insert_in_cache)
 				{
-					$cache_timestamp=array();
-					$cache_timestamp['atri_tag']='meta_cache_timestamp';
-					$cache_timestamp['text_val']=time();
-					$cache_key=array();
-					$cache_key['atri_tag']='meta_cache_key';
-					$cache_key['text_val']=$memcache_key;
-					$cache_miss_timestamp=array();
-					$cache_miss_timestamp['atri_tag']='meta_cache_miss_timestamp';
-					$cache_miss_timestamp['text_val']=time();
-					array_push($attrs, $cache_timestamp, $cache_key, $cache_miss_timestamp);
 					$attrs['cache_timestamp']=time();
+					$cache_time=time();
 					
 					//echo "!!! abans de guardar a cache";
 					//print_r($attrs);
