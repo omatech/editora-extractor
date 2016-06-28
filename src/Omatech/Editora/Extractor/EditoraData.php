@@ -15,7 +15,6 @@ class EditoraData
 		private static $sql_class_id="";
 		private static $conn;
 		private static $debug=false;
-		public static $cache_time=null;
 		private static $cache_expiration=3600;
 		
 		
@@ -175,7 +174,6 @@ class EditoraData
 		// "bigger-than-i" are values that is length is bigger than i 
 								
 				self::parse_args($args);
-				self::$cache_time=0;
 				
 				$insert_in_cache=false;
 				$memcache_key=dbname.':'.$id.':'.serialize($args);
@@ -213,7 +211,7 @@ class EditoraData
 										  if ($instance_last_update_timestamp<$memcache_value['cache_timestamp'])
 											{// l'objecte es fresc, el retornem
 												$memcache_value['cache_timestamp']=time();
-												self::$cache_time=$memcache_value['cache_timestamp'];
+												$memcache_value['cache_status']='hit';
 												self::debug("$type_of_cache:: HIT lo renovamos!!!\n");
 												if ($type_of_cache=='memcached')
 												{
@@ -328,7 +326,7 @@ class EditoraData
 				if ($insert_in_cache)
 				{
 						$attrs['cache_timestamp']=time();
-						self::$cache_time=$attrs['cache_timestamp'];
+						$attrs['cache_status']='hit';
 					
 					//echo "!!! abans de guardar a cache";
 					//print_r($attrs);

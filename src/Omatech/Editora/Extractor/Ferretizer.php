@@ -29,6 +29,8 @@ class Ferretizer {
 
 		static function FerretizeInstance ($instance, $metadata=false)
 		{
+				echo "pintant la instancia al ferretizer\n";
+				print_r($instance);
 				$una_instancia=array();
 				$una_instancia['id']=$instance['id'];
 				if (isset($instance['link']))	$una_instancia['link']=$instance['link'];
@@ -48,8 +50,8 @@ class Ferretizer {
 				{
 						foreach ($instance['all_values'] as $attr_key=>$attr_value)
 						{
-								echo "$attr_key=\n";
-								print_r($attr_value);
+								//echo "$attr_key=\n";
+								//print_r($attr_value);
 								$meta_cache_timestamp=0;
 								$meta_cache_miss_timestamp=0;
  								if ($attr_value['atri_tag']=='meta_cache_timestamp' 

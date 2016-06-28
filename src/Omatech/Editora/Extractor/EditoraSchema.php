@@ -274,6 +274,14 @@ class EditoraSchema
                     'type' => Type::string(),
                     'description' => 'The publishing start of the instance.',
                 ],
+                'cache_time' => [
+                    'type' => Type::int(),
+                    'description' => 'Cache Timestamp',
+                ],
+                'cache_status' => [
+                    'type' => Type::string(),
+                    'description' => 'Cache Status (hit or miss)',
+                ],
                 'creation_date' => [
                     'type' => Type::string(),
                     'description' => 'The creation of the instance.',
@@ -316,7 +324,8 @@ class EditoraSchema
                         $attrs=EditoraData::getValues($instance['id'], $args);
 												echo "cache_time=".EditoraData::$cache_time."\n";
 												print_r($attrs);
-												$instance['cache_time']=EditoraData::$cache_time;
+												$instance['cache_time']=$attrs['cache_time'];
+												$instance['cache_status']=$attrs['cache_status'];
 												if ($attrs) return $attrs;
 												return null;
                     },
