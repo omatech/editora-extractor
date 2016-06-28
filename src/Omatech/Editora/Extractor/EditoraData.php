@@ -182,15 +182,19 @@ class EditoraData
 										//print_r($memcache_value);
 										if (isset($memcache_value['cached_timestamp']))
 										{// tenim el timestamp a l'objecte
-										  if ($instance_last_update_timestamp<$memcache_value['cached_timestamp'])
+											$cache_timestamp=0;
+											if (isset($memcache_value['cache_metadata']['timestamp']))
+											{
+													$cache_timestamp=$memcache_value['cache_metadata']['timestamp'];
+											}
+										  if ($instance_last_update_timestamp<$cache_timestamp)
 											{// l'objecte es fresc, el retornem
 												//echo "MEMCACHE:: HIT lo renovamos!!!\n";
 												$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, 3600);
 											  return $memcache_value;	
 											}		
 											else
-											{// no es fresc, l'esborrem i donem ordres de refrescar-lo
-													
+											{// no es fresc, l'esborrem i donem ordres de refrescar-lo												
 											  //echo "MEMCACHE:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n";
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;
@@ -290,7 +294,10 @@ class EditoraData
 				
 				if ($insert_in_cache)
 				{
-					$attrs['cached_timestamp']=time();
+					$cache_metadata=array();
+					$cache_metadata['timestamp']=time();
+					$cache_metadata['key']=$memcache_key;
+					$attrs['cache_metadata']=$cache_metadata;
 			    $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
 					//echo "MEMCACHE:: insertamos el objeto $memcache_key \n";
 				}
