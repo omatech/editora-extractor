@@ -50,17 +50,31 @@ class Ferretizer {
 						{
 								//echo "attr_key=$attr_key\n";
 								//print_r($attr_value);
- 								if ($attr_value['atri_tag']=='meta_cache_timestamp' || $attr_value['atri_tag']=='meta_cache_key')
+								$meta_cache_timestamp=0;
+								$meta_cache_miss_timestamp=0;
+ 								if ($attr_value['atri_tag']=='meta_cache_timestamp' 
+								|| $attr_value['atri_tag']=='meta_cache_key' 
+								|| $attr_value['atri_tag']=='meta_cache_miss_timestamp'
+								)
 								{// cache_metadata
 										if ($metadata)
 										{
 												$una_instancia['metadata'][$attr_value['atri_tag']]=$attr_value['text_val'];
+												$$attr_value['atri_tag']=$attr_value['text_val'];
 										}
 								}
 								else
 								{// cas normal, attribute 
 										$una_instancia[$attr_value['atri_tag']]=$attr_value['text_val'];
 								}
+						}
+						if ($meta_cache_timestamp==$meta_cache_miss_timestamp)
+						{
+								$una_instancia['metadata']['is_miss']='true';
+						}
+						else 
+						{
+								$una_instancia['metadata']['is_miss']='false';								
 						}
 				}
 				

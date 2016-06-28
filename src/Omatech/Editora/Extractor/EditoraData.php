@@ -327,7 +327,10 @@ class EditoraData
 					$cache_key=array();
 					$cache_key['atri_tag']='meta_cache_key';
 					$cache_key['text_val']=$memcache_key;
-					array_push($attrs, $cache_timestamp, $cache_key);
+					$cache_miss_timestamp=array();
+					$cache__miss_timestamp['atri_tag']='meta_cache_miss_timestamp';
+					$cache_miss_timestamp['text_val']=time();
+					array_push($attrs, $cache_timestamp, $cache_key, $cache_miss_timestamp);
 					$attrs['cache_timestamp']=time();
 					
 					//echo "!!! abans de guardar a cache";
