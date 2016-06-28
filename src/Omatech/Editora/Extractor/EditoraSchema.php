@@ -65,6 +65,14 @@ class EditoraSchema
                     'type' => Type::string(),
                     'description' => 'Is detail? Y or N',
                 ],
+                'cache_time' => [
+                    'type' => Type::int(),
+                    'description' => 'Cache Time',
+                ],
+                'cache_status' => [
+                    'type' => Type::string(),
+                    'description' => 'Cache status (hit|miss)',
+                ],
             ],
         ]);
 						
@@ -274,14 +282,6 @@ class EditoraSchema
                     'type' => Type::string(),
                     'description' => 'The publishing start of the instance.',
                 ],
-                'cache_time' => [
-                    'type' => Type::int(),
-                    'description' => 'Cache Timestamp',
-                ],
-                'cache_status' => [
-                    'type' => Type::string(),
-                    'description' => 'Cache Status (hit or miss)',
-                ],
                 'creation_date' => [
                     'type' => Type::string(),
                     'description' => 'The creation of the instance.',
@@ -323,6 +323,7 @@ class EditoraSchema
 												//die;
 											  $attrs=EditoraData::getValues($instance['id'], $args);	
 												print_r($attrs);
+												
 												if ($attrs) return $attrs;
 												return null;
                     },
