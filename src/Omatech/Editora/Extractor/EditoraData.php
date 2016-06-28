@@ -21,7 +21,16 @@ class EditoraData
 				//var_dump($conn);
 				self::$conn=$conn;
 		}
-	
+		
+		static function debug($str)
+		{
+				if (self::$debug)
+				{
+						echo $str;
+				}
+		}
+
+
 		static function parse_args($args)
 		{
 				if (isset($args['id']))
