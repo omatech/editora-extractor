@@ -46,6 +46,7 @@ class Ferretizer {
 				{
 						foreach ($instance['all_values'] as $attr_key=>$attr_value)
 						{
+								echo "attr_key=$attr_key\n";
  								if ($attr_key=='cache_metadata')
 								{// cache_metadata
 										if ($metadata)
