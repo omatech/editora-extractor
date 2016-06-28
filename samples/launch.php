@@ -21,6 +21,8 @@ $params = [
     all_values (lang: $lang, filter: "small") {
 			atri_tag
 			text_val
+			cache_time
+			cache_status
     }
 		
     relation1 (lang: $lang, tag: "carrousel")
