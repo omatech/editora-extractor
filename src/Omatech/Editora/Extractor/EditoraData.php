@@ -14,7 +14,7 @@ class EditoraData
 		private static $sql_tag="";
 		private static $sql_class_id="";
 		private static $conn;
-		private static $debud=false;
+		private static $debug=false;
 		
 		static function set_connection($conn)
 		{
