@@ -17,6 +17,7 @@ class EditoraData
 		private static $debug=false;
 		private static $cache_time=3600;
 		
+		
 		static function set_connection($conn)
 		{
 				//var_dump($conn);
