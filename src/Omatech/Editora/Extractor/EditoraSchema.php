@@ -351,7 +351,7 @@ class EditoraSchema
 												//print_r($instance);
 												//die;
 											  $attrs=EditoraData::getValues($instance['id'], $args);	
-												print_r($attrs);
+												//print_r($attrs);
 												
 												if ($attrs) return $attrs;
 												return null;
