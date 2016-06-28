@@ -322,7 +322,6 @@ class EditoraSchema
 												//print_r($instance);
 												//die;
                         $attrs=EditoraData::getValues($instance['id'], $args);
-												echo "cache_time=".EditoraData::$cache_time."\n";
 												print_r($attrs);
 												$instance['cache_time']=$attrs['cache_time'];
 												$instance['cache_status']=$attrs['cache_status'];
