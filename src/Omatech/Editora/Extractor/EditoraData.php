@@ -169,8 +169,20 @@ class EditoraData
 				if (!self::$preview)
 				{// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
 						
-						$mc=new \Memcached;
-						$memcacheAvailable=$mc->addServer('localhost', 11211);
+						$memcacheAvailable=false;
+						if (class_exists('\Memcached'))
+						{
+							$mc=new \Memcached;
+						  $memcacheAvailable=$mc->addServer('localhost', 11211);
+							$type_of_cache='memcached';
+						}
+						elseif (class_exists('\Memcache'))
+						{
+								$mc=new \Memcache;
+								$memcacheAvailable=$mc->connect('localhost', 11211);	
+								$type_of_cache='memcache';
+						}
+								
 						if ($memcacheAvailable)
 						{
 						    $mc->setOption(Memcached::OPT_COMPRESSION, true);
@@ -178,9 +190,9 @@ class EditoraData
 								if ($memcache_value)
 								{// existe, retornamos directamente
 										$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
-										//echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !!!!\n";
-										//echo "MEMCACHE:: value for key $memcache_key\n";
-										//print_r($memcache_value);
+										echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !!!!\n";
+										echo "MEMCACHE:: value for key $memcache_key\n";
+										print_r($memcache_value);
 										if (isset($memcache_value['cached_timestamp']))
 										{// tenim el timestamp a l'objecte
 											$cache_timestamp=0;
@@ -196,14 +208,14 @@ class EditoraData
 											}		
 											else
 											{// no es fresc, l'esborrem i donem ordres de refrescar-lo												
-											  //echo "MEMCACHE:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n";
+											  echo "MEMCACHE:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n";
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;
 											}
 										}
 										else
 										{// no te el format correcte, l'expirem
-											  //echo "MEMCACHE:: purgamos el objeto ya que no tiene cached_timestamp\n";
+											  echo "MEMCACHE:: purgamos el objeto ya que no tiene cached_timestamp\n";
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;												
 										}
@@ -299,8 +311,16 @@ class EditoraData
 					$cache_metadata['timestamp']=time();
 					$cache_metadata['key']=$memcache_key;
 					$attrs['cache_metadata']=$cache_metadata;
-			    $mc->set($memcache_key, $attrs, 3600);
-					//echo "MEMCACHE:: insertamos el objeto $memcache_key \n";
+					if ($type_of_cache=='memcached')
+					{
+			      $mc->set($memcache_key, $attrs, 3600);
+					  echo "MEMCACHE:: insertamos el objeto $memcache_key \n";
+					}
+					else
+					{// memcache standard
+			      $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
+					  echo "MEMCACHE:: insertamos el objeto $memcache_key \n";							
+					}
 				}
 				return $attrs;
     }
