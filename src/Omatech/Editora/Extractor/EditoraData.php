@@ -205,11 +205,12 @@ class EditoraData
 										self::debug("$type_of_cache:: instance last updated at $instance_last_update_timestamp !!!!\n");
 										self::debug("$type_of_cache:: value for key $memcache_key\n");
 										self::debug(print_r($memcache_value, true));
-										if (isset($memcache_value['cache_metadata']['timestamp']))
+										if (isset($memcache_value['cache_timestamp']))
 										{// tenim el timestamp a l'objecte
-										  if ($instance_last_update_timestamp<$memcache_value['cache_metadata']['timestamp'])
+										  if ($instance_last_update_timestamp<$memcache_value['cache_timestamp'])
 											{// l'objecte es fresc, el retornem
 												self::debug("$type_of_cache:: HIT lo renovamos!!!\n");
+												$memcache_value['cache_timestamp']=time();
 												if ($type_of_cache=='memcached')
 												{
 													$mc->set($memcache_key, $memcache_value, self::$cache_time);
@@ -321,10 +322,14 @@ class EditoraData
 				
 				if ($insert_in_cache)
 				{
-					$cache_metadata=array();
-					$cache_metadata['timestamp']=time();
-					$cache_metadata['key']=$memcache_key;
-					$attrs['cache_metadata']=$cache_metadata;
+					$cache_timestamp=array();
+					$cache_timestamp['atri_tag']='meta_cache_timestamp';
+					$cache_timestamp['text_val']=time();
+					$cache_key=array();
+					$cache_key['atri_tag']='meta_cache_key';
+					$cache_key['text_val']=$memcache_key;
+					array_push($attrs, $cache_timestamp, $cache_key);
+					$attrs['cache_timestamp']=time();
 					
 					echo "!!! abans de guardar a cache";
 					print_r($attrs);
