@@ -46,7 +46,20 @@ class Ferretizer {
 				{
 						foreach ($instance['all_values'] as $values)
 						{
-								$una_instancia[$values['atri_tag']]=$values['text_val'];
+								if (is_array($values))
+								{// cache_metadata
+										if ($metadata)
+										{
+										  foreach ($values as $key => $value) 
+										  {
+												$una_instancia['metadata']['attr-cache-'.$key]=$val;
+										  }
+										}
+								}
+								else
+								{// cas normal, attribute
+										$una_instancia[$values['atri_tag']]=$values['text_val'];
+								}
 						}
 				}
 				
