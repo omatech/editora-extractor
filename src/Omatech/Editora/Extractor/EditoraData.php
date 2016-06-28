@@ -183,7 +183,7 @@ class EditoraData
 						if (extension_loaded('Memcached'))
 						{
 							$mc=new \Memcached;
-						  $mc->setOption(Memcached::OPT_COMPRESSION, true);
+						  $mc->setOption(\Memcached::OPT_COMPRESSION, true);
 						  $memcacheAvailable=$mc->addServer('localhost', 11211);
 							$type_of_cache='memcached';
 						}
