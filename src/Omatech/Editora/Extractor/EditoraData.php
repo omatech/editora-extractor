@@ -325,6 +325,10 @@ class EditoraData
 					$cache_metadata['timestamp']=time();
 					$cache_metadata['key']=$memcache_key;
 					$attrs['cache_metadata']=$cache_metadata;
+					
+					echo "!!! abans de guardar a cache";
+					print_r($attrs);
+					
 					self::debug("$type_of_cache:: insertamos el objeto $memcache_key \n");
 					if ($type_of_cache=='memcached')
 					{
