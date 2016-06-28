@@ -15,7 +15,8 @@ class EditoraData
 		private static $sql_class_id="";
 		private static $conn;
 		private static $debug=false;
-		private static $cache_time=3600;
+		private static $cache_time=null;
+		private static $cache_expiration=3600;
 		
 		
 		static function set_connection($conn)
@@ -160,7 +161,7 @@ class EditoraData
 		}
 		
 		
-    static function getValues($id, $args, &$cache_time)
+    static function getValues($id, $args)
     {// $id = inst_id 
 		// $lang = ALL | es | ca | en ...
 		// $filter = detail | resume | small | only-X | except-Y | thinnier-than-i | bigger-than-i | fields:fieldname1|fieldname2
@@ -174,6 +175,7 @@ class EditoraData
 		// "bigger-than-i" are values that is length is bigger than i 
 								
 				self::parse_args($args);
+				self::$cache_time=0;
 				
 				$insert_in_cache=false;
 				$memcache_key=dbname.':'.$id.':'.serialize($args);
@@ -210,15 +212,16 @@ class EditoraData
 										{// tenim el timestamp a l'objecte
 										  if ($instance_last_update_timestamp<$memcache_value['cache_timestamp'])
 											{// l'objecte es fresc, el retornem
-												
+												$memcache_value['cache_timestamp']=time();
+												self::$cache_time=$memcache_value['cache_timestamp'];
 												self::debug("$type_of_cache:: HIT lo renovamos!!!\n");
 												if ($type_of_cache=='memcached')
 												{
-													$mc->set($memcache_key, $memcache_value, self::$cache_time);
+													$mc->set($memcache_key, $memcache_value, self::$cache_expiration);
 												}
 												else
 												{// memcache standard
-													$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, self::$cache_time);
+													$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, self::$cache_expiration);
 												}
 											  return $memcache_value;	
 											}		
@@ -324,8 +327,8 @@ class EditoraData
 				
 				if ($insert_in_cache)
 				{
-					$attrs['cache_timestamp']=time();
-					$cache_time=time();
+						$attrs['cache_timestamp']=time();
+						self::$cache_time=$attrs['cache_timestamp'];
 					
 					//echo "!!! abans de guardar a cache";
 					//print_r($attrs);
@@ -334,11 +337,11 @@ class EditoraData
 					self::debug(print_r($attrs, true));
 					if ($type_of_cache=='memcached')
 					{
-			      $mc->set($memcache_key, $attrs, self::$cache_time);
+			      $mc->set($memcache_key, $attrs, self::$cache_expiration);
 					}
 					else
 					{// memcache standard
-			      $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, self::$cache_time);
+			      $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, self::$cache_expiration);
 					}
 				}
 				return $attrs;
