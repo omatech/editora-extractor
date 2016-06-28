@@ -48,8 +48,8 @@ class Ferretizer {
 				{
 						foreach ($instance['all_values'] as $attr_key=>$attr_value)
 						{
-								//echo "attr_key=$attr_key\n";
-								//print_r($attr_value);
+								echo "$attr_key=\n";
+								print_r($attr_value);
 								$meta_cache_timestamp=0;
 								$meta_cache_miss_timestamp=0;
  								if ($attr_value['atri_tag']=='meta_cache_timestamp' 
