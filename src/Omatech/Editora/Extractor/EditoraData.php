@@ -202,7 +202,7 @@ class EditoraData
 										$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
 										self::debug("$type_of_cache:: instance last updated at $instance_last_update_timestamp !!!!\n");
 										self::debug("$type_of_cache:: value for key $memcache_key\n");
-										self::debug(print_r($memcache_value, FALSE));
+										self::debug(print_r($memcache_value, true));
 										if (isset($memcache_value['cache_metadata']['timestamp']))
 										{// tenim el timestamp a l'objecte
 										  if ($instance_last_update_timestamp<$memcache_value['cache_metadata']['timestamp'])
