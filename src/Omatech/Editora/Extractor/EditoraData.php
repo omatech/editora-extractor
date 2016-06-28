@@ -190,8 +190,8 @@ class EditoraData
 								if ($memcache_value)
 								{// existe, retornamos directamente
 										$instance_last_update_timestamp=self::instanceLastUpdateTimeStamp ($id);
-										echo "MEMCACHE:: instance last updated at $instance_last_update_timestamp !!!!\n";
-										echo "MEMCACHE:: value for key $memcache_key\n";
+										echo "$type_of_cache:: instance last updated at $instance_last_update_timestamp !!!!\n";
+										echo "$type_of_cache:: value for key $memcache_key\n";
 										print_r($memcache_value);
 										if (isset($memcache_value['cached_timestamp']))
 										{// tenim el timestamp a l'objecte
@@ -208,14 +208,14 @@ class EditoraData
 											}		
 											else
 											{// no es fresc, l'esborrem i donem ordres de refrescar-lo												
-											  echo "MEMCACHE:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n";
+											  echo "$type_of_cache:: purgamos el objeto ya que $instance_last_update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n";
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;
 											}
 										}
 										else
 										{// no te el format correcte, l'expirem
-											  echo "MEMCACHE:: purgamos el objeto ya que no tiene cached_timestamp\n";
+											  echo "$type_of_cache:: purgamos el objeto ya que no tiene cached_timestamp\n";
 												$mc->delete($memcache_key);
 												$insert_in_cache=true;												
 										}
@@ -314,12 +314,12 @@ class EditoraData
 					if ($type_of_cache=='memcached')
 					{
 			      $mc->set($memcache_key, $attrs, 3600);
-					  echo "MEMCACHE:: insertamos el objeto $memcache_key \n";
+					  echo "$type_of_cache:: insertamos el objeto $memcache_key \n";
 					}
 					else
 					{// memcache standard
 			      $mc->set($memcache_key, $attrs, MEMCACHE_COMPRESSED, 3600);
-					  echo "MEMCACHE:: insertamos el objeto $memcache_key \n";							
+					  echo "$type_of_cache:: insertamos el objeto $memcache_key \n";							
 					}
 				}
 				return $attrs;
