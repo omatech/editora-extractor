@@ -14,7 +14,7 @@ class EditoraData
 		private static $sql_tag="";
 		private static $sql_class_id="";
 		private static $conn;
-		private static $debug=true;
+		private static $debug=false;
 		private static $cache_time=3600;
 		
 		static function set_connection($conn)
@@ -328,7 +328,7 @@ class EditoraData
 					$cache_key['atri_tag']='meta_cache_key';
 					$cache_key['text_val']=$memcache_key;
 					$cache_miss_timestamp=array();
-					$cache__miss_timestamp['atri_tag']='meta_cache_miss_timestamp';
+					$cache_miss_timestamp['atri_tag']='meta_cache_miss_timestamp';
 					$cache_miss_timestamp['text_val']=time();
 					array_push($attrs, $cache_timestamp, $cache_key, $cache_miss_timestamp);
 					$attrs['cache_timestamp']=time();
