@@ -169,10 +169,11 @@ class EditoraData
 				if (!self::$preview)
 				{// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
 						
-						$mc=new \Memcache;
-						$memcacheAvailable=$mc->connect('localhost', 11211);
+						$mc=new \Memcached;
+						$memcacheAvailable=$mc->addServer('localhost', 11211);
 						if ($memcacheAvailable)
 						{
+						    $mc->setOption(Memcached::OPT_COMPRESSION, true);
 								$memcache_value=$mc->get($memcache_key);
 								if ($memcache_value)
 								{// existe, retornamos directamente
@@ -190,7 +191,7 @@ class EditoraData
 										  if ($instance_last_update_timestamp<$cache_timestamp)
 											{// l'objecte es fresc, el retornem
 												//echo "MEMCACHE:: HIT lo renovamos!!!\n";
-												$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, 3600);
+												$mc->set($memcache_key, $memcache_value, 3600);
 											  return $memcache_value;	
 											}		
 											else
