@@ -310,7 +310,7 @@ class EditoraSchema
 												//print_r($instance);
 												//die;
                         $attrs=EditoraData::getValues($instance['id'], $args);
-												//print_r($attrs);
+												print_r($attrs);
 												if ($attrs) return $attrs;
 												return null;
                     },
@@ -347,10 +347,7 @@ class EditoraSchema
 												'preview_date' => [
 														'type' => Type::string(),
 														'description' => 'Preview date in %Y%m%d%H%i%S format',
-												],
-											
-											
-											
+												],										
                     ],
                     'resolve' => function ($instance, $args) {
 												//echo "aqui tinc aquests args\n";
