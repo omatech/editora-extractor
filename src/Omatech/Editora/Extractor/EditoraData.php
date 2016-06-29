@@ -225,7 +225,7 @@ class EditoraData
 		
     static function getInstance($args, $parent_args=false)
     {		
-				debug("EditoraData::getInstance\n");
+				self::debug("EditoraData::getInstance\n");
 				$args=self::parse_args($args, $parent_args);
 				
 				$sql="select i.*, c.name class_name, c.tag class_tag, c.id class_id, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
