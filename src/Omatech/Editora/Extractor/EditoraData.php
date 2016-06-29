@@ -3,22 +3,32 @@ namespace Omatech\Editora\Extractor;
 
 class EditoraData
 {
-		private static $preview=false;
-		private static $preview_date='NOW()';
-		private static $sql_preview="";
 		private static $id=null;
 		private static $lang='ALL';
 		private static $limit=10000;
 		private static $class_id=null;
+		private static $debug=false;
+
+		private static $preview=false;
+		private static $preview_date='NOW()';
+		
 		private static $tag='';
+
 		private static $sql_tag="";
 		private static $sql_class_id="";
+		private static $sql_preview="";
+
 		private static $conn;
-		private static $debug=false;
+
 		private static $cache_expiration=3600;
 		private static $type_of_cache=null;
 		private static $mc=null;
 		
+		
+		static function dump_current_args()
+		{
+				self::debug("lang=self::$lang limit=self::$limit id=self::$id class_id=self::$class_id debug=self::$debug preview=self::$preview preview_date=self::$preview_date\n");
+		}
 		
 		
 		static function set_connection($conn)
@@ -149,6 +159,7 @@ class EditoraData
 				print_r($args);
 				self::parse_args($parent_args);
 				self::parse_args($args);
+				self::dump_current_args();
 				
 				$sql="select i.*, c.name class_name, c.tag class_tag, c.id class_id, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				from omp_instances i 
@@ -198,6 +209,7 @@ class EditoraData
 				
 				self::parse_args($parent_args);
 				self::parse_args($args);
+				self::dump_current_args();
 				
 				if (self::$sql_tag=='' && self::$sql_class_id=='')
 				{
@@ -245,6 +257,7 @@ class EditoraData
 				
 				self::parse_args($parent_args);
 				self::parse_args($args);
+				self::dump_current_args();
 				
 				$insert_in_cache=false;
 				$memcache_key=dbname.':'.$id.':'.serialize($args);
@@ -396,6 +409,7 @@ class EditoraData
 				
 				self::parse_args($parent_args);
 				self::parse_args($args);
+				self::dump_current_args();
 				
 				//echo "getRelations $inst_id, $class_id, \n";
 				//print_r($args);
@@ -456,6 +470,7 @@ class EditoraData
 				
 				self::parse_args($parent_args);
 				self::parse_args($args);
+				self::dump_current_args();
 
 				$instances=array();
 			  $rows=self::$conn->fetchAll($sql_of_instances);
@@ -478,6 +493,7 @@ class EditoraData
 
 				self::parse_args($parent_args);
 				self::parse_args($args);
+				self::dump_current_args();
 
 				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				$sql="select i.id
@@ -507,6 +523,8 @@ class EditoraData
 				
 				self::parse_args($parent_args);
 				self::parse_args($args);
+				self::dump_current_args();
+
 				//echo "getRelated $direction, $rel_id, $inst_id, $limit\n";die;
 				if ($direction=='children')
 				{
@@ -528,6 +546,7 @@ class EditoraData
 
 				self::parse_args($parent_args);
 				self::parse_args($args);
+				self::dump_current_args();
 				
 				$sql="select i.id 
 				from omp_relation_instances ri
@@ -562,6 +581,7 @@ class EditoraData
 
 				self::parse_args($parent_args);
 				self::parse_args($args);				
+				self::dump_current_args();
 				
 				$sql="select i.id
 				from omp_relation_instances ri
