@@ -28,7 +28,7 @@ class EditoraData
 		
 		static function dump_current_args()
 		{
-				echo("lang=".self::$lang." limit=".self::$limit." id=".self::$id." class_id=".self::$class_id." debug=".self::$debug." preview=".self::$preview." preview_date=".self::$preview_date."\n");
+				echo("CURRENT ARGS::: lang=".self::$lang." limit=".self::$limit." id=".self::$id." class_id=".self::$class_id." debug=".self::$debug." preview=".self::$preview." preview_date=".self::$preview_date."\n");
 		}
 		
 		
