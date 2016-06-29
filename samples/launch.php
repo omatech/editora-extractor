@@ -70,6 +70,6 @@ $params = [
 
 EditoraData::set_connection($conn);
 $result=GraphQL::execute(EditoraSchema::build(), $query, null, $params);
-//print_r($result);
+print_r($result);
 print_r(Ferretizer::Ferretize($result['data'], true));
 
