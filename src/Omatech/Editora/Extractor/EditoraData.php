@@ -91,10 +91,10 @@ class EditoraData
 				and c.id=i.class_id
 				".self::$sql_preview."
 				";
-				//echo $sql;die;
+				echo $sql;
 				//$row=Model::get_one($sql);
 				$row=self::$conn->fetchAssoc($sql);
-				//print_r($row);die;
+				print_r($row);
 				$row['args']=$args;
 				
 				$sql="select niceurl
