@@ -19,18 +19,18 @@ $params = [
 
  $query='query FetchClassQuery ($class_id:Int, $lang:String, $debug:Boolean, $preview:Boolean) 
 {
-  class(class_id: $class_id, lang: $lang, preview:$preview) 
+  class(class_id: $class_id, lang: $lang, debug: $debug, preview:$preview) 
 	{
     class_id tag
 		instances
 		{
 				id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-				all_values (lang: $lang) 
+				all_values (lang: $lang, debug: $debug) 
 				{
 			    atri_tag text_val
         }
 				
-				relation1 (lang: $lang, tag: "pages", limit:2, preview:$preview)
+				relation1 (lang: $lang, debug: $debug, tag: "pages", limit:2, preview:$preview)
 				{
 					id tag direction limit
 					instances {

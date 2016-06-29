@@ -110,7 +110,7 @@ class EditoraData
 
 				if (isset($args['debug']))
 				{
-						if ($arg['debug']=='true' || $arg['debug']==1) self::$debug=true;
+						$arg['debug']=self::$debug;
 				}
 
 				if (isset($args['preview']))

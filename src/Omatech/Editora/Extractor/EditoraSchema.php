@@ -574,7 +574,7 @@ class EditoraSchema
                         'debug' => [
                             'name' => 'debug',
                             'description' => 'Sets the debug flag if 1 or true is passed',
-                            'type' => Type::String()
+                            'type' => Type::boolean()
                         ],
 
 											'preview' => [
@@ -619,7 +619,7 @@ class EditoraSchema
                         'debug' => [
                             'name' => 'debug',
                             'description' => 'Sets the debug flag if 1 or true is passed',
-                            'type' => Type::String()
+                            'type' => Type::boolean()
                         ],
 
 											'preview' => [
