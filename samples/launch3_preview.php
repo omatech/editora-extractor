@@ -14,7 +14,7 @@ $params = [
 		'class_id' => '150'
 	, 'lang' => 'ca'
 	, 'preview' => true
-	, 'debug' => false
+	, 'debug' => true
 ];
 $show_metadata=false;
 
