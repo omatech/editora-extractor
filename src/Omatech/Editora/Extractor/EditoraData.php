@@ -14,7 +14,7 @@ class EditoraData
 		private static $sql_tag="";
 		private static $sql_class_id="";
 		private static $conn;
-		private static $debug=true;
+		private static $debug=false;
 		private static $cache_expiration=3600;
 		private static $type_of_cache=null;
 		private static $mc=null;
@@ -106,6 +106,11 @@ class EditoraData
 				if (isset($args['limit']))
 				{
 						self::$limit=$args['limit'];
+				}
+
+				if (isset($args['debug']))
+				{
+						if ($arg['debug']=='true' || $arg['debug']==1) self::$debug=true;
 				}
 
 				if (isset($args['preview']))
@@ -339,11 +344,8 @@ class EditoraData
 				
 				if ($insert_in_cache)
 				{
-						$attrs['cache_timestamp']=time();
-						$attrs['cache_status']='hit';
-					
-					//echo "!!! abans de guardar a cache";
-					//print_r($attrs);
+					$attrs['cache_timestamp']=time();
+					$attrs['cache_status']='miss';
 					
 					self::debug(self::$type_of_cache.":: insertamos el objeto $memcache_key \n");
 					self::debug(print_r($attrs, true));

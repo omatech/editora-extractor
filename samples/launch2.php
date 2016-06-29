@@ -12,9 +12,10 @@ use Omatech\Editora\Extractor\Ferretizer;
 $params = [
 		'class_id' => '150'
 	, 'lang' => 'ca'
+	, 'debug' => true
 ];
 
- $query='query FetchClassQuery ($class_id:Int, $lang:String) 
+ $query='query FetchClassQuery ($class_id:Int, $debug:Boolean, $lang:String) 
 {
   class(class_id: $class_id, lang: $lang) 
 	{

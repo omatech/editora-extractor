@@ -14,9 +14,10 @@ $params = [
 		'class_id' => '150'
 	, 'lang' => 'ca'
 	, 'preview' => true
+	, 'debug' => true
 ];
 
- $query='query FetchClassQuery ($class_id:Int, $lang:String, $preview:Boolean) 
+ $query='query FetchClassQuery ($class_id:Int, $lang:String, $debug:Boolean, $preview:Boolean) 
 {
   class(class_id: $class_id, lang: $lang, preview:$preview) 
 	{

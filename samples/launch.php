@@ -13,9 +13,10 @@ use Omatech\Editora\Extractor\Ferretizer;
 $params = [
 		'id' => '1'
 	, 'lang' => 'ca'
+	, 'debug' => true
 ];
 
- $query='query FetchHomeQuery ($id:Int, $lang:String) {
+ $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean) {
   instance(id: $id, lang: $lang) {
 		id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
     all_values (lang: $lang, filter: "small") {

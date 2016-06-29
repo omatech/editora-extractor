@@ -571,7 +571,13 @@ class EditoraSchema
                             'type' => Type::String()
                         ],
 
-												'preview' => [
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if 1 or true is passed',
+                            'type' => Type::String()
+                        ],
+
+											'preview' => [
 														'type' => Type::boolean(),
 														'description' => 'Preview true or false, default false',
 												],
@@ -610,7 +616,13 @@ class EditoraSchema
                             'type' => Type::String()
                         ],
 											
-												'preview' => [
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if 1 or true is passed',
+                            'type' => Type::String()
+                        ],
+
+											'preview' => [
 														'type' => Type::boolean(),
 														'description' => 'Preview true or false, default false',
 												],
