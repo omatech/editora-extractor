@@ -329,7 +329,7 @@ class EditoraData
 		// "bigger-than-i" are values that is length is bigger than i 
 								
 				self::debug("EditoraData::getValues\n");
-				echo "id=$id update_timestamp=$update_timestamp\n";
+				self::debug("id=$id update_timestamp=$update_timestamp\n");
 				$args=self::parse_args($args, $parent_args);
 				
 				$insert_in_cache=false;
@@ -476,7 +476,7 @@ class EditoraData
 		// filter = TBD				
 
 				self::debug("EditoraData::getRelations\n");
-				echo "inst_id=$inst_id class_id=$class_id\n";
+				self::debug("inst_id=$inst_id class_id=$class_id\n");
 				$args=self::parse_args($args, $parent_args);
 				
 				//echo "getRelations $inst_id, $class_id, \n";
@@ -532,7 +532,7 @@ class EditoraData
 		function getAllInstances ($sql_of_instances, $args, $parent_args)
 		{
 				self::debug("EditoraData::getAllInstances\n");
-				echo "sql_of_instances=$sql_of_instances\n";
+				self::debug("sql_of_instances=$sql_of_instances\n");
 				$args=self::parse_args($args, $parent_args);
 
 				$instances=array();
@@ -550,7 +550,7 @@ class EditoraData
 		function getInstacesOfClass($class_id, $args, $parent_args)
 		{
 				self::debug("EditoraData::getInstancesOfClass\n");
-				echo "class_id=$class_id\n";
+				self::debug("class_id=$class_id\n");
 				$args=self::parse_args($args, $parent_args);
 
 				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
@@ -575,7 +575,7 @@ class EditoraData
 		function getRelated ($direction, $rel_id, $inst_id, $args, $parent_args)
 		{
 				self::debug("EditoraData::getRelated\n");
-				echo "inst_id=$inst_id rel_id=$rel_id direction=$direction\n";
+				self::debug("inst_id=$inst_id rel_id=$rel_id direction=$direction\n");
 				$args=self::parse_args($args, $parent_args);
 
 				//echo "getRelated $direction, $rel_id, $inst_id, $limit\n";die;
@@ -593,7 +593,7 @@ class EditoraData
 		function get_children ($rel_id, $inst_id, $args, $parent_args)
 		{
 				self::debug("EditoraData::get_children\n");
-				echo "inst_id=$inst_id rel_id=$rel_id\n";
+				self::debug("inst_id=$inst_id rel_id=$rel_id\n");
 				$args=self::parse_args($args, $parent_args);
 				
 				$sql="select i.id 
@@ -622,7 +622,7 @@ class EditoraData
 		function get_parents ($rel_id, $inst_id, $args, $parent_args)
 		{
 				self::debug("EditoraData::get_children\n");
-				echo "inst_id=$inst_id rel_id=$rel_id\n";
+				self::debug("inst_id=$inst_id rel_id=$rel_id\n");
 				$args=self::parse_args($args, $parent_args);
 				
 				$sql="select i.id
