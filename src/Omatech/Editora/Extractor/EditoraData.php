@@ -128,9 +128,24 @@ class EditoraData
 				}				
 		}
 
+		
+		function get_preview_status_condition ()
+		{
+				if (!self::$preview)
+				{
+					return "
+					and i.status = 'O'
+					";
+				}
+				return "
+				";
+		}
+		
+		
     static function getInstance($args)
     {		
-				//print_r($args);
+				print_r("EditoraData::getInstance\n");
+				print_r($args);
 				self::parse_args($args);
 				
 				$sql="select i.*, c.name class_name, c.tag class_tag, c.id class_id, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
@@ -175,6 +190,8 @@ class EditoraData
 
     static function getClass($args)
     {
+				print_r("EditoraData::getClass\n");
+				print_r($args);
 				
 				self::parse_args($args);
 				
@@ -218,6 +235,10 @@ class EditoraData
 		// "thinnier-than-i" are values that is length is less than i 
 		// "bigger-than-i" are values that is length is bigger than i 
 								
+				print_r("EditoraData::getValues\n");
+				echo "id=$id update_timestamp=$update_timestamp\n";
+				print_r($args);
+				
 				self::parse_args($args);
 				
 				$insert_in_cache=false;
@@ -362,6 +383,10 @@ class EditoraData
 		// limit = number of elements to get
 		// filter = TBD				
 
+				print_r("EditoraData::getRelations\n");
+				echo "inst_id=$inst_id class_id=$class_id\n";
+				print_r($args);
+				
 				self::parse_args($args);
 				
 				//echo "getRelations $inst_id, $class_id, \n";
@@ -414,6 +439,12 @@ class EditoraData
 		
 		function getAllInstances ($sql_of_instances, $args)
 		{
+				print_r("EditoraData::getAllInstances\n");
+				echo "sql_of_instances=$sql_of_instances\n";
+				print_r($args);
+				
+				self::parse_args($args);
+
 				$instances=array();
 			  $rows=self::$conn->fetchAll($sql_of_instances);
 				foreach ($rows as $row)
@@ -427,6 +458,10 @@ class EditoraData
 		
 		function getInstacesOfClass($class_id, $args)
 		{
+				print_r("EditoraData::getInstancesOfClass\n");
+				echo "class_id=$class_id\n";
+				print_r($args);
+
 				self::parse_args($args);
 
 				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
@@ -450,6 +485,10 @@ class EditoraData
 		
 		function getRelated ($direction, $rel_id, $inst_id, $args)
 		{
+				print_r("EditoraData::getRelated\n");
+				echo "inst_id=$inst_id rel_id=$rel_id direction=$direction\n";
+				print_r($args);
+				
 				self::parse_args($args);
 				//echo "getRelated $direction, $rel_id, $inst_id, $limit\n";die;
 				if ($direction=='children')
@@ -465,6 +504,10 @@ class EditoraData
 		
 		function get_children ($rel_id, $inst_id, $args)
 		{
+				print_r("EditoraData::get_children\n");
+				echo "inst_id=$inst_id rel_id=$rel_id\n";
+				print_r($args);
+
 				self::parse_args($args);
 				
 				$sql="select i.id 
@@ -489,21 +532,14 @@ class EditoraData
 
 		}
 		
-		function get_preview_status_condition ()
-		{
-				if (!self::$preview)
-				{
-					return "
-					and i.status = 'O'
-					";
-				}
-				return "
-				";
-		}
 		
 		function get_parents ($rel_id, $inst_id, $args)
 		{
 				
+				print_r("EditoraData::get_children\n");
+				echo "inst_id=$inst_id rel_id=$rel_id\n";
+				print_r($args);
+
 				self::parse_args($args);				
 				
 				$sql="select i.id
