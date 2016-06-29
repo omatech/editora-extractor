@@ -19,52 +19,34 @@ $params = [
  $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean) {
   instance(id: $id, lang: $lang, debug: $debug) {
 		id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-    all_values (lang: $lang, debug: $debug, filter: "small") {
-			atri_tag text_val
-    }
+    all_values (filter: "small") {atri_tag text_val}
 		
-    relation1 (lang: $lang, debug: $debug, tag: "carrousel")
+    relation1 (tag: "carrousel")
 		{
 		  id tag direction limit
 			instances {
 				id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-				all_values (lang: $lang, filter: "fields:title|subtitle_t") 
-				{
-			    atri_tag text_val
-        }
+				all_values (filter: "fields:title|subtitle_t") {atri_tag text_val}
 			}
 		}
 		
-    relation2 (tag: "values", debug: $debug, limit: 2)
+    relation2 (tag: "values", limit: 2)
 		{
 		  id tag direction limit
 			instances {
 			  id nom_intern link
-				all_values (lang: $lang, filter: "small") 
-				{
-			    atri_tag
-			    text_val
-					
-        }
+				all_values (filter: "small") {atri_tag, text_val}
 			}
 		}
 
-    relation3 (lang: $lang, debug: $debug, tag: "know_us", limit:1)
+    relation3 (tag: "know_us", limit:1)
 		{
 		  id tag direction limit
 			instances {
 			  id nom_intern link publishing_begins status creation_date
-				all_values (lang: $lang) 
-				{
-			    atri_tag
-			    text_val
-        }
+				all_values () {atri_tag text_val}
 			}
-			
-
-
 		}
-
   }
 }';
 
