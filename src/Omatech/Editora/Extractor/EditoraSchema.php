@@ -135,6 +135,12 @@ class EditoraSchema
 														'description' => 'limit of extraction',
 												],
 
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
 												'preview' => [
 														'type' => Type::boolean(),
 														'description' => 'Preview true or false, default false',
@@ -214,6 +220,12 @@ class EditoraSchema
 														'type' => Type::int(),
 														'description' => 'limit of extraction',
 												],
+
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
 
 												'preview' => [
 														'type' => Type::boolean(),
@@ -315,7 +327,13 @@ class EditoraSchema
                             'name' => 'lang',
                             'description' => 'Language of the extraction',
                             'type' => Type::String()
-                        ]
+                        ],
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
                     ],
                     'resolve' => function ($instance, $args) {
 												//print_r($args);
@@ -343,6 +361,12 @@ class EditoraSchema
                             'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
                         'filter' => [
                             'name' => 'filter',
                             'description' => 'filter some fields all|detail|resume default all',
@@ -387,6 +411,12 @@ class EditoraSchema
                             'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
                         'filter' => [
                             'name' => 'filter',
                             'description' => 'filter some fields all|detail|resume default all',
@@ -431,6 +461,12 @@ class EditoraSchema
                             'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
                         'filter' => [
                             'name' => 'filter',
                             'description' => 'filter some fields all|detail|resume default all',
@@ -475,6 +511,12 @@ class EditoraSchema
                             'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
                         'filter' => [
                             'name' => 'filter',
                             'description' => 'filter some fields all|detail|resume default all',
@@ -519,7 +561,13 @@ class EditoraSchema
                             'description' => 'number of children to get, default 1000',
                             'type' => Type::Int()
                         ],
-                        'filter' => [
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
+											'filter' => [
                             'name' => 'filter',
                             'description' => 'filter some fields all|detail|resume default all',
                             'type' => Type::String()
@@ -573,7 +621,7 @@ class EditoraSchema
 
                         'debug' => [
                             'name' => 'debug',
-                            'description' => 'Sets the debug flag if 1 or true is passed',
+                            'description' => 'Sets the debug flag if true',
                             'type' => Type::boolean()
                         ],
 
@@ -618,7 +666,7 @@ class EditoraSchema
 											
                         'debug' => [
                             'name' => 'debug',
-                            'description' => 'Sets the debug flag if 1 or true is passed',
+                            'description' => 'Sets the debug flag if true',
                             'type' => Type::boolean()
                         ],
 
