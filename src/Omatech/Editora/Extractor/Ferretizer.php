@@ -50,7 +50,18 @@ class Ferretizer {
 				{
 						foreach ($instance['all_values'] as $attr_key=>$attr_value)
 						{
-								$una_instancia[$attr_value['atri_tag']]=$attr_value['text_val'];
+								if (isset($attr_value['text_val']))
+								{
+										$real_value=$attr_value['text_val'];
+								}
+								elseif (isset($attr_value['num_val']))
+								{
+										$real_value=$attr_value['num_val'];										
+								}
+								if (isset($attr_value['atri_tag']) && (isset($real_value)))
+								{
+										$una_instancia[$attr_value['atri_tag']]=$real_value;
+								}
 						}
 				}
 				
