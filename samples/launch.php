@@ -13,7 +13,7 @@ use Omatech\Editora\Extractor\Ferretizer;
 $params = [
 		'id' => '1'
 	, 'lang' => 'ca'
-	, 'debug' => true
+	, 'debug' => false
 ];
 
  $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean) {
