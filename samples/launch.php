@@ -44,7 +44,7 @@ $params = [
 		  id tag direction limit
 			instances {
 			  id nom_intern link publishing_begins status creation_date
-				all_values () {atri_tag text_val}
+				all_values {atri_tag text_val}
 			}
 		}
   }
