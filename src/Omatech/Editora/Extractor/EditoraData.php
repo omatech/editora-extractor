@@ -14,7 +14,7 @@ class EditoraData
 		private static $sql_tag="";
 		private static $sql_class_id="";
 		private static $conn;
-		private static $debug=true;
+		private static $debug=false;
 		private static $cache_expiration=3600;
 		private static $type_of_cache=null;
 		private static $mc=null;
