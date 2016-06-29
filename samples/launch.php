@@ -19,7 +19,7 @@ $params = [
  $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean) {
   instance(id: $id, lang: $lang, debug: $debug) {
 		id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-    all_values (lang: $lang, filter: "small") {
+    all_values (lang: $lang, debug: $debug, filter: "small") {
 			atri_tag text_val
     }
 		

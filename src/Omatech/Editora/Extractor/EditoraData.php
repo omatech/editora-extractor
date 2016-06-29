@@ -210,12 +210,11 @@ class EditoraData
 				//echo $sql;die;
 				//$row=Model::get_one($sql);
 				$row=self::$conn->fetchAssoc($sql);
-				$row['lang']=self::$lang;
-				$row['limit']=self::$limit;
-				$row['preview']=self::$preview;
-				$row['preview_date']=self::$preview_date;
-//				echo $sql;
-//				print_r($row);
+				$row['args']=$args;
+//				$row['lang']=self::$lang;
+//				$row['limit']=self::$limit;
+//				$row['preview']=self::$preview;
+//				$row['preview_date']=self::$preview_date;
 				return $row;
     }
 		
@@ -367,6 +366,7 @@ class EditoraData
 				{
 					$attrs['cache_timestamp']=time();
 					$attrs['cache_status']='miss';
+					$attrs['args']=$args;
 					
 					self::debug(self::$type_of_cache.":: insertamos el objeto $memcache_key \n");
 					self::debug(print_r($attrs, true));
@@ -407,6 +407,7 @@ class EditoraData
 						$rel_row['direction']='children';
 						$rel_row['limit']=self::$limit;
 						$rel_row['inst_id']=$inst_id;
+						$rel_row['args']=$args;
 						//$rel_row['limit']=$args['limit'];
 						//print_r($rel_row);die;
 						return [$rel_row];
@@ -428,6 +429,7 @@ class EditoraData
 								$rel_row['inst_id']=$inst_id;
 								//$rel_row['limit']=$args['limit'];
 								//print_r($rel_row);die;
+								$rel_row['args']=$args;
 								return [$rel_row];
 						}
 						else
@@ -453,6 +455,7 @@ class EditoraData
 						$instance=self::getInstance($args);
 						array_push($instances, $instance);
 				}
+				$instances['args']=$args;
 				return $instances;
 		}
 		
