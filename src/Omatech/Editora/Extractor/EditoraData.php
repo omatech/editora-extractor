@@ -128,7 +128,7 @@ class EditoraData
 				//print_r($args);
 				self::parse_args($args);
 				
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				$sql="select i.*, c.name class_name, c.tag class_tag, c.id class_id, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				from omp_instances i 
 				, omp_classes c
 				where i.id=".self::$id."
