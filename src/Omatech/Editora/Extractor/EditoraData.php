@@ -462,7 +462,7 @@ class EditoraData
 				foreach ($rows as $row)
 				{
 						$args['id']=$row['id'];
-						$instance=self::getInstance($args);
+						$instance=self::getInstance($args, $parent_args);
 						array_push($instances, $instance);
 				}
 				$instances['args']=$args;
@@ -494,7 +494,7 @@ class EditoraData
 //				echo "getInstancesOfClass $class_id\n";
 //				print_r($args);
 //				echo "$sql\n";
-				return self::getAllInstances($sql, $args);
+				return self::getAllInstances($sql, $args, $parent_args);
 				//return self::$conn->fetchAll($sql);				
 		}	
 		
@@ -510,11 +510,11 @@ class EditoraData
 				//echo "getRelated $direction, $rel_id, $inst_id, $limit\n";die;
 				if ($direction=='children')
 				{
-				  return self::get_children ($rel_id, $inst_id, $args);
+				  return self::get_children ($rel_id, $inst_id, $args, $parent_args);
 				}
 				if ($direction=='parents')
 				{
-				  return self::get_parents ($rel_id, $inst_id, $args);
+				  return self::get_parents ($rel_id, $inst_id, $args, $parent_args);
 				}
 				
 		}
@@ -546,7 +546,7 @@ class EditoraData
 				//echo "get_children $rel_id, $inst_id\n";
 				//print_r($args);
 				//echo $sql."\n";
-				return self::getAllInstances($sql, $args);
+				return self::getAllInstances($sql, $args, $parent_args);
 				//return self::$conn->fetchAll($sql);				
 
 		}
