@@ -17,13 +17,13 @@ $params = [
 ];
 
  $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean) {
-  instance(id: $id, lang: $lang) {
+  instance(id: $id, lang: $lang, debug: $debug) {
 		id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
     all_values (lang: $lang, filter: "small") {
 			atri_tag text_val
     }
 		
-    relation1 (lang: $lang, tag: "carrousel")
+    relation1 (lang: $lang, debug: $debug, tag: "carrousel")
 		{
 		  id tag direction limit
 			instances {
@@ -35,7 +35,7 @@ $params = [
 			}
 		}
 		
-    relation2 (tag: "values", limit: 2)
+    relation2 (tag: "values", debug: $debug, limit: 2)
 		{
 		  id tag direction limit
 			instances {
@@ -49,7 +49,7 @@ $params = [
 			}
 		}
 
-    relation3 (lang: $lang, tag: "know_us", limit:1)
+    relation3 (lang: $lang, debug: $debug, tag: "know_us", limit:1)
 		{
 		  id tag direction limit
 			instances {
