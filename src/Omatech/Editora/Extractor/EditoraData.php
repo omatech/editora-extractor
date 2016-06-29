@@ -38,7 +38,14 @@ class EditoraData
 		{
 				if (self::$debug)
 				{
-						echo $str;
+						if (is_array($str))
+						{
+								print_r($str);
+						}
+						else
+						{// cas normal, es un string
+								echo $str;
+						}
 				}
 		}
 		
@@ -139,7 +146,7 @@ class EditoraData
 				{
 						if (isset($parent_args['limit']))
 						{
-						  self::$limit=$args['limit'];
+						  self::$limit=$parent_args['limit'];
 						  $final_args['limit']=self::$limit;
 						}
 				}
@@ -153,7 +160,7 @@ class EditoraData
 				{
 						if (isset($parent_args['debug']))
 						{
-						  self::$debug=$args['debug'];
+						  self::$debug=$parent_args['debug'];
 						  $final_args['debug']=self::$debug;
 						}						
 				}
@@ -167,7 +174,7 @@ class EditoraData
 				{
 						if (isset($parent_args['preview']))
 						{
-						  self::$preview=$args['preview'];
+						  self::$preview=$parent_args['preview'];
 						  $final_args['preview']=self::$preview;
 						}												
 				}
@@ -183,7 +190,7 @@ class EditoraData
 					{
 						if (isset($parent_args['preview_date']))
 						{
-						  self::$preview_date=$args['preview_date'];
+						  self::$preview_date=$parent_args['preview_date'];
 						  $final_args['preview_date']=self::$preview_date;
 						}												
 							
