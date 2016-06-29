@@ -350,7 +350,7 @@ class EditoraSchema
 												//print_r($args);
 												//print_r($instance);
 												//die;
-											  $attrs=EditoraData::getValues($instance['id'], $args);	
+											  $attrs=EditoraData::getValues($instance['id'], $instance['update_timestamp'], $args);	
 												//print_r($attrs);
 												
 												if ($attrs) return $attrs;
