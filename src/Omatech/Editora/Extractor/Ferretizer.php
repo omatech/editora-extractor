@@ -34,7 +34,7 @@ class Ferretizer {
 				$una_instancia=array();
 				$una_instancia['id']=$instance['id'];
 				if (isset($instance['link']))	$una_instancia['link']=$instance['link'];
-				if ($metadata)
+				if ($metadata && is_array($instance))
 				{
 						foreach ($instance as $key=>$val)
 						{
