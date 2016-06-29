@@ -84,7 +84,7 @@ class EditoraData
 				//print_r($args);
 				self::parse_args($args);
 				
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, unix_timestamp(update_date) update_timestamp  
+				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				from omp_instances i 
 				, omp_classes c
 				where i.id=".self::$id."
@@ -327,7 +327,7 @@ class EditoraData
 				
 				
 
-				$sql="select v.*, a.name atri_name, a.tag atri_tag, a.type atri_type, a.language atri_language, ca.detail is_detail
+				$sql="select v.*, a.name atri_name, a.tag atri_tag, a.type atri_type, a.language atri_language, ca.detail is_detail, i.update_date, unix_timestamp(i.update_date) update_timestamp 
 				from omp_values v
 				, omp_attributes a
 				, omp_class_attributes ca
@@ -422,7 +422,7 @@ class EditoraData
 		{
 				self::parse_args($args);
 
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern 
+				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				from omp_instances i
 				, omp_classes c
 				where i.class_id=c.id
@@ -458,7 +458,7 @@ class EditoraData
 		{
 				self::parse_args($args);
 				
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern 
+				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				from omp_relation_instances ri
 				, omp_instances i
 				, omp_classes c
@@ -495,7 +495,7 @@ class EditoraData
 				
 				self::parse_args($args);				
 				
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern 
+				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, unix_timestamp(i.update_date) update_timestamp  
 				from omp_relation_instances ri
 				, omp_instances i
 				, omp_classes c
