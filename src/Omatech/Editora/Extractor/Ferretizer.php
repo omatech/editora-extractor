@@ -111,7 +111,9 @@ class Ferretizer {
 		{
 				if (isset($data['class'])) return self::FerretizeClass($data['class'], $metadata);
 				if (isset($data['instance'])) return self::FerretizeInstance($data['instance'], $metadata);	
+				
 				echo "ERROR IN FERRETIZER ESTRUCTURA INCORRECTA!\n";
 				var_dump($data);
+				return false;
 		}
 }

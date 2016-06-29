@@ -47,6 +47,12 @@ $params = [
 
 EditoraData::set_connection($conn);
 $result=GraphQL::execute(EditoraSchema::build(), $query, null, $params);
-//print_r($result);
-print_r(Ferretizer::Ferretize($result['data'], true));
-
+$ferretizer_result=Ferretizer::Ferretize($result['data'], true);
+if ($ferretizer_result)
+{// todo ok 
+  print_r($ferretizer_result);		
+}
+else
+{// algun error
+  print_r($result);		
+}
