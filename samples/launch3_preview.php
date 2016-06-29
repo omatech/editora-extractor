@@ -16,7 +16,7 @@ $params = [
 	, 'preview' => true
 	, 'debug' => true
 ];
-$show_metadata=false;
+$show_metadata=true;
 
  $query='query FetchClassQuery ($class_id:Int, $lang:String, $debug:Boolean, $preview:Boolean) 
 {
