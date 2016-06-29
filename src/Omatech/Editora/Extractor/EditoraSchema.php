@@ -302,35 +302,6 @@ class EditoraSchema
                     'type' => Type::string(),
                     'description' => 'The link to the the instance.',
                 ],
-/*							  'cache_info' => [
-									'type' => Type::CacheInfoType,
-									'description' => 'Cache info',
-                    'args' => [
-                        'filter' => [
-                            'name' => 'filter',
-                            'description' => 'filter some fields all|detail|resume default all',
-                            'type' => Type::String()
-                        ],
-                        'lang' => [
-                            'name' => 'lang',
-                            'description' => 'Language of the extraction',
-                            'type' => Type::String()
-                        ],
-											
-                    'resolve' => function ($instance, $args) {
-												//print_r($args);
-												//print_r($instance);
-												//die;
-											  $cacheinfo=EditoraData::getCacheInfo($instance['id'], $args);	
-												print_r($cacheinfo);
-												
-												if ($cacheinfo) return $cacheinfo;
-												return null;
-                    },
-											
-								],
- 
- */
                 'all_values' => [
                     'type' => Type::listOf($ValueType),
                     'description' => 'The attributes of the instance.',
@@ -348,7 +319,8 @@ class EditoraSchema
                     ],
                     'resolve' => function ($instance, $args) {
 												//print_r($args);
-												//print_r($instance);
+												echo "Instance in EditoraSchema\n";
+												print_r($instance);
 												//die;
 											  $attrs=EditoraData::getValues($instance['id'], $instance['update_timestamp'], $args);	
 												//print_r($attrs);
