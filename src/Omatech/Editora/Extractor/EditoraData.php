@@ -413,7 +413,7 @@ class EditoraData
 		function getAllInstances ($sql_of_instances, $args)
 		{
 				$instances=array();
-			  $rows=self::$conn->fetchAll($sql);
+			  $rows=self::$conn->fetchAll($sql_of_instances);
 				foreach ($rows as $row)
 				{
 						$args['id']=$row['id'];
