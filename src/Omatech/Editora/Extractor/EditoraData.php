@@ -125,18 +125,6 @@ class EditoraData
 						}
 				}
 
-				if (isset($args['tag']))
-				{
-						self::$tag=$args['tag'];
-						self::$sql_tag="and c.tag='".$args['tag']."'";
-				}
-				
-				if (isset($args['class_id']))
-				{
-						self::$class_id=$args['class_id'];
-						self::$sql_class_id="and c.id=".$args['class_id'];
-				}
-
 				if (isset($args['limit']))
 				{
 						self::$limit=$args['limit'];
@@ -199,9 +187,30 @@ class EditoraData
 					self::$sql_preview=self::get_preview_status_condition()."
 				  and DATE_FORMAT(i.publishing_begins,'%Y%m%d%H%i%S') <= ".self::$preview_date."+0
 				  and IFNULL(DATE_FORMAT(i.publishing_ends,'%Y%m%d%H%i%S'),now()+1) > ".self::$preview_date."+0
-					";
-						
+					";			
 				}
+				
+				// ARGS QUE NO TIENE SENTIDO COGER DEL PARENT PERO GUARDAMOS TAG Y CLASS
+				if (isset($args['tag']))
+				{
+						self::$tag=$args['tag'];
+						$final_args['tag']=self::$tag;
+						self::$sql_tag="and c.tag='".$args['tag']."'";
+				}
+				
+				if (isset($args['class_id']))
+				{
+						self::$class_id=$args['class_id'];
+						$final_args['class_id']=self::$class_id;
+						self::$sql_class_id="and c.id=".$args['class_id'];
+				}
+				
+				// ARGS QUE NI SIGUIERA GUARDAMOS, SON SOLO PARA ESTE NODO: FILTER
+				if (isset($args['filter']))
+				{
+						$final_args['filter']=$args['filter'];
+				}
+				
 				
 				self::debug("PARENT ARGS:::\n");
 				self::debug($parent_args, true);
