@@ -25,15 +25,14 @@ $params = [
 				id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
 				all_values (lang: $lang) {atri_tag text_val}
 				
-    relation1 (lang: $lang, debug: $debug, tag: "pages", limit:10)
-		{
-		  id tag direction limit
-			instances {
-				id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-				all_values (lang: $lang, filter: "fields:title|niceurl") {atri_tag text_val}
-			}
-		}
-
+        relation1 (lang: $lang, debug: $debug, tag: "pages", limit:10)
+				{
+						id tag direction limit
+						instances {
+								id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
+								all_values (lang: $lang, filter: "fields:title|niceurl") {atri_tag text_val}
+						}
+				}
 		}
   }
 }';
