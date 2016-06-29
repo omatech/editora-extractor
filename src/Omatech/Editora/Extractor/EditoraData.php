@@ -34,7 +34,51 @@ class EditoraData
 						echo $str;
 				}
 		}
-
+		
+		static function setupCache()
+		{// returns an array with type_of_cache (memcache or memcached) and a handler or false if cache is not available
+				$memcacheAvailable=false;
+				if (extension_loaded('Memcached'))
+				{
+						$mc=new \Memcached;
+						$mc->setOption(\Memcached::OPT_COMPRESSION, true);
+						$memcacheAvailable=$mc->addServer('localhost', 11211);
+						$type_of_cache='memcached';	
+				}
+				elseif (extension_loaded('Memcache'))
+				{
+						$mc=new \Memcache;
+						$memcacheAvailable=$mc->connect('localhost', 11211);	
+						$type_of_cache='memcache';
+				}
+				else 
+				{
+				  return false;		
+				}
+				
+				if ($memcacheAvailable)
+				{
+				  self::$mc=$mc;
+				  self::$type_of_cache=$type_of_cache;
+				  return true;
+				}
+				else
+				{
+					return false;
+				}
+		}
+		
+		static function setCache ($memcache_key, $memcache_value)
+		{
+				if (self::$type_of_cache=='memcached')
+				{
+					self::$mc->set($memcache_key, $memcache_value, self::$cache_expiration);
+				}
+				else
+				{// memcache standard
+					self::$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, self::$cache_expiration);
+				}
+		}
 
 		static function parse_args($args)
 		{
@@ -150,63 +194,11 @@ class EditoraData
 				$row['preview_date']=self::$preview_date;
 //				echo $sql;
 //				print_r($row);
-//				die;
 				return $row;
     }
 		
-/*		static function instanceLastUpdateTimeStamp ($id)
-		{
-				$sql="select unix_timestamp(update_date) update_timestamp 
-				from omp_instances where id=$id";
-				$inst_row=self::$conn->fetchAssoc($sql);
-				return $inst_row['update_timestamp'];
-		}
-*/		
+
 		
-		static function setupCache()
-		{// returns an array with type_of_cache (memcache or memcached) and a handler or false if cache is not available
-				$memcacheAvailable=false;
-				if (extension_loaded('Memcached'))
-				{
-						$mc=new \Memcached;
-						$mc->setOption(\Memcached::OPT_COMPRESSION, true);
-						$memcacheAvailable=$mc->addServer('localhost', 11211);
-						$type_of_cache='memcached';	
-				}
-				elseif (extension_loaded('Memcache'))
-				{
-						$mc=new \Memcache;
-						$memcacheAvailable=$mc->connect('localhost', 11211);	
-						$type_of_cache='memcache';
-				}
-				else 
-				{
-				  return false;		
-				}
-				
-				if ($memcacheAvailable)
-				{
-				  self::$mc=$mc;
-				  self::$type_of_cache=$type_of_cache;
-				  return true;
-				}
-				else
-				{
-					return false;
-				}
-		}
-		
-		static function setCache ($memcache_key, $memcache_value)
-		{
-				if (self::$type_of_cache=='memcached')
-				{
-					self::$mc->set($memcache_key, $memcache_value, self::$cache_expiration);
-				}
-				else
-				{// memcache standard
-					self::$mc->set($memcache_key, $memcache_value, MEMCACHE_COMPRESSED, self::$cache_expiration);
-				}
-		}
 		
     static function getValues($id, $update_timestamp, $args)
     {// $id = inst_id 
@@ -418,11 +410,25 @@ class EditoraData
 				}
     }
 		
+		function getAllInstances ($sql_of_instances, $args)
+		{
+				$instances=array();
+			  $rows=self::$conn->fetchAll($sql);
+				foreach ($rows as $row)
+				{
+						$args['id']=$row['id'];
+						$instance=self::getInstance($args);
+						array_push($instances, $instance);
+				}
+				return $instances;
+		}
+		
 		function getInstacesOfClass($class_id, $args)
 		{
 				self::parse_args($args);
 
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				$sql="select i.id
 				from omp_instances i
 				, omp_classes c
 				where i.class_id=c.id
@@ -436,7 +442,8 @@ class EditoraData
 //				echo "getInstancesOfClass $class_id\n";
 //				print_r($args);
 //				echo "$sql\n";
-				return self::$conn->fetchAll($sql);				
+				return self::getAllInstances($sql, $args);
+				//return self::$conn->fetchAll($sql);				
 		}	
 		
 		function getRelated ($direction, $rel_id, $inst_id, $args)
@@ -475,7 +482,9 @@ class EditoraData
 				//echo "get_children $rel_id, $inst_id\n";
 				//print_r($args);
 				//echo $sql."\n";
-				return self::$conn->fetchAll($sql);
+				return self::getAllInstances($sql, $args);
+				//return self::$conn->fetchAll($sql);				
+
 		}
 		
 		function get_preview_status_condition ()
@@ -509,7 +518,8 @@ class EditoraData
 				order by weight
 				limit ".self::$limit."
 				";
-				return self::$conn->fetchAll($sql);
+				return self::getAllInstances($sql, $args);
+				//return self::$conn->fetchAll($sql);
 		}
 
 		
