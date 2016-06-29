@@ -465,7 +465,7 @@ class EditoraData
 		{
 				self::parse_args($args);
 				
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				$sql="select i.id 
 				from omp_relation_instances ri
 				, omp_instances i
 				, omp_classes c
@@ -504,7 +504,7 @@ class EditoraData
 				
 				self::parse_args($args);				
 				
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, unix_timestamp(i.update_date) update_timestamp  
+				$sql="select i.id
 				from omp_relation_instances ri
 				, omp_instances i
 				, omp_classes c
