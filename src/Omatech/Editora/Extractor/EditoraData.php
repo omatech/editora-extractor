@@ -26,10 +26,6 @@ class EditoraData
 		
 		
 		
-		static function dump_current_args()
-		{
-				echo("CURRENT ARGS::: lang=".self::$lang." limit=".self::$limit." id=".self::$id." class_id=".self::$class_id." debug=".self::$debug." preview=".self::$preview." preview_date=".self::$preview_date."\n");
-		}
 		
 		
 		static function set_connection($conn)
@@ -91,16 +87,35 @@ class EditoraData
 				}
 		}
 
-		static function parse_args($args)
+		static function parse_args($args, $parent_args)
 		{
+				$final_args=array();
 				if (isset($args['id']))
 				{
 						self::$id=$args['id'];
+						$final_args['id']=self::$id;
+				}
+				else
+				{
+						if (isset($parent_args['id']))
+						{
+								self::$id=$parent_args['id'];
+								$final_args['id']=self::$id;
+						}						
 				}
 				
 				if (isset($args['lang']))
 				{
 						self::$lang=$args['lang'];
+						$final_args['lang']=self::$lang;
+				}
+				else 
+				{
+						if (isset($parent_args['lang']))
+						{
+								self::$lang=$parent_args['lang'];						
+								$final_args['lang']=self::$lang;
+						}
 				}
 
 				if (isset($args['tag']))
@@ -108,6 +123,7 @@ class EditoraData
 						self::$tag=$args['tag'];
 						self::$sql_tag="and c.tag='".$args['tag']."'";
 				}
+				
 				if (isset($args['class_id']))
 				{
 						self::$class_id=$args['class_id'];
@@ -117,26 +133,80 @@ class EditoraData
 				if (isset($args['limit']))
 				{
 						self::$limit=$args['limit'];
+						$final_args['limit']=self::$limit;
+				}
+				else
+				{
+						if (isset($parent_args['limit']))
+						{
+						  self::$limit=$args['limit'];
+						  $final_args['limit']=self::$limit;
+						}
 				}
 
 				if (isset($args['debug']))
 				{
 						self::$debug=$args['debug'];
+						$final_args['debug']=self::$debug;
+				}
+				else
+				{
+						if (isset($parent_args['debug']))
+						{
+						  self::$debug=$args['debug'];
+						  $final_args['debug']=self::$debug;
+						}						
 				}
 
 				if (isset($args['preview']))
 				{
 					self::$preview=$args['preview'];
+					$final_args['preview']=self::$preview;										
+				}
+				else
+				{
+						if (isset($parent_args['preview']))
+						{
+						  self::$preview=$args['preview'];
+						  $final_args['preview']=self::$preview;
+						}												
+				}
+				
+				if (self::$preview)
+				{
 					if (isset($args['preview_date']))
 					{
 							self::$preview_date=$args['preview_date'];
+						  $final_args['preview_date']=self::$preview_date;
+					}
+					else
+					{
+						if (isset($parent_args['preview_date']))
+						{
+						  self::$preview_date=$args['preview_date'];
+						  $final_args['preview_date']=self::$preview_date;
+						}												
+							
 					}
 				  
 					self::$sql_preview=self::get_preview_status_condition()."
 				  and DATE_FORMAT(i.publishing_begins,'%Y%m%d%H%i%S') <= ".self::$preview_date."+0
 				  and IFNULL(DATE_FORMAT(i.publishing_ends,'%Y%m%d%H%i%S'),now()+1) > ".self::$preview_date."+0
 					";
-				}				
+						
+				}
+				
+				self::debug("PARENT ARGS:::\n");
+				self::debug($parent_args, true);
+
+				self::debug("ARGS:::\n");
+				self::debug($args, true);
+
+				
+				self::debug("FINAL ARGS:::\n");
+				self::debug($final_args, true);
+				//("CURRENT ARGS::: lang=".self::$lang." limit=".self::$limit." id=".self::$id." class_id=".self::$class_id." debug=".self::$debug." preview=".self::$preview." preview_date=".self::$preview_date."\n");
+				return $final_args;
 		}
 
 		
@@ -155,12 +225,8 @@ class EditoraData
 		
     static function getInstance($args, $parent_args=false)
     {		
-				print_r("EditoraData::getInstance\n");
-				print_r($parent_args);
-				print_r($args);
-				self::parse_args($parent_args);
-				self::parse_args($args);
-				self::dump_current_args();
+				debug("EditoraData::getInstance\n");
+				$args=self::parse_args($args, $parent_args);
 				
 				$sql="select i.*, c.name class_name, c.tag class_tag, c.id class_id, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				from omp_instances i 
@@ -204,13 +270,8 @@ class EditoraData
 
     static function getClass($args, $parent_args=false)
     {
-				print_r("EditoraData::getClass\n");
-				print_r($parent_args);
-				print_r($args);
-				
-				self::parse_args($parent_args);
-				self::parse_args($args);
-				self::dump_current_args();
+				self::debug("EditoraData::getClass\n");
+				$args=self::parse_args($args, $parent_args);
 				
 				if (self::$sql_tag=='' && self::$sql_class_id=='')
 				{
@@ -251,14 +312,9 @@ class EditoraData
 		// "thinnier-than-i" are values that is length is less than i 
 		// "bigger-than-i" are values that is length is bigger than i 
 								
-				print_r("EditoraData::getValues\n");
+				self::debug("EditoraData::getValues\n");
 				echo "id=$id update_timestamp=$update_timestamp\n";
-				print_r($parent_args);
-				print_r($args);
-				
-				self::parse_args($parent_args);
-				self::parse_args($args);
-				self::dump_current_args();
+				$args=self::parse_args($args, $parent_args);
 				
 				$insert_in_cache=false;
 				$memcache_key=dbname.':'.$id.':'.serialize($args);
@@ -403,14 +459,9 @@ class EditoraData
 		// limit = number of elements to get
 		// filter = TBD				
 
-				print_r("EditoraData::getRelations\n");
+				self::debug("EditoraData::getRelations\n");
 				echo "inst_id=$inst_id class_id=$class_id\n";
-				print_r($parent_args);
-				print_r($args);
-				
-				self::parse_args($parent_args);
-				self::parse_args($args);
-				self::dump_current_args();
+				$args=self::parse_args($args, $parent_args);
 				
 				//echo "getRelations $inst_id, $class_id, \n";
 				//print_r($args);
@@ -464,14 +515,9 @@ class EditoraData
 		
 		function getAllInstances ($sql_of_instances, $args, $parent_args)
 		{
-				print_r("EditoraData::getAllInstances\n");
+				self::debug("EditoraData::getAllInstances\n");
 				echo "sql_of_instances=$sql_of_instances\n";
-				print_r($parent_args);
-				print_r($args);
-				
-				self::parse_args($parent_args);
-				self::parse_args($args);
-				self::dump_current_args();
+				$args=self::parse_args($args, $parent_args);
 
 				$instances=array();
 			  $rows=self::$conn->fetchAll($sql_of_instances);
@@ -487,14 +533,9 @@ class EditoraData
 		
 		function getInstacesOfClass($class_id, $args, $parent_args)
 		{
-				print_r("EditoraData::getInstancesOfClass\n");
+				self::debug("EditoraData::getInstancesOfClass\n");
 				echo "class_id=$class_id\n";
-				print_r($parent_args);
-				print_r($args);
-
-				self::parse_args($parent_args);
-				self::parse_args($args);
-				self::dump_current_args();
+				$args=self::parse_args($args, $parent_args);
 
 				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				$sql="select i.id
@@ -517,14 +558,9 @@ class EditoraData
 		
 		function getRelated ($direction, $rel_id, $inst_id, $args, $parent_args)
 		{
-				print_r("EditoraData::getRelated\n");
+				self::debug("EditoraData::getRelated\n");
 				echo "inst_id=$inst_id rel_id=$rel_id direction=$direction\n";
-				print_r($parent_args);
-				print_r($args);
-				
-				self::parse_args($parent_args);
-				self::parse_args($args);
-				self::dump_current_args();
+				$args=self::parse_args($args, $parent_args);
 
 				//echo "getRelated $direction, $rel_id, $inst_id, $limit\n";die;
 				if ($direction=='children')
@@ -540,14 +576,9 @@ class EditoraData
 		
 		function get_children ($rel_id, $inst_id, $args, $parent_args)
 		{
-				print_r("EditoraData::get_children\n");
+				self::debug("EditoraData::get_children\n");
 				echo "inst_id=$inst_id rel_id=$rel_id\n";
-				print_r($parent_args);
-				print_r($args);
-
-				self::parse_args($parent_args);
-				self::parse_args($args);
-				self::dump_current_args();
+				$args=self::parse_args($args, $parent_args);
 				
 				$sql="select i.id 
 				from omp_relation_instances ri
@@ -574,15 +605,9 @@ class EditoraData
 		
 		function get_parents ($rel_id, $inst_id, $args, $parent_args)
 		{
-				
-				print_r("EditoraData::get_children\n");
+				self::debug("EditoraData::get_children\n");
 				echo "inst_id=$inst_id rel_id=$rel_id\n";
-				print_r($parent_args);
-				print_r($args);
-
-				self::parse_args($parent_args);
-				self::parse_args($args);				
-				self::dump_current_args();
+				$args=self::parse_args($args, $parent_args);
 				
 				$sql="select i.id
 				from omp_relation_instances ri
