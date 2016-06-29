@@ -100,58 +100,42 @@ class EditoraData
 				if (isset($args['id']))
 				{
 						self::$id=$args['id'];
-						$final_args['id']=self::$id;
 				}
 				else
 				{
 						if (isset($parent_args['id']))
 						{
 								self::$id=$parent_args['id'];
-								$final_args['id']=self::$id;
 						}						
 				}
+				$final_args['id']=self::$id;
 				
 				if (isset($args['lang']))
 				{
 						self::$lang=$args['lang'];
-						$final_args['lang']=self::$lang;
 				}
 				else 
 				{
 						if (isset($parent_args['lang']))
 						{
 								self::$lang=$parent_args['lang'];						
-								$final_args['lang']=self::$lang;
 						}
 				}
+				$final_args['lang']=self::$lang;
 
-				if (isset($args['limit']))
-				{
-						self::$limit=$args['limit'];
-						$final_args['limit']=self::$limit;
-				}
-				else
-				{
-						if (isset($parent_args['limit']))
-						{
-						  self::$limit=$parent_args['limit'];
-						  $final_args['limit']=self::$limit;
-						}
-				}
 
 				if (isset($args['debug']))
 				{
 						self::$debug=$args['debug'];
-						$final_args['debug']=self::$debug;
 				}
 				else
 				{
 						if (isset($parent_args['debug']))
 						{
 						  self::$debug=$parent_args['debug'];
-						  $final_args['debug']=self::$debug;
 						}						
 				}
+				$final_args['debug']=self::$debug;
 
 				if (isset($args['preview']))
 				{
@@ -190,6 +174,8 @@ class EditoraData
 					";			
 				}
 				
+				
+				
 				// ARGS QUE NO TIENE SENTIDO COGER DEL PARENT PERO GUARDAMOS TAG Y CLASS
 				if (isset($args['tag']))
 				{
@@ -197,6 +183,13 @@ class EditoraData
 						$final_args['tag']=self::$tag;
 						self::$sql_tag="and c.tag='".$args['tag']."'";
 				}
+				
+				if (isset($args['limit']))
+				{
+						self::$limit=$args['limit'];
+				}
+				$final_args['limit']=self::$limit;
+				
 				
 				if (isset($args['class_id']))
 				{
@@ -493,7 +486,7 @@ class EditoraData
 				//$rel_row=Model::get_one($sql);
 				$rel_row=self::$conn->fetchAssoc($sql);
 				if ($rel_row)
-				{// la instancie es pare, treiem els fills
+				{// la instancia es pare, treiem els fills
 						$rel_row['direction']='children';
 						$rel_row['limit']=self::$limit;
 						$rel_row['inst_id']=$inst_id;
