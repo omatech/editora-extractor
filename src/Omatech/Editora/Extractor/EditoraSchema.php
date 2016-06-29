@@ -319,8 +319,8 @@ class EditoraSchema
                     ],
                     'resolve' => function ($instance, $args) {
 												//print_r($args);
-												echo "Instance in EditoraSchema\n";
-												print_r($instance);
+												//echo "Instance in EditoraSchema\n";
+												//print_r($instance);
 												//die;
 											  $attrs=EditoraData::getValues($instance['id'], $instance['update_timestamp'], $args);	
 												//print_r($attrs);
