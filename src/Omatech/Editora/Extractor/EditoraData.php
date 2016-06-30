@@ -503,9 +503,7 @@ class EditoraData
 				where r.parent_class_id = $class_id
 				and r.tag='".self::$tag."'
 				";
-				self::debug($sql);
-				//print_r($sql);die;
-				//$rel_row=Model::get_one($sql);
+				//self::debug($sql);
 				$rel_row=self::$conn->fetchAssoc($sql);
 				if ($rel_row)
 				{// la instancia es pare, treiem els fills
@@ -513,10 +511,8 @@ class EditoraData
 						$rel_row['limit']=self::$limit;
 						$rel_row['inst_id']=$inst_id;
 						$rel_row['args']=$args;
-						//$rel_row['limit']=$args['limit'];
-						//print_r($rel_row);die;
-						self::debug("result getRelations\n");
-					  self::debug([$rel_row]);
+						//self::debug("result getRelations\n");
+					  //self::debug([$rel_row]);
 						return [$rel_row];
 				}
 				else
@@ -524,10 +520,10 @@ class EditoraData
 						
 						$sql="select r.id, r.tag, r.language
 						from omp_relations r
-						where r.child_class_id = ".self::$class_id."
+						where r.child_class_id = $class_id
 						and r.tag='".self::$tag."'
 						";
-						self::debug($sql);
+						//self::debug($sql);
 						
 						//$rel_row=Model::get_one($sql);
 						$rel_row=self::$conn->fetchAssoc($sql);
