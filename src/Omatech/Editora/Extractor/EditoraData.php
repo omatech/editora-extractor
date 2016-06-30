@@ -448,7 +448,13 @@ class EditoraData
 				$attrs=self::$conn->fetchAll($sql);
 				foreach ($attrs as $attr_key=>$attr_val)
 				{
-						echo "key=$attr_key val=$attr_val\n";
+						if (is_array($attr_val))
+						{
+								foreach ($attr_val as $subkey=>$subval)
+								{
+										echo "key=$attr_key subkey=$subkey val=$subval\n";
+								}
+						}
 				}
 				
 				if ($insert_in_cache)
