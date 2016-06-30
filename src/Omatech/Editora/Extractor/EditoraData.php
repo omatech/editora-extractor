@@ -24,6 +24,8 @@ class EditoraData
 		private static $type_of_cache=null;
 		private static $mc=null;
 		
+		public static $debug_info='';
+		
 		
 		
 		
@@ -40,11 +42,11 @@ class EditoraData
 				{
 						if (is_array($str))
 						{
-								print_r($str);
+								$self::$debug_info.=print_r($str, true);
 						}
 						else
 						{// cas normal, es un string
-								echo $str;
+								$self::$debug_info.=$str;
 						}
 				}
 		}
