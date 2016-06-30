@@ -446,6 +446,10 @@ class EditoraData
 				//$attrs=Model::get_data($sql);
 				
 				$attrs=self::$conn->fetchAll($sql);
+				foreach ($attrs as $attr_key=>$attr_val)
+				{
+						echo "key=$attr_key val=$attr_val\n";
+				}
 				
 				if ($insert_in_cache)
 				{
