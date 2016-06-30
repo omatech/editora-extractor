@@ -514,6 +514,8 @@ class EditoraData
 						$rel_row['args']=$args;
 						//$rel_row['limit']=$args['limit'];
 						//print_r($rel_row);die;
+						self::debug("result getRelations\n");
+					  self::debug([$rel_row]);
 						return [$rel_row];
 				}
 				else
@@ -534,6 +536,8 @@ class EditoraData
 								//$rel_row['limit']=$args['limit'];
 								//print_r($rel_row);die;
 								$rel_row['args']=$args;
+								self::debug("result getRelations\n");
+								self::debug([$rel_row]);
 								return [$rel_row];
 						}
 						else

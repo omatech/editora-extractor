@@ -155,10 +155,6 @@ class EditoraSchema
 											
 											
                     'resolve' => function ($relation, $args) {
-												//echo "instance resolve\n";
-												self::debug("Abans de cridar a getRelated\n");
-												self::debug($relation);
-												self::debug($args);
                         $insts=EditoraData::getRelated($relation['direction'], $relation['id'], $relation['inst_id'], $args, $relation['args']);
 												//echo "attrs\n";
 												//print_r($attrs);
