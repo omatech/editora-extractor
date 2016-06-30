@@ -453,7 +453,13 @@ class EditoraData
 								foreach ($attr_val as $subkey=>$subval)
 								{// apliquem la transformació per canviar nls a brs
 										echo "key=$attr_key subkey=$subkey val=$subval\n";
-										$attrs[$attr_key][$subkey]=str_replace(array("\r\n", "\r", "\n"), "<br />", $subval);
+										if ($subkey=='text_val')
+										{
+										  if ($attrs[$attr_key]['atri_type']!='T')
+											{
+										    $attrs[$attr_key][$subkey]=str_replace(array("\r\n", "\r", "\n"), "<br />", $subval);
+											}
+										}
 								}
 						}
 				}
