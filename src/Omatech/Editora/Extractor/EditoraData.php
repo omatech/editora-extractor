@@ -648,7 +648,7 @@ class EditoraData
 				, omp_classes c
 				where ri.rel_id=$rel_id
 				and ri.child_inst_id=$inst_id
-			  and ri.child_inst_id=i.id
+			  and ri.parent_inst_id=i.id
 				
 				".self::$sql_preview."
 
