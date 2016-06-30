@@ -452,7 +452,8 @@ class EditoraData
 						{
 								foreach ($attr_val as $subkey=>$subval)
 								{
-										echo "key=$attr_key subkey=$subkey val=$subval\n";
+										//echo "key=$attr_key subkey=$subkey val=$subval\n";
+										$attrs[$attr_key][$subkey]=str_replace(array("\r\n", "\r", "\n"), "<br />", $subval);
 								}
 						}
 				}
