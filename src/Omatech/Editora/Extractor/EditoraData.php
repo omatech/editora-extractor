@@ -42,11 +42,13 @@ class EditoraData
 				{
 						if (is_array($str))
 						{
-								$self::$debug_info.=print_r($str, true);
+								//$self::$debug_info.=print_r($str, true);
+								print_r($str);
 						}
 						else
 						{// cas normal, es un string
-								$self::$debug_info.=$str;
+								//$self::$debug_info.=$str;
+								echo($str);
 						}
 				}
 		}
