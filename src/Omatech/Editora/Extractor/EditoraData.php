@@ -526,6 +526,7 @@ class EditoraData
 						where r.child_class_id = ".self::$class_id."
 						and r.tag='".self::$tag."'
 						";
+						
 						//$rel_row=Model::get_one($sql);
 						$rel_row=self::$conn->fetchAssoc($sql);
 						if ($rel_row)
