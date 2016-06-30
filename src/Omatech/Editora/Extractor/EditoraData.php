@@ -503,6 +503,7 @@ class EditoraData
 				where r.parent_class_id = $class_id
 				and r.tag='".self::$tag."'
 				";
+				self::debug($sql);
 				//print_r($sql);die;
 				//$rel_row=Model::get_one($sql);
 				$rel_row=self::$conn->fetchAssoc($sql);
@@ -526,6 +527,7 @@ class EditoraData
 						where r.child_class_id = ".self::$class_id."
 						and r.tag='".self::$tag."'
 						";
+						self::debug($sql);
 						
 						//$rel_row=Model::get_one($sql);
 						$rel_row=self::$conn->fetchAssoc($sql);
