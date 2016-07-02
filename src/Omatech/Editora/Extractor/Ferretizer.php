@@ -44,8 +44,8 @@ class Ferretizer {
 								}
 						}
 				}
-				echo "!!! info de la instancia al ferretizer\n";
-				print_r($instance);
+				//echo "!!! info de la instancia al ferretizer\n";
+				//print_r($instance);
 				if (isset($instance['all_values']))
 				{
 						foreach ($instance['all_values'] as $attr_key=>$attr_value)
@@ -58,7 +58,7 @@ class Ferretizer {
 								{
 										$real_value=$attr_value['num_val'];										
 								}
-								echo "--- Al ferretizer tag=".$attr_value['atri_tag']." value=$real_value\n";
+								//echo "--- Al ferretizer tag=".$attr_value['atri_tag']." value=$real_value\n";
 								if (isset($attr_value['atri_tag']) && (isset($real_value)))
 								{
 										$una_instancia[$attr_value['atri_tag']]=$real_value;
