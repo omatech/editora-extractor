@@ -10,7 +10,7 @@
     },
 		"autoload": {
     "psr-4": {
-        "Omatech\\": "src/Omatech"
+        "Omatech\\": "src/Omatech/Editora/Extractor"
 				}
     }
 }
