@@ -335,11 +335,11 @@ class EditoraSchema
                     ],
                     'resolve' => function ($instance, $args) {
 												//print_r($args);
-												//echo "Instance in EditoraSchema\n";
+												echo "Instance in EditoraSchema vaig a treure els values\n";
 												//print_r($instance);
 												//die;
 											  $attrs=EditoraData::getValues($instance['id'], $instance['update_timestamp'], $args, $instance['args']);	
-												//print_r($attrs);
+												print_r($attrs);
 												
 												if ($attrs) return $attrs;
 												return null;

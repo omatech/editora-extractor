@@ -58,6 +58,7 @@ class Ferretizer {
 								{
 										$real_value=$attr_value['num_val'];										
 								}
+								echo "--- Al ferretizer tag=".$attr_value['atri_tag']." value=$real_value\n";
 								if (isset($attr_value['atri_tag']) && (isset($real_value)))
 								{
 										$una_instancia[$attr_value['atri_tag']]=$real_value;
