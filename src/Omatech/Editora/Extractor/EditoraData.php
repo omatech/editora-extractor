@@ -223,7 +223,7 @@ class EditoraData
 		}
 
 		
-		function get_preview_status_condition ()
+		static function get_preview_status_condition ()
 		{
 				if (!self::$preview)
 				{
@@ -546,7 +546,7 @@ class EditoraData
 				}
     }
 		
-		function getAllInstances ($sql_of_instances, $args, $parent_args)
+		static function getAllInstances ($sql_of_instances, $args, $parent_args)
 		{
 				self::debug("EditoraData::getAllInstances\n");
 				self::debug("sql_of_instances=$sql_of_instances\n");
@@ -564,7 +564,7 @@ class EditoraData
 				return $instances;
 		}
 		
-		function getInstacesOfClass($class_id, $args, $parent_args)
+		static function getInstacesOfClass($class_id, $args, $parent_args)
 		{
 				self::debug("EditoraData::getInstancesOfClass\n");
 				self::debug("class_id=$class_id\n");
@@ -589,7 +589,7 @@ class EditoraData
 				//return self::$conn->fetchAll($sql);				
 		}	
 		
-		function getRelated ($direction, $rel_id, $inst_id, $args, $parent_args)
+		static function getRelated ($direction, $rel_id, $inst_id, $args, $parent_args)
 		{
 				self::debug("EditoraData::getRelated\n");
 				self::debug("inst_id=$inst_id rel_id=$rel_id direction=$direction\n");
@@ -607,7 +607,7 @@ class EditoraData
 				
 		}
 		
-		function get_children ($rel_id, $inst_id, $args, $parent_args)
+		static function get_children ($rel_id, $inst_id, $args, $parent_args)
 		{
 				self::debug("EditoraData::get_children\n");
 				self::debug("inst_id=$inst_id rel_id=$rel_id\n");
@@ -636,7 +636,7 @@ class EditoraData
 		}
 		
 		
-		function get_parents ($rel_id, $inst_id, $args, $parent_args)
+		static function get_parents ($rel_id, $inst_id, $args, $parent_args)
 		{
 				self::debug("EditoraData::get_children\n");
 				self::debug("inst_id=$inst_id rel_id=$rel_id\n");
