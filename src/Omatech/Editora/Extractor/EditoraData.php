@@ -364,7 +364,7 @@ class EditoraData
 											}		
 											else
 											{// no es fresc, l'esborrem i donem ordres de refrescar-lo												
-											  self::debug(self::$type_of_cache.":: purgamos el objeto ya que $update_timestamp es mayor o igual a ".$memcache_value['cached_timestamp']."\n");
+											  self::debug(self::$type_of_cache.":: purgamos el objeto ya que $update_timestamp es mayor o igual a ".$memcache_value['cache_timestamp']."\n");
 												self::$mc->delete($memcache_key);
 												$insert_in_cache=true;
 											}
