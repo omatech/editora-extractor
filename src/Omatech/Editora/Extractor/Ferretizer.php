@@ -50,11 +50,11 @@ class Ferretizer {
 				{
 						foreach ($instance['all_values'] as $attr_key=>$attr_value)
 						{
-								if (isset($attr_value['text_val']) && $attr_value['text_val'])
+								if (isset($attr_value['text_val']) && $attr_value['text_val']!='')
 								{
 										$real_value=$attr_value['text_val'];
 								}
-								elseif (isset($attr_value['num_val']) && $attr_value['num_val'])
+								elseif (isset($attr_value['num_val']) && $attr_value['num_val']!='')
 								{
 										$real_value=$attr_value['num_val'];										
 								}
