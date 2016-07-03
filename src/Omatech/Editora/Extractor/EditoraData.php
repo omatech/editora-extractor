@@ -371,7 +371,7 @@ class EditoraData
 										}
 										else
 										{// no te el format correcte, l'expirem
-											  self::debug(self::$type_of_cache.":: purgamos el objeto ya que no tiene cached_timestamp\n");
+											  self::debug(self::$type_of_cache.":: purgamos el objeto ya que no tiene cache_timestamp\n");
 												self::$mc->delete($memcache_key);
 												$insert_in_cache=true;												
 										}
