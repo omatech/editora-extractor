@@ -6,6 +6,7 @@ class EditoraData
 		private static $id=null;
 		private static $lang='ALL';
 		private static $limit=10000;
+		private static $default_limit=10000;
 		private static $class_id=null;
 		private static $debug=false;
 
@@ -201,6 +202,10 @@ class EditoraData
 				if (isset($args['limit']))
 				{
 						self::$limit=$args['limit'];
+				}
+				else
+				{
+						self::$limit=self::$default_limit;
 				}
 				$final_args['limit']=self::$limit;
 				
