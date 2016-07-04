@@ -573,7 +573,10 @@ class EditoraData
 				{
 						$args['id']=$row['id'];
 						$instance=self::getInstance($args, $parent_args);
-						array_push($instances, $instance);
+						if ($instance)
+						{
+						  array_push($instances, $instance);
+						}
 				}
 				$instances['args']=$args;
 				return $instances;
