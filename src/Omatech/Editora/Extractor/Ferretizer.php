@@ -21,7 +21,13 @@ class Ferretizer {
 				{
 						foreach ($relation['instances'] as $inner_inst)
 						{
-							$una_rel['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
+							echo "Inner Inst\n";
+							print_r($inner_inst);
+							if ($inner_inst)
+							{
+								echo "Entro!\n";
+							  $una_rel['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
+							}
 						}
 				}
 				return $una_rel;		
