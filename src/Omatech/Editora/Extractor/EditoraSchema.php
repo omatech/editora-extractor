@@ -157,11 +157,10 @@ class EditoraSchema
                     'resolve' => function ($relation, $args) {
 												
 												echo "ARGS ABANS DEL GETRELATED\n";
-												print_r($args);
-												echo "PARENT ARGS ABANS DEL GETRELATED\n";
 												print_r($relation['args']);
+												//echo "PARENT ARGS ABANS DEL GETRELATED\n";
 												
-                        $insts=EditoraData::getRelated($relation['direction'], $relation['id'], $relation['inst_id'], $args, $relation['args']);
+                        $insts=EditoraData::getRelated($relation['direction'], $relation['id'], $relation['inst_id'], $relation['args'], null);
 												//echo "attrs\n";
 												//print_r($attrs);
 												if ($insts) return $insts;
