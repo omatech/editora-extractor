@@ -36,7 +36,7 @@ class Ferretizer {
 		static function FerretizeInstance ($instance, $metadata=false)
 		{
 				echo "pintant la instancia al ferretizer\n";
-				print_r($instance);
+				//print_r($instance);
 				$una_instancia=array();
 				$una_instancia['id']=$instance['id'];
 				if (isset($instance['link']))	$una_instancia['link']=$instance['link'];
