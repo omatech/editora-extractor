@@ -31,7 +31,7 @@ $show_metadata=false;
 			}
 		}
 		
-    relation2 (tag: "values", limit: 2)
+    relation2 (tag: "values", limit: 5)
 		{
 		  id tag direction limit
 			instances {
