@@ -15,7 +15,7 @@ $params = [
 	, 'lang' => 'ca'
 	, 'debug' => false
 ];
-$show_metadata=false;
+$show_metadata=true;
 
  $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean) {
   instance(id: $id, lang: $lang, debug: $debug) {
