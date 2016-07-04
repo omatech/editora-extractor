@@ -161,8 +161,8 @@ class EditoraSchema
 												//echo "PARENT ARGS ABANS DEL GETRELATED\n";
 												
                         $insts=EditoraData::getRelated($relation['direction'], $relation['id'], $relation['inst_id'], $relation['args'], null);
-												//echo "attrs\n";
-												//print_r($attrs);
+												echo "Instancies despres del GetRelated\n";
+												print_r($insts);
 												if ($insts) return $insts;
 												return null;
                     },
