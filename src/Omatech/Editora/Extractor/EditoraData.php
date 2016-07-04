@@ -642,9 +642,10 @@ class EditoraData
 				order by weight
 				limit ".self::$limit."
 				";
-				//echo "get_children $rel_id, $inst_id\n";
-				//print_r($args);
-				//echo $sql."\n";
+				self::debug("get_children $rel_id, $inst_id\n");
+				self::debug($args);
+				self::debug($parent_args);
+				self::debug($sql."\n");
 				return self::getAllInstances($sql, $args, $parent_args);
 				//return self::$conn->fetchAll($sql);				
 
@@ -671,6 +672,10 @@ class EditoraData
 				order by weight
 				limit ".self::$limit."
 				";
+				self::debug("get_parent $rel_id, $inst_id\n");
+				self::debug($args);
+				self::debug($parent_args);
+				self::debug($sql."\n");
 				return self::getAllInstances($sql, $args, $parent_args);
 				//return self::$conn->fetchAll($sql);
 		}
