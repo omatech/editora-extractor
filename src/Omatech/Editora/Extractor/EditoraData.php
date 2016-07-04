@@ -340,7 +340,7 @@ class EditoraData
 				$args=self::parse_args($args, $parent_args);
 				
 				$insert_in_cache=false;
-				$memcache_key=dbname.':'.$id.':'.serialize($args);
+				$memcache_key=$conn->getDatabase().':'.$id.':'.serialize($args);
 				self::debug("MEMCACHE:: using key $memcache_key instance update_timestamp=$update_timestamp\n");
 				if (!self::$preview)
 				{// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
