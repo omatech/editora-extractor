@@ -159,9 +159,9 @@ class EditoraSchema
 												echo "ARGS ABANS DEL GETRELATED\n";
 												print_r($args);
 												echo "PARENT ARGS ABANS DEL GETRELATED\n";
-												print_r($parent_args);
+												print_r($relation['args']);
 												
-                        $insts=EditoraData::getRelated($relation['direction'], $relation['id'], $relation['inst_id'], $args, $parent_args);
+                        $insts=EditoraData::getRelated($relation['direction'], $relation['id'], $relation['inst_id'], $args, $relation['args']);
 												//echo "attrs\n";
 												//print_r($attrs);
 												if ($insts) return $insts;
