@@ -21,11 +21,11 @@ class Ferretizer {
 				{
 						foreach ($relation['instances'] as $inner_inst)
 						{
-							echo "Inner Inst\n";
-							print_r($inner_inst);
+							//echo "Inner Inst\n";
+							//print_r($inner_inst);
 							if ($inner_inst)
 							{
-								echo "Entro!\n";
+								//echo "Entro!\n";
 							  $una_rel['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
 							}
 						}
@@ -35,7 +35,7 @@ class Ferretizer {
 
 		static function FerretizeInstance ($instance, $metadata=false)
 		{
-				echo "pintant la instancia al ferretizer\n";
+				//echo "pintant la instancia al ferretizer\n";
 				//print_r($instance);
 				$una_instancia=array();
 				$una_instancia['id']=$instance['id'];
