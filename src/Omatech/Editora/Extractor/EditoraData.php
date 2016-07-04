@@ -613,11 +613,11 @@ class EditoraData
 				//echo "getRelated $direction, $rel_id, $inst_id, $limit\n";die;
 				if ($direction=='children')
 				{
-				  return self::get_children ($rel_id, $inst_id, $args, $args);
+				  return self::get_children ($rel_id, $inst_id, $args, null);
 				}
 				if ($direction=='parents')
 				{
-				  return self::get_parents ($rel_id, $inst_id, $args, $args);
+				  return self::get_parents ($rel_id, $inst_id, $args, null);
 				}
 				
 		}
