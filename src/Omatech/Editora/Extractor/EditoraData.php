@@ -576,7 +576,7 @@ class EditoraData
 						if ($instance)
 						{
 							self::debug("Instancia a getAllInstances\n");
-							self::debug($instance);
+							self::debug($instance); 
 						  array_push($instances, $instance);
 						}
 				}
