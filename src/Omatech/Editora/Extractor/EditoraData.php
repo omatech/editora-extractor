@@ -526,8 +526,8 @@ class EditoraData
 						$rel_row['limit']=self::$limit;
 						$rel_row['inst_id']=$inst_id;
 						$rel_row['args']=$args;
-						//self::debug("result getRelations\n");
-					  //self::debug([$rel_row]);
+						self::debug("result getRelations\n");
+					  self::debug([$rel_row]);
 						return [$rel_row];
 				}
 				else
@@ -613,11 +613,11 @@ class EditoraData
 				//echo "getRelated $direction, $rel_id, $inst_id, $limit\n";die;
 				if ($direction=='children')
 				{
-				  return self::get_children ($rel_id, $inst_id, $args, null);
+				  return self::get_children ($rel_id, $inst_id, $args, $parent_args);
 				}
 				if ($direction=='parents')
 				{
-				  return self::get_parents ($rel_id, $inst_id, $args, null);
+				  return self::get_parents ($rel_id, $inst_id, $args, $parent_args);
 				}
 				
 		}

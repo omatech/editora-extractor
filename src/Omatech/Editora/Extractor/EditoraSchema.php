@@ -155,7 +155,7 @@ class EditoraSchema
 											
 											
                     'resolve' => function ($relation, $args) {
-                        $insts=EditoraData::getRelated($relation['direction'], $relation['id'], $relation['inst_id'], $args, $relation['args']);
+                        $insts=EditoraData::getRelated($relation['direction'], $relation['id'], $relation['inst_id'], $args, null);
 												//echo "attrs\n";
 												//print_r($attrs);
 												if ($insts) return $insts;
