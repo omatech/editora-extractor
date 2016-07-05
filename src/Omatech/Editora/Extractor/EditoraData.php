@@ -472,13 +472,27 @@ class EditoraData
 								foreach ($attr_val as $subkey=>$subval)
 								{// apliquem la transformació per canviar nls a brs
 										//echo "key=$attr_key subkey=$subkey val=$subval\n";
-										if ($subkey=='text_val')
+										if ($subkey=='atri_type')
+										{// casos especials depenent del atri_type
+												if ($subval=='A')
+												{
+														$attrs[$attr_key]['text_val']=str_replace(array("\r\n", "\r", "\n"), "<br />", $attrs[$attr_key]['text_val']);
+												}
+												if ($subval=='L')
+												{
+														$attrs[$attr_key]['text_val']='Sala gran';
+												}												
+										}
+										/*
+										if ($subkey=='text_val' && $subval!='')
 										{
 										  if ($attrs[$attr_key]['atri_type']!='T' && $attrs[$attr_key]['atri_type']!='K')
 											{
 										    $attrs[$attr_key][$subkey]=str_replace(array("\r\n", "\r", "\n"), "<br />", $subval);
 											}
 										}
+										 
+										*/
 								}
 						}
 				}
