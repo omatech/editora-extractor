@@ -474,7 +474,7 @@ class EditoraData
 										//echo "key=$attr_key subkey=$subkey val=$subval\n";
 										if ($subkey=='text_val')
 										{
-										  if ($attrs[$attr_key]['atri_type']!='T' && $attrs[$attr_key]['atri_type']!='K')
+										  if ($attrs[$attr_key]['atri_type']!='T' || $attrs[$attr_key]['atri_type']!='K')
 											{
 										    $attrs[$attr_key][$subkey]=str_replace(array("\r\n", "\r", "\n"), "<br />", $subval);
 											}
