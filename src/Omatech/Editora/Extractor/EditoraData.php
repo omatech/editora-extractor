@@ -5,6 +5,7 @@ class EditoraData
 {
 		private static $id=null;
 		private static $lang='ALL';
+		private static $default_lang='ca';
 		private static $limit=10000;
 		private static $default_limit=10000;
 		private static $class_id=null;
@@ -30,6 +31,22 @@ class EditoraData
 		{
 				//var_dump($conn);
 				self::$conn=$conn;
+		}
+
+		static function set_default_lang($lang)
+		{
+				//var_dump($conn);
+				self::$lang=$lang;
+		}
+		
+		static function get_lookup_value ($id)
+		{
+				$sql="select caption_".self::$lang." caption
+				from omp_lookups_values 
+				where id=$id
+				";
+				$row=self::$conn->fetchAssoc($sql);
+				return $row['caption'];
 		}
 		
 		static function debug($str)
@@ -480,7 +497,7 @@ class EditoraData
 												}
 												if ($subval=='L')
 												{
-														$attrs[$attr_key]['text_val']='Sala gran';
+														$attrs[$attr_key]['text_val']=self::get_lookup_value($attrs[$attr_key]['num_val']);
 												}												
 										}
 										/*
