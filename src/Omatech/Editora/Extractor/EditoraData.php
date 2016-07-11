@@ -168,6 +168,8 @@ class EditoraData
 						}						
 				}
 				$final_args['debug']=self::$debug;
+				
+				
 
 				if (isset($args['preview']))
 				{
@@ -201,9 +203,11 @@ class EditoraData
 					}
 				  
 					self::$sql_preview=self::get_preview_status_condition()."
-				  and DATE_FORMAT(i.publishing_begins,'%Y%m%d%H%i%S') <= ".self::$preview_date."+0
-				  and IFNULL(DATE_FORMAT(i.publishing_ends,'%Y%m%d%H%i%S'),now()+1) > ".self::$preview_date."+0
-					";			
+					";
+					//self::$sql_preview=self::get_preview_status_condition()."
+				  //and DATE_FORMAT(i.publishing_begins,'%Y%m%d%H%i%S') <= ".self::$preview_date."+0
+				  //and IFNULL(DATE_FORMAT(i.publishing_ends,'%Y%m%d%H%i%S'),now()+1) > ".self::$preview_date."+0
+					//";			
 				}
 				else
 				{// No estem al preview, cas normal
