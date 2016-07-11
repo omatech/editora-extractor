@@ -41,12 +41,12 @@ class EditoraData
 		
 		static function get_lookup_value ($id)
 		{
-				$sql="select caption_".self::$lang." caption
+				$sql="select value_".self::$lang." value
 				from omp_lookups_values 
 				where id=$id
 				";
 				$row=self::$conn->fetchAssoc($sql);
-				return $row['caption'];
+				return $row['value'];
 		}
 		
 		static function debug($str)
