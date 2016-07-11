@@ -202,7 +202,7 @@ class EditoraData
 							
 					}
 				  
-					self::$sql_preview=self::get_preview_status_condition()."
+					self::$sql_preview="
 					";
 					//self::$sql_preview=self::get_preview_status_condition()."
 				  //and DATE_FORMAT(i.publishing_begins,'%Y%m%d%H%i%S') <= ".self::$preview_date."+0
