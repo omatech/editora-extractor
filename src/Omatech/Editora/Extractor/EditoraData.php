@@ -288,7 +288,8 @@ class EditoraData
 				and c.id=i.class_id
 				".self::$sql_preview."
 				";
-				//echo $sql;
+				self::debug("SQL a getInstance\n");
+				self::debug($sql);
 				//$row=Model::get_one($sql);
 				$row=self::$conn->fetchAssoc($sql);
 				//print_r($row);
