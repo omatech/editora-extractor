@@ -574,7 +574,7 @@ class EditoraData
 						
 						$sql="select r.id, r.tag, r.language
 						from omp_relations r
-						where r.child_class_id = $class_id
+						where ( r.child_class_id = $class_id OR FIND_IN_SET( $class_id, r.multiple_child_class_id ) )
 						and r.tag='".self::$tag."'
 						";
 						//self::debug($sql);
