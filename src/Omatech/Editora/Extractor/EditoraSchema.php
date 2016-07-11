@@ -374,6 +374,11 @@ class EditoraSchema
                             'description' => 'filter some fields all|detail|resume default all',
                             'type' => Type::String()
                         ],
+                        'direction' => [
+                            'name' => 'direction',
+                            'description' => 'force a direction, by default is children, use parents if you want to override',
+                            'type' => Type::String()
+                        ],
                         'lang' => [
                             'name' => 'lang',
                             'description' => 'Language of the extraction',
@@ -422,6 +427,11 @@ class EditoraSchema
                         'filter' => [
                             'name' => 'filter',
                             'description' => 'filter some fields all|detail|resume default all',
+                            'type' => Type::String()
+                        ],
+                        'direction' => [
+                            'name' => 'direction',
+                            'description' => 'force a direction, by default is children, use parents if you want to override',
                             'type' => Type::String()
                         ],
                         'lang' => [
@@ -474,6 +484,11 @@ class EditoraSchema
                             'description' => 'filter some fields all|detail|resume default all',
                             'type' => Type::String()
                         ],
+                        'direction' => [
+                            'name' => 'direction',
+                            'description' => 'force a direction, by default is children, use parents if you want to override',
+                            'type' => Type::String()
+                        ],
                         'lang' => [
                             'name' => 'lang',
                             'description' => 'Language of the extraction',
@@ -524,6 +539,11 @@ class EditoraSchema
                             'description' => 'filter some fields all|detail|resume default all',
                             'type' => Type::String()
                         ],
+                        'direction' => [
+                            'name' => 'direction',
+                            'description' => 'force a direction, by default is children, use parents if you want to override',
+                            'type' => Type::String()
+                        ],
                         'lang' => [
                             'name' => 'lang',
                             'description' => 'Language of the extraction',
@@ -572,6 +592,11 @@ class EditoraSchema
 											'filter' => [
                             'name' => 'filter',
                             'description' => 'filter some fields all|detail|resume default all',
+                            'type' => Type::String()
+                        ],
+                        'direction' => [
+                            'name' => 'direction',
+                            'description' => 'force a direction, by default is children, use parents if you want to override',
                             'type' => Type::String()
                         ],
                         'lang' => [

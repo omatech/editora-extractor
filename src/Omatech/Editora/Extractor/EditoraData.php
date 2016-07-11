@@ -240,6 +240,14 @@ class EditoraData
 						$final_args['filter']=$args['filter'];
 				}
 				
+				if (isset($args['direction']))
+				{
+						$final_args['direction']=$args['direction'];
+				}
+				else
+				{
+						$final_args['direction']='children';
+				}
 				
 				self::debug("PARENT ARGS:::\n");
 				self::debug($parent_args, true);
@@ -551,7 +559,7 @@ class EditoraData
 				";
 				//self::debug($sql);
 				$rel_row=self::$conn->fetchAssoc($sql);
-				if ($rel_row)
+				if ($rel_row && $args['directions']!='parents')
 				{// la instancia es pare, treiem els fills
 						$rel_row['direction']='children';
 						$rel_row['limit']=self::$limit;
