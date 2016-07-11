@@ -559,7 +559,7 @@ class EditoraData
 				";
 				//self::debug($sql);
 				$rel_row=self::$conn->fetchAssoc($sql);
-				if ($rel_row && $args['directions']!='parents')
+				if ($rel_row && $args['direction']!='parents')
 				{// la instancia es pare, treiem els fills
 						$rel_row['direction']='children';
 						$rel_row['limit']=self::$limit;
