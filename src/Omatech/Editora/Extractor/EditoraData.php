@@ -172,16 +172,16 @@ class EditoraData
 				if (isset($args['preview']))
 				{
 					self::$preview=$args['preview'];
-					$final_args['preview']=self::$preview;										
 				}
 				else
 				{
 						if (isset($parent_args['preview']))
 						{
 						  self::$preview=$parent_args['preview'];
-						  $final_args['preview']=self::$preview;
 						}												
 				}
+				$final_args['preview']=self::$preview;		
+				
 				
 				if (self::$preview)
 				{
