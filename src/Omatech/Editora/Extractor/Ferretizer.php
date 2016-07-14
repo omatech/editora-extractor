@@ -94,9 +94,35 @@ class Ferretizer {
 				}
 				if (isset($instance['relation5']))
 				{
-						$relation=$instance['relation4'][0];
+						$relation=$instance['relation5'][0];
 						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
 				}
+				if (isset($instance['relation6']))
+				{
+						$relation=$instance['relation6'][0];
+						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
+				}
+				if (isset($instance['relation7']))
+				{
+						$relation=$instance['relation7'][0];
+						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
+				}
+				if (isset($instance['relation8']))
+				{
+						$relation=$instance['relation8'][0];
+						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
+				}
+				if (isset($instance['relation9']))
+				{
+						$relation=$instance['relation9'][0];
+						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
+				}
+				if (isset($instance['relation10']))
+				{
+						$relation=$instance['relation10'][0];
+						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
+				}
+
 				return $una_instancia;
 		}
 		
