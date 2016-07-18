@@ -361,7 +361,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
@@ -421,7 +421,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
@@ -481,7 +481,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
@@ -541,7 +541,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
@@ -601,7 +601,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
@@ -663,7 +663,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
@@ -721,7 +721,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
@@ -781,7 +781,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
@@ -842,7 +842,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
@@ -902,7 +902,7 @@ class EditoraSchema
                         'alias' => [
                             'name' => 'alias',
                             'description' => 'alias of the relation',
-                            'type' => new NonNull(Type::String())
+                            'type' => Type::String()
                         ],
                         'limit' => [
                             'name' => 'limit',
