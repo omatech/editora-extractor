@@ -524,6 +524,10 @@ class EditoraData
 												{
 														$attrs[$attr_key]['text_val']=self::get_lookup_value($attrs[$attr_key]['num_val']);
 												}												
+												if ($subval=='D')
+												{
+														$attrs[$attr_key]['text_val']=$attrs[$attr_key]['date_val'];
+												}												
 										}
 										/*
 										if ($subkey=='text_val' && $subval!='')
