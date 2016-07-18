@@ -22,7 +22,7 @@ $show_metadata=true;
 		id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
     all_values (filter: "small") {atri_tag text_val}
 		
-    relation1 (tag: "carrousel", limit:2)
+    relation1 (tag: "carrousel", limit:2, alias: "mycarrousel")
 		{
 		  id tag direction limit
 			instances {
