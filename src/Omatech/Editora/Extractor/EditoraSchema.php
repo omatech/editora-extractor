@@ -355,7 +355,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [
@@ -410,7 +415,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [
@@ -465,7 +475,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [
@@ -520,7 +535,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [
@@ -575,7 +595,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [
@@ -632,7 +657,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [
@@ -685,7 +715,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [
@@ -740,7 +775,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [
@@ -796,7 +836,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [
@@ -851,7 +896,12 @@ class EditoraSchema
                     'args' => [
                         'tag' => [
                             'name' => 'tag',
-                            'description' => 'tag of the child relation',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
                             'type' => new NonNull(Type::String())
                         ],
                         'limit' => [

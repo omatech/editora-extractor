@@ -251,6 +251,11 @@ class EditoraData
 						$final_args['filter']=$args['filter'];
 				}
 				
+				if (isset($args['alias']))
+				{
+						$final_args['alias']=$args['alias'];
+				}
+
 				if (isset($args['direction']))
 				{
 						$final_args['direction']=$args['direction'];
@@ -553,6 +558,7 @@ class EditoraData
 		// lang = ALL | es | ca | en ...
 		// tag = tag of the relation
 		// limit = number of elements to get
+		// alias = alias of the relation in output
 		// filter = TBD				
 
 				self::debug("EditoraData::getRelations\n");
@@ -575,6 +581,10 @@ class EditoraData
 				{// la instancia es pare, treiem els fills
 						$rel_row['direction']='children';
 						$rel_row['limit']=self::$limit;
+						if (isset($args['alias']))
+						{
+								$rel_row['tag']=$args['alias'];
+						}						
 						$rel_row['inst_id']=$inst_id;
 						$rel_row['args']=$args;
 						self::debug("result getRelations\n");
@@ -597,6 +607,10 @@ class EditoraData
 						{
 								$rel_row['direction']='parents';
 								$rel_row['limit']=self::$limit;
+								if (isset($args['alias']))
+								{
+										$rel_row['tag']=$args['alias'];
+								}
 								$rel_row['inst_id']=$inst_id;
 								//$rel_row['limit']=$args['limit'];
 								//print_r($rel_row);die;
