@@ -1,7 +1,37 @@
 <?php
 namespace Omatech\Editora\Extractor;
-class Ferretizer {
-		//put your code here
+class Ferretizer 
+{
+
+		static function debug($str)
+		{
+				global $debug;
+				if (is_array($str))
+				{
+						//$self::$debug_info.=print_r($str, true);
+						if ($debug)
+						{
+								$debug->debug(print_r($str, true));
+						}
+						else
+						{
+								print_r($str);
+						}
+				}
+				else
+				{// cas normal, es un string
+						//$self::$debug_info.=$str;
+						if ($debug)
+						{
+								$debug->debug($str);
+						}
+						else
+						{
+								echo($str);
+						}
+				}
+		}
+		
 		
 		static function FerretizeRel ($relation, $metadata=false)
 		{
@@ -156,8 +186,8 @@ class Ferretizer {
 				if (isset($data['class'])) return self::FerretizeClass($data['class'], $metadata);
 				if (isset($data['instance'])) return self::FerretizeInstance($data['instance'], $metadata);	
 				
-				echo "ERROR IN FERRETIZER ESTRUCTURA INCORRECTA!\n";
-				var_dump($data);
+				self::debug("ERROR IN FERRETIZER ESTRUCTURA INCORRECTA!\n");
+				self::debug($data);
 				return false;
 		}
 }
