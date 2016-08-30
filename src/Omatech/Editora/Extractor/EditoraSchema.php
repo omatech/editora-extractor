@@ -1180,11 +1180,11 @@ class EditoraSchema
 									
                     ],
                     'resolve' => function ($root, $args) {
-                        $class = EditoraData::getSearch($args);
+                        $search = EditoraData::getSearch($args);
 												echo "Al query type\n";
-												print_r($class);
-												die;
-												if ($class) return $class;
+												print_r($search);
+												//die;
+												if ($search) return $search;
 												return null;
                         //return isset($instance[$args['id']]) ? $instance[$args['id']] : null;
                     }
