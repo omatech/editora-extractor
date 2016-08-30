@@ -178,15 +178,15 @@ class EditoraSchema
             'fields' => [
                 'class_id' => [
                     'type' => new NonNull(Type::int()),
-                    'description' => 'The id of the relation.',
+                    'description' => 'The id of the class.',
                 ],
                 'tag' => [
                     'type' => new NonNull(Type::string()),
-                    'description' => 'Relation tag',
+                    'description' => 'Class tag',
                 ],
                 'language' => [
                     'type' => Type::string(),
-                    'description' => 'Relation language',
+                    'description' => 'Class language',
                 ],
                 'limit' => [
                     'type' => Type::int(),
@@ -256,6 +256,95 @@ class EditoraSchema
             ],
         ]);
 
+										
+				$SearchType = new ObjectType([
+            'name' => 'search',
+            'description' => 'Search',
+            'fields' => [
+                'query' => [
+                    'type' => new NonNull(Type::string()),
+                    'description' => 'search query',
+                ],
+                'class_id' => [
+                    'type' => Type::int(),
+                    'description' => 'The id of the relation.',
+                ],
+                'tag' => [
+                    'type' => Type::string(),
+                    'description' => 'Relation tag',
+                ],
+                'language' => [
+                    'type' => Type::string(),
+                    'description' => 'Relation language',
+                ],
+                'limit' => [
+                    'type' => Type::int(),
+                    'description' => 'limit of extraction',
+                ],
+
+                'preview' => [
+                    'type' => Type::boolean(),
+                    'description' => 'Preview true or false, default false',
+                ],
+                'preview_date' => [
+                    'type' => Type::string(),
+                    'description' => 'Preview date in %Y%m%d%H%i%S format',
+                ],
+							
+								'instances' => [
+                    'type' => function () use (&$InstanceType) {
+                        return Type::listOf($InstanceType);
+                    },
+                    'description' => 'The instances of this class.',
+											
+                    'args' => [
+                        'filter' => [
+                            'name' => 'filter',
+                            'description' => 'filter some fields all|detail|resume default all',
+                            'type' => Type::String()
+                        ],
+                        'lang' => [
+                            'name' => 'lang',
+                            'description' => 'Language of the extraction',
+                            'type' => Type::String()
+                        ],
+												'limit' => [
+														'type' => Type::int(),
+														'description' => 'limit of extraction',
+												],
+
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
+												'preview' => [
+														'type' => Type::boolean(),
+														'description' => 'Preview true or false, default false',
+												],
+												'preview_date' => [
+														'type' => Type::string(),
+														'description' => 'Preview date in %Y%m%d%H%i%S format',
+												],
+											
+											
+                    ],
+											
+                    'resolve' => function ($search, $args) {
+												echo "instance resolve\n";
+												print_r($class);
+												$insts=EditoraData::getInstacesOfSearch($search['query'], $search['class_id'], $search, $args, $search['args']);
+												echo "attrs\n";
+												print_r($insts);
+												if ($insts)	return $insts;
+												return null;
+                    },
+								],
+
+            ],
+        ]);
+										
 										
 				$InstanceType = new ObjectType([
             'name' => 'Instance',
@@ -1045,7 +1134,61 @@ class EditoraSchema
 												return null;
                         //return isset($instance[$args['id']]) ? $instance[$args['id']] : null;
                     }
-                ],									
+                ],
+									
+									
+                'search' => [
+                    'type' => $SearchType,
+                    'args' => [
+                        'query' => [
+                            'name' => 'query',
+                            'description' => 'Query string for search',
+                            'type' => Type::String()
+                        ],
+                        'class_id' => [
+                            'name' => 'class_id',
+                            'description' => 'Optional id of the Class',
+                            'type' => Type::Int()
+                        ],
+                        'tag' => [
+                            'name' => 'tag',
+                            'description' => 'Optional tag of the class',
+                            'type' => Type::String()
+                        ],
+                        'lang' => [
+                            'name' => 'lang',
+                            'description' => 'Language of the extraction',
+                            'type' => Type::String()
+                        ],
+											
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
+											'preview' => [
+														'type' => Type::boolean(),
+														'description' => 'Preview true or false, default false',
+												],
+												'preview_date' => [
+														'type' => Type::string(),
+														'description' => 'Preview date in %Y%m%d%H%i%S format',
+												],
+									
+									
+									
+                    ],
+                    'resolve' => function ($root, $args) {
+                        $class = EditoraData::getSearch($args);
+//												echo "Al query type\n";
+//												print_r($class);
+//												die;
+												if ($class) return $class;
+												return null;
+                        //return isset($instance[$args['id']]) ? $instance[$args['id']] : null;
+                    }
+                ],
 									
             ]
         ]);
@@ -1055,4 +1198,6 @@ class EditoraSchema
 
         return new Schema($queryType);
     }
+		
+		
 }

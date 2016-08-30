@@ -15,6 +15,7 @@ class EditoraData
 		private static $preview_date='NOW()';
 		
 		private static $tag='';
+		private static $query='';
 
 		private static $sql_tag="";
 		private static $sql_class_id="";
@@ -227,6 +228,13 @@ class EditoraData
 						self::$sql_tag="and c.tag='".$args['tag']."'";
 				}
 				
+
+				if (isset($args['query']))
+				{
+						self::$query=$args['query'];
+						$final_args['query']=self::$query;
+				}
+				
 				if (isset($args['limit']))
 				{
 						self::$limit=$args['limit'];
@@ -367,6 +375,42 @@ class EditoraData
     }
 		
 
+    static function getSearch($args, $parent_args=false)
+    {
+				self::debug("EditoraData::getSearch\n");
+				$args=self::parse_args($args, $parent_args);
+				
+				if (self::$query=='')
+				{
+						echo "Debes introducir un query string\n";
+						return null;						
+				}
+				
+				if (self::$sql_tag=='' && self::$sql_class_id=='')
+				{
+						debug("No estamos mirando un class concreto, es una busqueda general\n");
+						$row=array();
+				}
+				else
+				{// filtramos por una class concreta
+								
+						$sql="select c.id class_id, c.name, c.tag
+						from omp_classes c
+						where 1=1
+						".self::$sql_tag."
+						".self::$sql_class_id."
+						";
+						//echo $sql;die;
+						//$row=Model::get_one($sql);
+						$row=self::$conn->fetchAssoc($sql);
+				}
+				$row['args']=$args;
+//				$row['lang']=self::$lang;
+//				$row['limit']=self::$limit;
+//				$row['preview']=self::$preview;
+//				$row['preview_date']=self::$preview_date;
+				return $row;
+    }
 		
 		
     static function getValues($id, $update_timestamp, $args, $parent_args)
@@ -677,6 +721,50 @@ class EditoraData
 				return self::getAllInstances($sql, $args, $parent_args);
 				//return self::$conn->fetchAll($sql);				
 		}	
+		
+
+		static function getInstacesOfSearch($query, $class_id, $args, $parent_args)
+		{
+				self::debug("EditoraData::getInstancesOfSearch\n");
+				self::debug("query=$query\n");
+				self::debug("class_id=$class_id\n");
+				$args=self::parse_args($args, $parent_args);
+
+				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				
+				$sql = "SELECT s.inst_id, MATCH (s.text) AGAINST ('".$text."') relevance
+				FROM omp_search s
+				, omp_instances i
+				where MATCH (s.text) AGAINST ('".$text."' in boolean mode) 
+				and (s.language = '".self::$lang."' OR s.language = 'ALL')
+				and s.class_id = ".$class_id."
+				and s.inst_id=i.id
+				".self::$sql_preview." 
+				ORDER BY relevance DESC
+				limit ".self::$limit."				
+				";
+				
+/*				
+				$sql="select i.id
+				from omp_instances i
+				, omp_classes c
+				where i.class_id=c.id
+				and c.id=$class_id
+
+				".self::$sql_preview." 
+						
+				order by update_date desc
+				limit ".self::$limit."
+				";
+*/
+				echo "getInstancesOfSearch $query $class_id\n";
+				print_r($args);
+				echo "$sql\n";
+				return self::getAllInstances($sql, $args, $parent_args);
+				//return self::$conn->fetchAll($sql);				
+		}	
+		
+		
 		
 		static function getRelated ($direction, $rel_id, $inst_id, $args, $parent_args)
 		{
