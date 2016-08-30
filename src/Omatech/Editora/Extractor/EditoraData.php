@@ -388,7 +388,7 @@ class EditoraData
 				
 				if (self::$sql_tag=='' && self::$sql_class_id=='')
 				{
-						debug("No estamos mirando un class concreto, es una busqueda general\n");
+						self::debug("No estamos mirando un class concreto, es una busqueda general\n");
 						$row=array();
 				}
 				else
