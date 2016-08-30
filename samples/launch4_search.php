@@ -1,14 +1,8 @@
 <?php
 
 $autoload_location=__DIR__.'/../vendor/autoload.php';
-if (is_file($autoload_location))
-{
-		
-}
-else
-{
-		$autoload_location='../../../autoload.php';	
-}
+if (!is_file($autoload_location)) $autoload_location='../../../autoload.php';	
+
 require_once $autoload_location;
 require_once __DIR__.'/../conf/config.php';
 require_once __DIR__.'/../conf/bootstrap.php';
