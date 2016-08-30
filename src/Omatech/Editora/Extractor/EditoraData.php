@@ -405,7 +405,7 @@ class EditoraData
 						$row=self::$conn->fetchAssoc($sql);
 				}
 				$row['args']=$args;
-				$row['query']=$query;
+				$row['query']=self::$query;
 //				$row['lang']=self::$lang;
 //				$row['limit']=self::$limit;
 //				$row['preview']=self::$preview;
