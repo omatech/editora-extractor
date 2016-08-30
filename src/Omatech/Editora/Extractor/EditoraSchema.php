@@ -267,11 +267,11 @@ class EditoraSchema
                 ],
                 'class_id' => [
                     'type' => Type::int(),
-                    'description' => 'The id of the relation.',
+                    'description' => 'The id of the class.',
                 ],
                 'tag' => [
                     'type' => Type::string(),
-                    'description' => 'Relation tag',
+                    'description' => 'class tag',
                 ],
                 'language' => [
                     'type' => Type::string(),
@@ -1181,9 +1181,9 @@ class EditoraSchema
                     ],
                     'resolve' => function ($root, $args) {
                         $class = EditoraData::getSearch($args);
-//												echo "Al query type\n";
-//												print_r($class);
-//												die;
+												echo "Al query type\n";
+												print_r($class);
+												die;
 												if ($class) return $class;
 												return null;
                         //return isset($instance[$args['id']]) ? $instance[$args['id']] : null;
