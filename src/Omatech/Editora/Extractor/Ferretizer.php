@@ -181,9 +181,35 @@ class Ferretizer
 				return $una_class;
 		}
 		
+		static function FerretizeSearch ($search, $metadata=false)
+		{
+				$una_search=array();
+				$una_search['id']=$una_search['class_id'];
+				if ($metadata)
+				{
+						foreach ($search as $key=>$val)
+						{
+								if (!is_array($val))
+								{
+									$una_class['metadata'][$key]=$val;
+								}
+						}
+				}
+
+				if (isset($search['instances']))
+				{
+						foreach ($search['instances'] as $inner_inst)
+						{
+						  $una_search['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
+						}
+				}
+				return $una_search;
+		}
+
 		static function Ferretize ($data, $metadata=false)
 		{
 				if (isset($data['class'])) return self::FerretizeClass($data['class'], $metadata);
+				if (isset($data['search'])) return self::FerretizeSearch($data['search'], $metadata);
 				if (isset($data['instance'])) return self::FerretizeInstance($data['instance'], $metadata);	
 				
 				self::debug("ERROR IN FERRETIZER ESTRUCTURA INCORRECTA!\n");
