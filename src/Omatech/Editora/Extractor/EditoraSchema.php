@@ -334,7 +334,7 @@ class EditoraSchema
                     'resolve' => function ($search, $args) {
 												//echo "instance resolve\n";
 												//print_r($search);
-												$insts=EditoraData::getInstacesOfSearch($search['query'], $search['class_id'], $search, $args, $search['args']);
+												$insts=EditoraData::getInstacesOfSearch($search['query'], $search, $args, $search['args']);
 												//echo "attrs\n";
 												//print_r($insts);
 												if ($insts)	return $insts;

@@ -724,9 +724,11 @@ class EditoraData
 		}	
 		
 
-		static function getInstacesOfSearch($query, $class_id, $args, $parent_args)
+		static function getInstacesOfSearch($query, $args, $parent_args)
 		{
 				self::debug("EditoraData::getInstancesOfSearch\n");
+				$class_id='';
+				if (isset($args['class_id'])) $class_id=$args['class_id'];
 				self::debug("query=$query\n");
 				self::debug("class_id=$class_id\n");
 				$args=self::parse_args($args, $parent_args);
