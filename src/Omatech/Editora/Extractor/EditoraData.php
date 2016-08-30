@@ -736,7 +736,7 @@ class EditoraData
 				$sql = "SELECT s.inst_id, MATCH (s.text) AGAINST ('".$text."') relevance
 				FROM omp_search s
 				, omp_instances i
-				where MATCH (s.text) AGAINST ('".$text."' in boolean mode) 
+				where MATCH (s.text) AGAINST ('".$query."' in boolean mode) 
 				and (s.language = '".self::$lang."' OR s.language = 'ALL')
 				and s.class_id = ".$class_id."
 				and s.inst_id=i.id
