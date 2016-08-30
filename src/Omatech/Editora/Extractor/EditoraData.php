@@ -733,7 +733,7 @@ class EditoraData
 
 				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				
-				$sql = "SELECT s.inst_id, MATCH (s.text) AGAINST ('".$query."') relevance
+				$sql = "SELECT s.inst_id id, MATCH (s.text) AGAINST ('".$query."') relevance
 				FROM omp_search s
 				, omp_instances i
 				where MATCH (s.text) AGAINST ('".$query."' in boolean mode) 
