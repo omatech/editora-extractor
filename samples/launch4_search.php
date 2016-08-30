@@ -18,7 +18,7 @@ $params = [
 	, 'query' => 'Brossa'
 	, 'lang' => 'ca'
 	, 'preview' => true
-	, 'debug' => true
+	, 'debug' => false
 ];
 $show_metadata=true;
 
