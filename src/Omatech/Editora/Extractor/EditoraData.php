@@ -727,7 +727,7 @@ class EditoraData
 		static function getInstacesOfSearch($query, $args, $parent_args)
 		{
 				self::debug("EditoraData::getInstancesOfSearch\n");
-				$class_id=null;
+				$class_id=false;
 				if (isset($args['class_id'])) $class_id=$args['class_id'];
 				self::debug("query=$query\n");
 				self::debug("class_id=$class_id\n");
@@ -735,18 +735,33 @@ class EditoraData
 
 				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				
-				$sql = "SELECT i.id, MATCH (s.text) AGAINST ('".$query."') relevance
-				FROM omp_search s
-				, omp_instances i
-				where MATCH (s.text) AGAINST ('".$query."' in boolean mode) 
-				and (s.language = '".self::$lang."' OR s.language = 'ALL')
-				and s.class_id = ".$class_id."
-				and s.inst_id=i.id
-				".self::$sql_preview." 
-				ORDER BY relevance DESC
-				limit ".self::$limit."				
-				";
-				
+				if ($class_id)
+				{
+						$sql = "SELECT i.id, MATCH (s.text) AGAINST ('".$query."') relevance
+						FROM omp_search s
+						, omp_instances i
+						where MATCH (s.text) AGAINST ('".$query."' in boolean mode) 
+						and (s.language = '".self::$lang."' OR s.language = 'ALL')
+						and s.class_id = ".$class_id."
+						and s.inst_id=i.id
+						".self::$sql_preview." 
+						ORDER BY relevance DESC
+						limit ".self::$limit."				
+						";
+				}
+				else
+				{// sense un class concret
+						$sql = "SELECT i.id, MATCH (s.text) AGAINST ('".$query."') relevance
+						FROM omp_search s
+						, omp_instances i
+						where MATCH (s.text) AGAINST ('".$query."' in boolean mode) 
+						and (s.language = '".self::$lang."' OR s.language = 'ALL')
+						and s.inst_id=i.id
+						".self::$sql_preview." 
+						ORDER BY relevance DESC
+						limit ".self::$limit."				
+						";						
+				}
 /*				
 				$sql="select i.id
 				from omp_instances i
