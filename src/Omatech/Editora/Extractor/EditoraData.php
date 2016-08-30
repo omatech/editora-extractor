@@ -758,9 +758,9 @@ class EditoraData
 				limit ".self::$limit."
 				";
 */
-				echo "getInstancesOfSearch $query $class_id\n";
-				print_r($args);
-				echo "$sql\n";
+				//echo "getInstancesOfSearch $query $class_id\n";
+				//print_r($args);
+				//echo "$sql\n";
 				return self::getAllInstances($sql, $args, $parent_args);
 				//return self::$conn->fetchAll($sql);				
 		}	

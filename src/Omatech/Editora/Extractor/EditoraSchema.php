@@ -332,11 +332,11 @@ class EditoraSchema
                     ],
 											
                     'resolve' => function ($search, $args) {
-												echo "instance resolve\n";
-												print_r($search);
+												//echo "instance resolve\n";
+												//print_r($search);
 												$insts=EditoraData::getInstacesOfSearch($search['query'], $search['class_id'], $search, $args, $search['args']);
-												echo "attrs\n";
-												print_r($insts);
+												//echo "attrs\n";
+												//print_r($insts);
 												if ($insts)	return $insts;
 												return null;
                     },
@@ -1181,8 +1181,8 @@ class EditoraSchema
                     ],
                     'resolve' => function ($root, $args) {
                         $search = EditoraData::getSearch($args);
-												echo "Al query type\n";
-												print_r($search);
+												//echo "Al query type\n";
+												//print_r($search);
 												//die;
 												if ($search) return $search;
 												return null;
