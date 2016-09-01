@@ -264,7 +264,7 @@ class EditoraData
 
 				if (isset($args['order_direction']))
 				{
-						self::$order=$args['order_direction'];
+						self::$order_direction=$args['order_direction'];
 						$final_args['order_direction']=self::$order_direction;
 				}
 
