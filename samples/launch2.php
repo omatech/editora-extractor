@@ -54,3 +54,8 @@ else
   print_r($result);		
 }
 
+foreach ($element as $result['instances'])
+{
+		echo $element['title']."\n";
+}
+
