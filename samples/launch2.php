@@ -56,6 +56,9 @@ else
 
 foreach ($ferretizer_result['instances'] as $element)
 {
-		echo $element['title']."\n";
+		if (isset($element['title']))
+		{
+		  echo $element['title']."\n";
+		}
 }
 
