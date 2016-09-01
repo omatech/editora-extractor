@@ -744,6 +744,10 @@ class EditoraData
 						{
 								$order_sql="order by i.id";
 						}
+						if (strtolower(self::$order)=='key_fields')
+						{
+								$order_sql="order by i.key_fields";
+						}
 				}
 				
 				if (isset(self::$order_direction) && strtolower(self::$order_direction)=='desc')
