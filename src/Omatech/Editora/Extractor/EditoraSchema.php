@@ -1104,7 +1104,7 @@ class EditoraSchema
 											
                         'order' => [
                             'name' => 'order',
-                            'description' => 'order class instances by order criteria, update_date|publishing_begins|inst_id default publishing_begins',
+                            'description' => 'order class instances by order criteria, update_date|publishing_begins|inst_id|key_fields default publishing_begins',
                             'type' => Type::String()
                         ],
 											

@@ -22,7 +22,7 @@ $show_metadata=false;
 
  $query='query FetchClassQuery ($class_id:Int, $debug:Boolean, $lang:String) 
 {
-  class(class_id: $class_id, lang: $lang, debug: $debug, order:"publishing_begins") 
+  class(class_id: $class_id, lang: $lang, debug: $debug, order:"key_fields") 
 	{
     class_id tag
 		instances

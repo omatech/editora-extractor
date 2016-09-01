@@ -361,7 +361,7 @@ class EditoraData
 		// $tag = Tag of the class
 		// NOTE: you must specify tag or id of the class mandatory-li
 		// $lang = ALL | es | ca | en ...
-		// $order = order class instances by order criteria, update_date|publishing_begins|inst_id default publishing_begins
+		// $order = order class instances by order criteria, update_date|publishing_begins|inst_id|key_fields default publishing_begins
 		// $order_direction = direction of the order by clause, desc|asc defaults to asc
 				self::debug("EditoraData::getClass\n");
 				$args=self::parse_args($args, $parent_args);
