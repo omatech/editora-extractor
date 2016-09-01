@@ -23,7 +23,6 @@ class EditoraData
 		private static $sql_class_id="";
 		private static $sql_preview="";
 		
-		private static $order=null;
 
 		private static $conn;
 
