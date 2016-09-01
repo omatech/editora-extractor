@@ -9,6 +9,8 @@ class EditoraData
 		private static $limit=10000;
 		private static $default_limit=10000;
 		private static $class_id=null;
+		private static $order=null;
+		private static $order_direction=null;
 		private static $debug=false;
 
 		private static $preview=false;
@@ -20,6 +22,8 @@ class EditoraData
 		private static $sql_tag="";
 		private static $sql_class_id="";
 		private static $sql_preview="";
+		
+		private static $order=null;
 
 		private static $conn;
 
@@ -253,21 +257,24 @@ class EditoraData
 						self::$sql_class_id="and c.id=".$args['class_id'];
 				}
 				
+				if (isset($args['order']))
+				{
+						self::$order=$args['order'];
+						$final_args['order']=self::$order;
+				}
+
+				if (isset($args['order_direction']))
+				{
+						self::$order=$args['order_direction'];
+						$final_args['order_dorection']=self::$order_direction;
+				}
+
 				// ARGS QUE NI SIGUIERA GUARDAMOS, SON SOLO PARA ESTE NODO: FILTER
 				if (isset($args['filter']))
 				{
 						$final_args['filter']=$args['filter'];
 				}
 				
-				if (isset($args['order']))
-				{
-						$final_args['order']=$args['order'];
-				}
-
-				if (isset($args['order_direction']))
-				{
-						$final_args['order_direction']=$args['order_direction'];
-				}
 
 				if (isset($args['alias']))
 				{
