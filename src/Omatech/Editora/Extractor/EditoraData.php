@@ -731,19 +731,19 @@ class EditoraData
 				
 				$order_sql="order by i.publishing_begins";
 				
-				if (isset($args['order'])) 
+				if (isset(self::$order)) 
 				{
-						if ($args['order']=='update_date')
+						if (self::$order=='update_date')
 						{
 								$order_sql="order by i.update_date";
 						}
-						if ($args['order']=='inst_id')
+						if (self::$order=='inst_id')
 						{
 								$order_sql="order by i.id";
 						}
 				}
 				
-				if (isset($args['order_direction']) && strtolower($args['order_direction'])=='desc')
+				if (isset(self::$order_direction) && strtolower(self::$order_direction)=='desc')
 				{
 						$order_sql.=" desc";
 				}
