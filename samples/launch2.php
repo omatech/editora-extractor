@@ -54,7 +54,7 @@ else
   print_r($result);		
 }
 
-foreach ($element as $result['instances'])
+foreach ($element as $ferretizer_result['instances'])
 {
 		echo $element['title']."\n";
 }
