@@ -729,15 +729,18 @@ class EditoraData
 				self::debug("class_id=$class_id\n");
 				$args=self::parse_args($args, $parent_args);
 				
+				self::debug("!!!order: ".self::$order."\n");
+				self::debug("!!!order_direction: ".self::$order_direction."\n");
+				
 				$order_sql="order by i.publishing_begins";
 				
 				if (isset(self::$order)) 
 				{
-						if (self::$order=='update_date')
+						if (strtolower(self::$order)=='update_date')
 						{
 								$order_sql="order by i.update_date";
 						}
-						if (self::$order=='inst_id')
+						if (strtolower(self::$order)=='inst_id')
 						{
 								$order_sql="order by i.id";
 						}
