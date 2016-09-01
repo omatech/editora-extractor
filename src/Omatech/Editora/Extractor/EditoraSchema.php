@@ -1101,7 +1101,20 @@ class EditoraSchema
                             'description' => 'tag of the Class',
                             'type' => Type::String()
                         ],
-                        'lang' => [
+											
+                        'order' => [
+                            'name' => 'order',
+                            'description' => 'order class instances by order criteria, update_date|publishing_begins|inst_id default publishing_begins',
+                            'type' => Type::String()
+                        ],
+											
+                        'order_direction' => [
+                            'name' => 'order_direction',
+                            'description' => 'direction of the order by clause, desc|asc defaults to asc',
+                            'type' => Type::String()
+                        ],
+
+												'lang' => [
                             'name' => 'lang',
                             'description' => 'Language of the extraction',
                             'type' => Type::String()

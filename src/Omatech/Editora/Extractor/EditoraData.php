@@ -259,6 +259,16 @@ class EditoraData
 						$final_args['filter']=$args['filter'];
 				}
 				
+				if (isset($args['order']))
+				{
+						$final_args['order']=$args['order'];
+				}
+
+				if (isset($args['order_direction']))
+				{
+						$final_args['order_direction']=$args['order_direction'];
+				}
+
 				if (isset($args['alias']))
 				{
 						$final_args['alias']=$args['alias'];
@@ -347,7 +357,12 @@ class EditoraData
 
 
     static function getClass($args, $parent_args=false)
-    {
+    {// $class_id = ID of the class
+		// $tag = Tag of the class
+		// NOTE: you must specify tag or id of the class mandatory-li
+		// $lang = ALL | es | ca | en ...
+		// $order = order class instances by order criteria, update_date|publishing_begins|inst_id default publishing_begins
+		// $order_direction = direction of the order by clause, desc|asc defaults to asc
 				self::debug("EditoraData::getClass\n");
 				$args=self::parse_args($args, $parent_args);
 				
@@ -376,7 +391,11 @@ class EditoraData
 		
 
     static function getSearch($args, $parent_args=false)
-    {
+    {// $class_id = ID of the class
+		// $tag = Tag of the class
+		// NOTE: the class_id and the tag are optional, use only if you want to obtain a certain class instances only as result of the search
+		// $query: string to search
+		// $lang = ALL | es | ca | en ...
 				self::debug("EditoraData::getSearch\n");
 				$args=self::parse_args($args, $parent_args);
 				
@@ -703,6 +722,26 @@ class EditoraData
 				self::debug("EditoraData::getInstancesOfClass\n");
 				self::debug("class_id=$class_id\n");
 				$args=self::parse_args($args, $parent_args);
+				
+				$order_sql="order by i.publishing_begins";
+				
+				if (isset($args['order'])) 
+				{
+						if ($args['order']=='update_date')
+						{
+								$order_sql="order by i.update_date";
+						}
+						if ($args['order']=='inst_id')
+						{
+								$order_sql="order by i.id";
+						}
+				}
+				
+				if (isset($args['order_direction']) && strtolower($args['order_direction'])=='desc')
+				{
+						$order_sql.=" desc";
+				}
+
 
 				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				$sql="select i.id
@@ -713,7 +752,8 @@ class EditoraData
 
 				".self::$sql_preview." 
 						
-				order by update_date desc
+				$order_sql
+						
 				limit ".self::$limit."
 				";
 //				echo "getInstancesOfClass $class_id\n";
