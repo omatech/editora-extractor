@@ -265,7 +265,7 @@ class EditoraData
 				if (isset($args['order_direction']))
 				{
 						self::$order=$args['order_direction'];
-						$final_args['order_dorection']=self::$order_direction;
+						$final_args['order_direction']=self::$order_direction;
 				}
 
 				// ARGS QUE NI SIGUIERA GUARDAMOS, SON SOLO PARA ESTE NODO: FILTER
