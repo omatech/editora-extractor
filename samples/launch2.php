@@ -13,7 +13,7 @@ use Omatech\Editora\Extractor\EditoraSchema;
 use Omatech\Editora\Extractor\Ferretizer;
 
 $params = [
-		'class_id' => '80'
+		'class_id' => '140'
 	, 'lang' => 'ca'
 	, 'debug' => false
 ];
