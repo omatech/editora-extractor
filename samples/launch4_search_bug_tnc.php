@@ -18,7 +18,7 @@ $params = [
 	, 'query' => 'brossa'
 	, 'lang' => 'ca'
 	, 'preview' => true
-	, 'debug' => true
+	, 'debug' => false
 ];
 
 
