@@ -17,7 +17,7 @@ $params = [
 		'class_id' => '80'
 	, 'query' => 'brossa'
 	, 'lang' => 'ca'
-	, 'preview' => true
+	, 'preview' => false
 	, 'debug' => false
 ];
 
