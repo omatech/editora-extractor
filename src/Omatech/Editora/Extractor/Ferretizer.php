@@ -184,8 +184,8 @@ class Ferretizer
 		static function FerretizeSearch ($search, $metadata=false)
 		{
 				$una_search=array();
-				$una_search['query']=$search['query'];
-				if (isset($search['class_id'])) $una_search['id']=$search['class_id'];
+				if (isset($search['query'])) $una_search['query']=$search['query'];
+				if (isset($search['class_id'])) $una_search['class_id']=$search['class_id'];
 				
 				if ($metadata)
 				{
