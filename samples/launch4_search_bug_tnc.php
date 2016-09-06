@@ -15,7 +15,7 @@ use Omatech\Editora\Extractor\Ferretizer;
 
 $params = [
 		'class_id' => '80'
-	, 'query' => 'Brossa'
+	, 'query' => 'brossa'
 	, 'lang' => 'ca'
 	, 'preview' => false
 	, 'debug' => true
