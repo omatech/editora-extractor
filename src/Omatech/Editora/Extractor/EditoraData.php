@@ -780,6 +780,9 @@ class EditoraData
 		static function getInstacesOfSearch($query, $args, $parent_args)
 		{
 				self::debug("EditoraData::getInstancesOfSearch\n");
+				self::debug("query=$query\n");
+				$args=self::parse_args($args, $parent_args);
+
 				$class_id=false;
 				$sql_class_add="";
 				if (isset($args['class_id']))
@@ -788,9 +791,7 @@ class EditoraData
 						$sql_class_add=" and s.class_id=$class_id
 						";
 				}
-				self::debug("query=$query\n");
 				self::debug("class_id=$class_id\n");
-				$args=self::parse_args($args, $parent_args);
 
 				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				
