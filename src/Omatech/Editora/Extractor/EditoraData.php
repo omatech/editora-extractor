@@ -781,6 +781,7 @@ class EditoraData
 		{
 				self::debug("EditoraData::getInstancesOfSearch\n");
 				$class_id=false;
+				$sql_class_add="";
 				if (isset($args['class_id']))
 				{
 						$class_id=$args['class_id'];
