@@ -430,8 +430,6 @@ class EditoraData
 						$row=self::$conn->fetchAssoc($sql);
 				}
 				$row['args']=$args;
-				$row['class_id']=$args['class_id'];
-				$row['class_tag']=$args['class_tag'];
 				
 				$row['query']=self::$query;
 //				$row['lang']=self::$lang;
@@ -793,6 +791,16 @@ class EditoraData
 						$class_id=$args['class_id'];
 						$sql_class_add=" and s.class_id=$class_id
 						";
+				}
+				else
+				{
+						if (isset($args['args']['class_id']))
+						{
+								$class_id=$args['args']['class_id'];
+								$sql_class_add=" and s.class_id=$class_id
+								";
+						}
+						
 				}
 				self::debug("class_id=$class_id\n");
 
