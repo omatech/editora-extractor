@@ -24,7 +24,7 @@ $params = [
 
 $query='query FetchSearchQuery ($query:String, $class_id:Int, $lang:String, $debug:Boolean, $preview:Boolean) {
 				search(query: $query, class_id: $class_id, lang: $lang, debug: $debug, preview:$preview) {
-				    query instances{
+				    instances{
 						id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
 						all_values (filter: "fields:title|subtitle"){atri_tag text_val}				
 					}
@@ -33,7 +33,6 @@ $query='query FetchSearchQuery ($query:String, $class_id:Int, $lang:String, $deb
 
 $show_metadata=true;
 
-print_r($params);die;
 EditoraData::set_connection($conn);
 $result=GraphQL::execute(EditoraSchema::build(), $query, null, $params);
 $ferretizer_result=Ferretizer::Ferretize($result['data'], $show_metadata);
