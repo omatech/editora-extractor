@@ -789,7 +789,7 @@ class EditoraData
 				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				$sql="select i.id
 				from omp_instances i
-				where i.id in ".$instance_list['ids']."
+				where i.id in ".self::$ids."
 
 				".self::$sql_preview." 
 						
