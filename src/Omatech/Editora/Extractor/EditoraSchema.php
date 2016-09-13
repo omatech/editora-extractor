@@ -1280,9 +1280,9 @@ class EditoraSchema
                     ],
                     'resolve' => function ($root, $args) {
                         $instance_list = EditoraData::getInstanceList($args);
-//												echo "Al query type\n";
-//												print_r($class);
-//												die;
+												echo "Al query type\n";
+												print_r($instance_list);
+												die;
 												if ($instance_list) return $instance_list;
 												return null;
                         //return isset($instance[$args['id']]) ? $instance[$args['id']] : null;
