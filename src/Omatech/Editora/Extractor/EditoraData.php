@@ -397,6 +397,26 @@ class EditoraData
     }
 		
 
+    static function getInstanceList($args, $parent_args=false)
+    {// $ids = IDs of the class
+		// NOTE: you must specify tag or id of the class mandatory-li
+		// $lang = ALL | es | ca | en ...
+		// $order = order class instances by order criteria, update_date|publishing_begins|inst_id|key_fields default publishing_begins
+		// $order_direction = direction of the order by clause, desc|asc defaults to asc
+				self::debug("EditoraData::getInstanceList\n");
+				$args=self::parse_args($args, $parent_args);
+				
+				$row['ids']=$args['ids'];
+				$row['args']=$args;
+//				$row['lang']=self::$lang;
+//				$row['limit']=self::$limit;
+//				$row['preview']=self::$preview;
+//				$row['preview_date']=self::$preview_date;
+				return $row;
+    }
+		
+		
+		
     static function getSearch($args, $parent_args=false)
     {// $class_id = ID of the class
 		// $tag = Tag of the class
@@ -724,6 +744,60 @@ class EditoraData
 				$instances['args']=$args;
 				return $instances;
 		}
+
+		
+		static function getInstacesList($instance_list, $args, $parent_args)
+		{
+				self::debug("EditoraData::getInstancesList\n");
+				self::debug("instance_list=$instance_list\n");
+				$args=self::parse_args($args, $parent_args);
+				
+				self::debug("!!!order: ".self::$order."\n");
+				self::debug("!!!order_direction: ".self::$order_direction."\n");
+				
+				$order_sql="order by i.publishing_begins";
+				
+				if (isset(self::$order)) 
+				{
+						if (strtolower(self::$order)=='update_date')
+						{
+								$order_sql="order by i.update_date";
+						}
+						if (strtolower(self::$order)=='inst_id')
+						{
+								$order_sql="order by i.id";
+						}
+						if (strtolower(self::$order)=='key_fields')
+						{
+								$order_sql="order by i.key_fields";
+						}
+				}
+				
+				if (isset(self::$order_direction) && strtolower(self::$order_direction)=='desc')
+				{
+						$order_sql.=" desc";
+				}
+
+
+				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				$sql="select i.id
+				from omp_instances i
+				where i.id in ".$instance_list['ids']."
+
+				".self::$sql_preview." 
+						
+				$order_sql
+						
+				limit ".self::$limit."
+				";
+//				echo "getInstancesOfClass $class_id\n";
+//				print_r($args);
+//				echo "$sql\n";
+				return self::getAllInstances($sql, $args, $parent_args);
+				//return self::$conn->fetchAll($sql);				
+		}	
+		
+		
 		
 		static function getInstacesOfClass($class_id, $args, $parent_args)
 		{

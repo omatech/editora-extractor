@@ -170,6 +170,88 @@ class EditoraSchema
 
             ],
         ]);
+										
+										
+				$InstanceListType = new ObjectType([
+            'name' => 'instance_list',
+            'description' => 'Instance List',
+            'fields' => [
+                'ids' => [
+                    'type' => new NonNull(Type::string()),
+                    'description' => 'The ids of the instances.',
+                ],
+                'language' => [
+                    'type' => Type::string(),
+                    'description' => 'Class language',
+                ],
+                'limit' => [
+                    'type' => Type::int(),
+                    'description' => 'limit of extraction',
+                ],
+
+                'preview' => [
+                    'type' => Type::boolean(),
+                    'description' => 'Preview true or false, default false',
+                ],
+                'preview_date' => [
+                    'type' => Type::string(),
+                    'description' => 'Preview date in %Y%m%d%H%i%S format',
+                ],
+							
+								'instances' => [
+                    'type' => function () use (&$InstanceType) {
+                        return Type::listOf($InstanceType);
+                    },
+                    'description' => 'The instances list',
+											
+                    'args' => [
+                        'filter' => [
+                            'name' => 'filter',
+                            'description' => 'filter some fields all|detail|resume default all',
+                            'type' => Type::String()
+                        ],
+                        'lang' => [
+                            'name' => 'lang',
+                            'description' => 'Language of the extraction',
+                            'type' => Type::String()
+                        ],
+												'limit' => [
+														'type' => Type::int(),
+														'description' => 'limit of extraction',
+												],
+
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
+												'preview' => [
+														'type' => Type::boolean(),
+														'description' => 'Preview true or false, default false',
+												],
+												'preview_date' => [
+														'type' => Type::string(),
+														'description' => 'Preview date in %Y%m%d%H%i%S format',
+												],
+											
+											
+                    ],
+											
+                    'resolve' => function ($instance_list, $args) {
+												//echo "instance resolve\n";
+												//print_r($class);
+												$insts=EditoraData::getInstacesList($instance_list, $args, $instance_list['args']);
+												//echo "attrs\n";
+												//print_r($insts);
+												if ($insts)	return $insts;
+												return null;
+                    },
+								],
+
+            ],
+        ]);
+										
 						
 				
 				$ClassType = new ObjectType([
@@ -1048,6 +1130,8 @@ class EditoraSchema
         $queryType = new ObjectType([
             'name' => 'Query',
             'fields' => [
+							
+							
                 'instance' => [
                     'type' => $InstanceType,
                     'args' => [
@@ -1149,6 +1233,61 @@ class EditoraSchema
                     }
                 ],
 									
+                'instance_list' => [
+                    'type' => $InstanceListType,
+                    'args' => [
+                        'ids' => [
+                            'name' => 'ids',
+                            'description' => 'list of ids in format (1,2,3...)',
+                            'type' => Type::String()
+                        ],
+
+												'order' => [
+                            'name' => 'order',
+                            'description' => 'order class instances by order criteria, update_date|publishing_begins|inst_id|key_fields default publishing_begins',
+                            'type' => Type::String()
+                        ],
+											
+                        'order_direction' => [
+                            'name' => 'order_direction',
+                            'description' => 'direction of the order by clause, desc|asc defaults to asc',
+                            'type' => Type::String()
+                        ],
+
+												'lang' => [
+                            'name' => 'lang',
+                            'description' => 'Language of the extraction',
+                            'type' => Type::String()
+                        ],
+											
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
+											'preview' => [
+														'type' => Type::boolean(),
+														'description' => 'Preview true or false, default false',
+												],
+												'preview_date' => [
+														'type' => Type::string(),
+														'description' => 'Preview date in %Y%m%d%H%i%S format',
+												],
+									
+									
+									
+                    ],
+                    'resolve' => function ($root, $args) {
+                        $instance_list = EditoraData::getInstanceList($args);
+//												echo "Al query type\n";
+//												print_r($class);
+//												die;
+												if ($instance_list) return $instance_list;
+												return null;
+                        //return isset($instance[$args['id']]) ? $instance[$args['id']] : null;
+                    }
+                ],
 									
                 'search' => [
                     'type' => $SearchType,
