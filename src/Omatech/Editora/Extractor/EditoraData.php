@@ -405,7 +405,6 @@ class EditoraData
 				self::debug("EditoraData::getInstanceList\n");
 				$args=self::parse_args($args, $parent_args);
 				
-				$row['ids']=$args['ids'];
 				$row['args']=$args;
 //				$row['lang']=self::$lang;
 //				$row['limit']=self::$limit;
