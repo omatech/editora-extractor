@@ -25,7 +25,7 @@ $show_metadata=true;
 	{
 	  instances 
 		{
-				id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
+				id nom_intern link publishing_begins status update_timestamp
 				all_values (filter: "fields:title"){atri_tag text_val}				
 		}
   }
