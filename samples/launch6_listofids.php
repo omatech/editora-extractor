@@ -20,8 +20,8 @@ $params = [
 ];
 $show_metadata=true;
 
- $query='query FetchListQuery ($id:String, $lang:String, $debug:Boolean) {
-  instance_list (id: $id, lang: $lang, debug: $debug) {
+ $query='query FetchListQuery ($ids:String, $lang:String, $debug:Boolean) {
+  instance_list (id: $ids, lang: $lang, debug: $debug) {
 		id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
     all_values (filter: "small") {atri_tag text_val}
   }
