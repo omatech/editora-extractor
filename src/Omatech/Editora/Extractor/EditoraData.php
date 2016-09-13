@@ -320,19 +320,12 @@ class EditoraData
     {		
 				self::debug("EditoraData::getInstance\n");
 				$args=self::parse_args($args, $parent_args);
-				
-				$id_condition = "and i.id=".self::$id;
-
-				if (stripos(self::$id, ',')!==false)
-				{// we have a list of ids
-						$id_condition = "and i.id in ".self::$id;
-				}
-				
+								
 				$sql="select i.*, c.name class_name, c.tag class_tag, c.id class_id, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
 				from omp_instances i 
 				, omp_classes c
 				where 1=1
-				$id_condition
+				and i.id=".self::$id."
 				and c.id=i.class_id
 				".self::$sql_preview."
 				";
