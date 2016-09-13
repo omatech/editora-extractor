@@ -753,7 +753,7 @@ class EditoraData
 		}
 
 		
-		static function getInstacesList($args, $parent_args)
+		static function getInstancesList($args, $parent_args)
 		{
 				self::debug("EditoraData::getInstancesList\n");
 
