@@ -341,6 +341,8 @@ class EditoraData
 				self::debug($sql);
 				//$row=Model::get_one($sql);
 				$row=self::$conn->fetchAssoc($sql);
+				if (!$row) return null;
+				
 				//print_r($row);
 				$row['args']=$args;
 				
