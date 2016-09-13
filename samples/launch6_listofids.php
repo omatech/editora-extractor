@@ -14,7 +14,7 @@ use Omatech\Editora\Extractor\Ferretizer;
 
 
 $params = [
-		'id' => '(784, 787, 100104)'
+		'ids' => '(784, 787, 100104)'
 	, 'lang' => 'ca'
 	, 'debug' => true
 ];
