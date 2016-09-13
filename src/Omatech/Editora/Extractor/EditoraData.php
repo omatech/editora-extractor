@@ -602,7 +602,7 @@ class EditoraData
 				and a.id=ca.atri_id
 				$add_sql
 				";
-				//echo $sql;
+				self::debug($sql);
 				//$attrs=Model::get_data($sql);
 				
 				$attrs=self::$conn->fetchAll($sql);
