@@ -1053,8 +1053,8 @@ class EditoraSchema
                     'args' => [
                         'id' => [
                             'name' => 'id',
-                            'description' => 'id of the Instance',
-                            'type' => Type::Int()
+                            'description' => 'id of the Instance or list of ids in format (1,2,3)',
+                            'type' => Type::String()
                         ],
                         'lang' => [
                             'name' => 'lang',
