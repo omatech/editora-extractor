@@ -184,7 +184,6 @@ class Ferretizer
 		static function FerretizeInstancesList ($instances_list, $metadata=false)
 		{
 				$una_instance_list=array();
-				$una_instance_list['ids']=$instances_list['ids'];
 				if ($metadata)
 				{
 						foreach ($instances_list as $key=>$val)
