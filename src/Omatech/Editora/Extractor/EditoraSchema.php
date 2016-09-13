@@ -1233,7 +1233,7 @@ class EditoraSchema
                     }
                 ],
 									
-                'instance_list' => [
+                'instances_list' => [
                     'type' => $InstanceListType,
                     'args' => [
                         'ids' => [
