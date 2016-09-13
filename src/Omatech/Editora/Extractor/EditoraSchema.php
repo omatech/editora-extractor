@@ -241,7 +241,7 @@ class EditoraSchema
                     'resolve' => function ($instance_list, $args) {
 												//echo "instance resolve\n";
 												//print_r($class);
-												$insts=EditoraData::getInstacesList($instance_list, $args, $instance_list['args']);
+												$insts=EditoraData::getInstancesList($args, $instance_list['args']);
 												//echo "attrs\n";
 												//print_r($insts);
 												if ($insts)	return $insts;

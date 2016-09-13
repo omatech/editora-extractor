@@ -753,10 +753,10 @@ class EditoraData
 		}
 
 		
-		static function getInstacesList($instance_list, $args, $parent_args)
+		static function getInstacesList($args, $parent_args)
 		{
 				self::debug("EditoraData::getInstancesList\n");
-				self::debug("instance_list=$instance_list\n");
+
 				$args=self::parse_args($args, $parent_args);
 				
 				self::debug("!!!order: ".self::$order."\n");
