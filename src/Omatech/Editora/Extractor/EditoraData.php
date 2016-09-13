@@ -329,7 +329,7 @@ class EditoraData
 				self::debug("EditoraData::getInstance\n");
 				$args=self::parse_args($args, $parent_args);
 								
-				$sql="select i.*, c.name class_name, c.tag class_tag, c.id class_id, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				$sql="select i.*, c.name class_name, c.tag class_tag, c.id class_id, i.key_fields nom_intern, i.update_date, ifnull(unix_timestamp(i.update_date),0) update_timestamp  
 				from omp_instances i 
 				, omp_classes c
 				where 1=1
@@ -591,7 +591,7 @@ class EditoraData
 				
 				
 
-				$sql="select v.*, a.name atri_name, a.tag atri_tag, a.type atri_type, a.language atri_language, ca.detail is_detail, i.update_date, unix_timestamp(i.update_date) update_timestamp 
+				$sql="select v.*, a.name atri_name, a.tag atri_tag, a.type atri_type, a.language atri_language, ca.detail is_detail, i.update_date, ifnull(unix_timestamp(i.update_date),0) update_timestamp 
 				from omp_values v
 				, omp_attributes a
 				, omp_class_attributes ca
@@ -789,7 +789,7 @@ class EditoraData
 
 
 				//$sql="select i.id
-				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, ifnull(unix_timestamp(i.update_date),0) update_timestamp  
 				from omp_instances i
 				, omp_classes c
 				where i.class_id=c.id
@@ -843,7 +843,7 @@ class EditoraData
 				}
 
 
-				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, ifnull(unix_timestamp(i.update_date),0) update_timestamp  
 				$sql="select i.id
 				from omp_instances i
 				, omp_classes c
@@ -890,7 +890,7 @@ class EditoraData
 				}
 				self::debug("class_id=$class_id\n");
 
-				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, unix_timestamp(i.update_date) update_timestamp  
+				//$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, ifnull(unix_timestamp(i.update_date),0) update_timestamp  
 				
 				$sql = "SELECT i.id, MATCH (s.text) AGAINST ('".$query."') relevance
 				FROM omp_search s
