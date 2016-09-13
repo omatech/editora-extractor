@@ -181,7 +181,7 @@ class Ferretizer
 				return $una_class;
 		}
 		
-		static function FerretizeClass ($instances_list, $metadata=false)
+		static function FerretizeInstancesList ($instances_list, $metadata=false)
 		{
 				$una_instance_list=array();
 				$una_instance_list['ids']=$instances_list['ids'];
