@@ -513,10 +513,13 @@ class EditoraSchema
 												//print_r($args);
 												//echo "Instance in EditoraSchema vaig a treure els values\n";
 												//print_r($instance);
-											  $attrs=EditoraData::getValues($instance['id'], $instance['update_timestamp'], $args, $instance['args']);	
-												//print_r($attrs);
+												if (isset($instance) && isset($instance['id']))
+												{
+											    $attrs=EditoraData::getValues($instance['id'], $instance['update_timestamp'], $args, $instance['args']);	
+												  //print_r($attrs);
 												
-												if ($attrs) return $attrs;
+												  if ($attrs) return $attrs;
+												}
 												return null;
                     },
                 ],
