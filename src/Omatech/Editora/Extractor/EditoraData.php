@@ -4,6 +4,7 @@ namespace Omatech\Editora\Extractor;
 class EditoraData
 {
 		private static $id=null;
+		private static $ids='';
 		private static $lang='ALL';
 		private static $default_lang='ca';
 		private static $limit=10000;
@@ -133,6 +134,7 @@ class EditoraData
 		static function parse_args($args, $parent_args)
 		{
 				$final_args=array();
+
 				if (isset($args['id']))
 				{
 						self::$id=$args['id'];
@@ -256,6 +258,12 @@ class EditoraData
 						self::$sql_class_id="and c.id=".$args['class_id'];
 				}
 				
+				if (isset($args['ids']))
+				{
+						self::$ids=$args['ids'];
+						$final_args['ids']=self::$ids;
+				}
+
 				if (isset($args['order']))
 				{
 						self::$order=$args['order'];
@@ -405,6 +413,7 @@ class EditoraData
 				self::debug("EditoraData::getInstanceList\n");
 				$args=self::parse_args($args, $parent_args);
 				
+				$row['ids']=$args['ids'];
 				$row['args']=$args;
 //				$row['lang']=self::$lang;
 //				$row['limit']=self::$limit;
