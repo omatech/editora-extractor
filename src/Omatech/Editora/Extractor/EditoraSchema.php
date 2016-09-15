@@ -1351,7 +1351,7 @@ class EditoraSchema
 								
 								
 
-        return new Schema($queryType);
+        return new Schema(['query'=>$queryType, 'mutation'=>null, 'types'=>null]);
     }
 		
 		
