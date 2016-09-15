@@ -58,11 +58,6 @@ $show_metadata=true;
 }';
 
 EditoraData::set_connection($conn);
-$schema = new Schema([
-    'query' => $queryType,
-    'mutation' => $mutationType,
-    'types' => $arrayOfTypesWithInterfaces // See 3.
-]);
 $result=GraphQL::execute(EditoraSchema::build(), $query, null, $context, $params);
 //print_r($result);die;
 $ferretizer_result=Ferretizer::Ferretize($result['data'], $show_metadata);
