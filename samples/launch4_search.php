@@ -13,18 +13,19 @@ use Omatech\Editora\Extractor\EditoraSchema;
 use Omatech\Editora\Extractor\Ferretizer;
 
 $context = [
-		'lang' => 'ca'
-		, 'preview' => true
-		, 'debug' => true
 ];
 
 $params = [
-		'class_id' => '80'
+	'class_id' => '80'
 	, 'query' => 'Brossa'
+	, 'lang' => 'ca'
+	, 'preview' => true
+	, 'debug' => true
 ];
+
 $show_metadata=true;
 
- $query='query FetchSearchQuery ($query:String, $class_id:Int, $lang:String, $debug:Boolean, $preview:Boolean) 
+$query='query FetchSearchQuery ($query:String, $class_id:Int, $lang:String, $debug:Boolean, $preview:Boolean) 
 {
   search(query: $query, class_id: $class_id, lang: $lang, debug: $debug, preview:$preview) 
 	{
