@@ -12,13 +12,10 @@ use Omatech\Editora\Extractor\EditoraData;
 use Omatech\Editora\Extractor\EditoraSchema;
 use Omatech\Editora\Extractor\Ferretizer;
 
-$context = [	
-	'lang' => 'ca'
-	, 'debug' => true
-];
-
 $params = [
-		'id' => '1'
+	'id' => '1'
+	, 'lang' => 'ca'
+	, 'debug' => true
 ];
 
 $show_metadata=true;
@@ -58,7 +55,7 @@ $show_metadata=true;
 }';
 
 EditoraData::set_connection($conn);
-$result=GraphQL::execute(EditoraSchema::build(), $query, null, $context, $params);
+$result=GraphQL::execute(EditoraSchema::build(), $query, null, null, $params);
 //print_r($result);die;
 $ferretizer_result=Ferretizer::Ferretize($result['data'], $show_metadata);
 if ($ferretizer_result)
