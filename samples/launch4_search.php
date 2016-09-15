@@ -28,8 +28,7 @@ $show_metadata=true;
 {
   search(query: $query, class_id: $class_id, lang: $lang, debug: $debug, preview:$preview) 
 	{
-    query
-		instances
+    instances
 		{
 				id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
 				all_values (filter: "fields:title|subtitle"){atri_tag text_val}				
