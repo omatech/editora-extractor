@@ -68,6 +68,9 @@ class Ferretizer
 				//echo "pintant la instancia al ferretizer\n";
 				//print_r($instance);
 				$una_instancia=array();
+				
+				if (empty($instance['id']) || empty($instance['class_id']) || empty($instance['status'])) return null;
+				
 				$una_instancia['id']=$instance['id'];
 				if (isset($instance['link']))	$una_instancia['link']=$instance['link'];
 				if ($metadata && is_array($instance))
