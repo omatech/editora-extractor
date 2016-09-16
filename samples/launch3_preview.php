@@ -13,7 +13,7 @@ $params = [
 		'class_id' => '80'
 		, 'lang' => 'ca'
 		, 'preview' => true
-		, 'debug' => true
+		, 'debug' => false
 	  , 'metadata' => true
 ];
 

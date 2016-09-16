@@ -13,7 +13,7 @@ $params = [
 		'query' => 'Brossa'
 	, 'lang' => 'ca'
 	, 'preview' => true
-	, 'debug' => false
+	, 'debug' => true
   , 'metadata' => true	
 ];
 
@@ -32,7 +32,7 @@ $params = [
 
  
 $extractor=new Extractor($conn);
-$res=$extractor->extract($query, $params);
+$res=$extractor->extract($query, $params, 'array', false);
 if ($res)
 {
 		echo "HA FUNCIONAT!!!";
