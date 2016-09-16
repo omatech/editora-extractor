@@ -178,7 +178,8 @@ class Ferretizer
 				{
 						foreach ($class['instances'] as $inner_inst)
 						{
-						  $una_class['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
+						  $tmp_inst=self::FerretizeInstance($inner_inst, $metadata);
+							if ($tmp_inst) $una_class['instances'][]=$tmp_inst;
 						}
 				}
 				return $una_class;
@@ -202,7 +203,10 @@ class Ferretizer
 				{
 						foreach ($instances_list['instances'] as $inner_inst)
 						{
-						  $una_instance_list['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
+						  //$una_instance_list['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
+							$tmp_inst=self::FerretizeInstance($inner_inst, $metadata);
+							if ($tmp_inst) $una_instance_list['instances'][]=$tmp_inst;
+
 						}
 				}
 				return $una_instance_list;
@@ -229,7 +233,9 @@ class Ferretizer
 				{
 						foreach ($search['instances'] as $inner_inst)
 						{
-						  $una_search['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
+						  //$una_search['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
+							$tmp_inst=self::FerretizeInstance($inner_inst, $metadata);
+							if ($tmp_inst) $una_search['instances'][]=$tmp_inst;
 						}
 				}
 				return $una_search;
