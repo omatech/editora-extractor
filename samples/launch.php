@@ -51,7 +51,7 @@ $params = [
 }';
 
 $extractor=new Extractor($conn);
-$res=$extractor->extract($query, $params, false);
+$res=$extractor->extract($query, $params, 'array', false);
 if ($res)
 {
 		echo "HA FUNCIONAT!!!";
