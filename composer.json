@@ -4,9 +4,7 @@
 		"minimum-stability":"dev",
     "require": {
         "doctrine/dbal": "~2.5"
-    },
-    "require-dev": {
-        "webonyx/graphql-php": "0.7.1"
+        , "webonyx/graphql-php": "0.7.1"
     },
 		"autoload": {
     "psr-4": {
