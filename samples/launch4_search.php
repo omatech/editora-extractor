@@ -7,10 +7,7 @@ require_once $autoload_location;
 require_once __DIR__.'/../conf/config.php';
 require_once __DIR__.'/../conf/bootstrap.php';
 
-use GraphQL\GraphQL;
-use Omatech\Editora\Extractor\EditoraData;
-use Omatech\Editora\Extractor\EditoraSchema;
-use Omatech\Editora\Extractor\Ferretizer;
+use Omatech\Editora\Extractor\Extractor;
 
 $params = [
 	'class_id' => '80'
@@ -18,9 +15,9 @@ $params = [
 	, 'lang' => 'ca'
 	, 'preview' => true
 	, 'debug' => true
+	, 'metadata' => true	
 ];
 
-$show_metadata=true;
 
 $query='query FetchSearchQuery ($query:String, $class_id:Int, $lang:String, $debug:Boolean, $preview:Boolean) 
 {
@@ -34,14 +31,17 @@ $query='query FetchSearchQuery ($query:String, $class_id:Int, $lang:String, $deb
   }
 }';
 
-EditoraData::set_connection($conn);
-$result=GraphQL::execute(EditoraSchema::build(), $query, null, null, $params);
-$ferretizer_result=Ferretizer::Ferretize($result['data'], $show_metadata);
-if ($ferretizer_result)
-{// todo ok 
-  print_r($ferretizer_result);		
+$extractor=new Extractor($conn);
+$res=$extractor->extract($query, $params);
+if ($res)
+{
+		echo "HA FUNCIONAT!!!";
+		print_r($res);
 }
-else
-{// algun error
-  print_r($result);		
+
+$res=$extractor->extract($query, $params, "json");
+if ($res)
+{
+		echo "HA FUNCIONAT!!!";
+		echo ($res);
 }
