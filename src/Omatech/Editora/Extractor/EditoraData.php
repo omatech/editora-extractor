@@ -468,7 +468,6 @@ class EditoraData
 						$row=self::$conn->fetchAssoc($sql);
 				}
 				
-				if (!$row) return null;
 				
 				$row['args']=$args;
 				if ($args['limit']) $row['limit']=$args['limit'];
