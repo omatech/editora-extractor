@@ -12,7 +12,7 @@ use Omatech\Editora\Extractor\Extractor;
 $params = [
 	'id' => '1'
 	, 'lang' => 'ca'
-	, 'debug' => true
+	, 'debug' => false
 	, 'metadata' => true
 ];
 
@@ -51,7 +51,7 @@ $params = [
 }';
 
 $extractor=new Extractor($conn);
-$res=$extractor->extract($query, $params);
+$res=$extractor->extract($query, $params, false);
 if ($res)
 {
 		echo "HA FUNCIONAT!!!";
