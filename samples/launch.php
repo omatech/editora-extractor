@@ -50,7 +50,7 @@ $params = [
   }
 }';
 
-$extractor=new \Omatech\Editora\Extractor($conn);
+$extractor=new Extractor($conn);
 $res=$extractor->extract($query, $params);
 if ($res)
 {
