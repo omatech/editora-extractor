@@ -1227,8 +1227,8 @@ class EditoraSchema
                     ],
                     'resolve' => function ($root, $args) {
                         $class = EditoraData::getClass($args);
-//												echo "Al query type\n";
-//												print_r($class);
+												echo "Al query type\n";
+												print_r($class);
 //												die;
 												if ($class) return $class;
 												return null;
