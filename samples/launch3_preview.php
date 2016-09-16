@@ -20,7 +20,7 @@ $params = [
 $show_metadata=true;
 
  $query='query FetchClassQuery ($class_id:Int, $lang:String, $debug:Boolean, $preview:Boolean) 
-{
+  {
   class(class_id: $class_id, lang: $lang, debug: $debug, preview:$preview, limit:3) 
 	{
     class_id tag

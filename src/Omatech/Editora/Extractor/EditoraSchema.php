@@ -437,15 +437,15 @@ class EditoraSchema
                     'description' => 'The id of instance.',
                 ],
                 'class_id' => [
-                    'type' => new NonNull(Type::int()),
+                    'type' => Type::int(),
                     'description' => 'The class_id of instance.',
                 ],
                 'class_name' => [
-                    'type' => new NonNull(Type::string()),
+                    'type' => Type::string(),
                     'description' => 'The class_name of instance.',
                 ],
                 'class_tag' => [
-                    'type' => new NonNull(Type::string()),
+                    'type' => Type::string(),
                     'description' => 'The class_tag of instance.',
                 ],
                 'key_fields' => [
