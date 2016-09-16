@@ -471,6 +471,7 @@ class EditoraData
 				if (!$row) return null;
 				
 				$row['args']=$args;
+				if ($args['limit']) $row['limit']=$args['limit'];
 				
 				$row['query']=self::$query;
 //				$row['lang']=self::$lang;
