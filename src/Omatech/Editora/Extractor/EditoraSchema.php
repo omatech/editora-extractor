@@ -1230,7 +1230,7 @@ class EditoraSchema
 												echo "Al query type !!!$class!!!\n";
 												print_r($class);
 //												die;
-												if ($class) return $class;
+												if ($class && !empty($class)) return $class;
 												return null;
                         //return isset($instance[$args['id']]) ? $instance[$args['id']] : null;
                     }
