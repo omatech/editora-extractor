@@ -51,6 +51,8 @@ class EditoraData
 				where id=$id
 				";
 				$row=self::$conn->fetchAssoc($sql);
+				if (!$row) return null;
+				
 				return $row['value'];
 		}
 		
@@ -399,6 +401,7 @@ class EditoraData
 				self::debug($sql);
 				//$row=Model::get_one($sql);
 				$row=self::$conn->fetchAssoc($sql);
+				if (!$row) return null;
 				$row['args']=$args;
 //				$row['lang']=self::$lang;
 //				$row['limit']=self::$limit;
@@ -460,6 +463,9 @@ class EditoraData
 						//$row=Model::get_one($sql);
 						$row=self::$conn->fetchAssoc($sql);
 				}
+				
+				if (!$row) return null;
+				
 				$row['args']=$args;
 				
 				$row['query']=self::$query;
