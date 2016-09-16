@@ -7,18 +7,14 @@ require_once $autoload_location;
 require_once __DIR__.'/../conf/config.php';
 require_once __DIR__.'/../conf/bootstrap.php';
 
-use GraphQL\GraphQL;
-use Omatech\Editora\Extractor\EditoraData;
-use Omatech\Editora\Extractor\EditoraSchema;
-use Omatech\Editora\Extractor\Ferretizer;
+use Omatech\Editora\Extractor\Extractor;
 
 $params = [
 	'id' => '1'
 	, 'lang' => 'ca'
 	, 'debug' => true
+	, 'metadata' => true
 ];
-
-$show_metadata=true;
 
  $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean) {
   instance(id: $id, lang: $lang, debug: $debug) {
@@ -54,16 +50,24 @@ $show_metadata=true;
   }
 }';
 
-EditoraData::set_connection($conn);
-$result=GraphQL::execute(EditoraSchema::build(), $query, null, null, $params);
-//print_r($result);die;
-$ferretizer_result=Ferretizer::Ferretize($result['data'], $show_metadata);
-if ($ferretizer_result)
-{// todo ok 
-  print_r($ferretizer_result);		
-}
-else
-{// algun error
-  print_r($result);		
+$extractor=new \Omatech\Editora\Extractor($conn);
+$res=$extractor->extract($query, $params);
+if ($res)
+{
+		echo "HA FUNCIONAT!!!";
+		print_r($res);
 }
 
+$res=$extractor->extract($query, $params, "json");
+if ($res)
+{
+		echo "HA FUNCIONAT!!!";
+		echo ($res);
+}
+
+$res=$extractor->extract($query, $params, "xml");
+if ($res)
+{
+		echo "HA FUNCIONAT!!!";
+		echo($res);
+}
