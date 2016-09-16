@@ -65,9 +65,3 @@ if ($res)
 		echo ($res);
 }
 
-$res=$extractor->extract($query, $params, "xml");
-if ($res)
-{
-		echo "HA FUNCIONAT!!!";
-		echo($res);
-}
