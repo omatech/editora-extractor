@@ -38,7 +38,7 @@ $show_metadata=true;
 }';
 
 $extractor=new Extractor($conn);
-$res=$extractor->extract($query, $params);
+$res=$extractor->extract($query, $params, 'array', false);
 if ($res)
 {
 		echo "HA FUNCIONAT!!!";
