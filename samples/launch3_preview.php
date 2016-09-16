@@ -38,16 +38,9 @@ $show_metadata=true;
 }';
 
 $extractor=new Extractor($conn);
-$res=$extractor->extract($query, $params);
+$res=$extractor->extract($query, $params, false);
 if ($res)
 {
 		echo "HA FUNCIONAT!!!";
 		print_r($res);
-}
-
-$res=$extractor->extract($query, $params, "json");
-if ($res)
-{
-		echo "HA FUNCIONAT!!!";
-		echo ($res);
 }
