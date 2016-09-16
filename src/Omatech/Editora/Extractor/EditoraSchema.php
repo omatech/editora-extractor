@@ -576,9 +576,12 @@ class EditoraSchema
                     'resolve' => function ($instance, $args) {
 												//echo "aqui tinc aquests args\n";
 												//print_r($args);
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
@@ -636,9 +639,12 @@ class EditoraSchema
 											
                     ],
                     'resolve' => function ($instance, $args) {
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
@@ -696,9 +702,12 @@ class EditoraSchema
 											
                     ],
                     'resolve' => function ($instance, $args) {
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
@@ -756,9 +765,12 @@ class EditoraSchema
 											
                     ],
                     'resolve' => function ($instance, $args) {
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
@@ -817,9 +829,12 @@ class EditoraSchema
 											
                     ],
                     'resolve' => function ($instance, $args) {
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
@@ -876,9 +891,12 @@ class EditoraSchema
 												],											
                     ],
                     'resolve' => function ($instance, $args) {
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
@@ -934,9 +952,12 @@ class EditoraSchema
 												],											
                     ],
                     'resolve' => function ($instance, $args) {
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
@@ -994,9 +1015,12 @@ class EditoraSchema
 												],											
                     ],
                     'resolve' => function ($instance, $args) {
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
@@ -1055,9 +1079,12 @@ class EditoraSchema
 												],											
                     ],
                     'resolve' => function ($instance, $args) {
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
@@ -1115,9 +1142,12 @@ class EditoraSchema
 												],											
                     ],
                     'resolve' => function ($instance, $args) {
-                        $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
-												//print_r($related);
-												if ($related) return $related;
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
 												return null;
                     },
                 ],
