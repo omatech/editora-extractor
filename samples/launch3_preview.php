@@ -29,7 +29,7 @@ $show_metadata=true;
 				id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
 				all_values {atri_tag text_val}
 				
-				relation1 (tag: "pages", limit:2)
+				relation1 (tag: "obra_actividad", limit:2)
 				{
 					id tag direction limit
 					instances {
