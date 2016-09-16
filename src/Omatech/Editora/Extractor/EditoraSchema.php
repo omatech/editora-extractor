@@ -1207,7 +1207,12 @@ class EditoraSchema
                             'type' => Type::String()
                         ],
 											
-                        'debug' => [
+												'limit' => [
+														'type' => Type::int(),
+														'description' => 'limit of extraction',
+												],
+
+											  'debug' => [
                             'name' => 'debug',
                             'description' => 'Sets the debug flag if true',
                             'type' => Type::boolean()
@@ -1316,7 +1321,12 @@ class EditoraSchema
                             'type' => Type::String()
                         ],
 											
-                        'debug' => [
+												'limit' => [
+														'type' => Type::int(),
+														'description' => 'limit of extraction',
+												],
+
+											  'debug' => [
                             'name' => 'debug',
                             'description' => 'Sets the debug flag if true',
                             'type' => Type::boolean()

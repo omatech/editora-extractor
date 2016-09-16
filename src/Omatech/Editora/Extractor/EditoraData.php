@@ -396,6 +396,7 @@ class EditoraData
 				where 1=1
 				".self::$sql_tag."
 				".self::$sql_class_id."
+				limit ".self::$limit."
 				";
 				//echo $sql;die;
 				self::debug($sql);
@@ -458,6 +459,7 @@ class EditoraData
 						where 1=1
 						".self::$sql_tag."
 						".self::$sql_class_id."
+						limit ".self::$limit."
 						";
 						//echo $sql;die;
 						//$row=Model::get_one($sql);
