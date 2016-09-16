@@ -1,6 +1,7 @@
 <?php
 namespace Omatech\Editora\Extractor;
 
+use GraphQL\GraphQL;
 use Omatech\Editora\Extractor\EditoraData;
 use Omatech\Editora\Extractor\EditoraSchema;
 use Omatech\Editora\Extractor\Ferretizer;
