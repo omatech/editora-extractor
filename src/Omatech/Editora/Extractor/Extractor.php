@@ -15,7 +15,7 @@ class Extractor
 		}
 		
 		public function extract ($query, $params, $output='array', $ferretizer=true)
-		{
+		{// output array as "array", default or json
 				$result=GraphQL::execute(EditoraSchema::build(), $query, null, null, $params);
 				
 				if ($ferretizer)
@@ -38,10 +38,6 @@ class Extractor
 				}
 				
 				if ($output=='json')
-				{
-						return json_encode($result);
-				}
-				elseif ($output=='xml')
 				{
 						return json_encode($result);
 				}
