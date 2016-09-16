@@ -396,6 +396,7 @@ class EditoraData
 				".self::$sql_class_id."
 				";
 				//echo $sql;die;
+				self::debug($sql);
 				//$row=Model::get_one($sql);
 				$row=self::$conn->fetchAssoc($sql);
 				$row['args']=$args;
