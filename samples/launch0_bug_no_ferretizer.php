@@ -10,6 +10,7 @@ require_once __DIR__.'/../conf/bootstrap.php';
 use Omatech\Editora\Extractor\Extractor;
 
 $inst_id=100002;
+$lang='ca';
 
 $params = ['id' => $inst_id, 'lang' => $lang, 'debug'=>true, 'preview' => false, 'metadata' => true];
 $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean, $preview:Boolean) {
