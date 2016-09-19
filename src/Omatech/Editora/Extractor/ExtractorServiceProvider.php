@@ -10,7 +10,6 @@ class ExtractorServiceProvider extends ServiceProvider
 
     /**
      * Indicates if loading of the provider is deferred.
-     *
      * @var bool
      */
     protected $defer = false;
@@ -18,7 +17,6 @@ class ExtractorServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
      * @return void
      */
     public function boot()
@@ -34,7 +32,6 @@ class ExtractorServiceProvider extends ServiceProvider
 
     /**
      * Register the application services.
-     *
      * @return void
      */
     public function register()
