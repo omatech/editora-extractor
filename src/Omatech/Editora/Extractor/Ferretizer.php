@@ -65,11 +65,15 @@ class Ferretizer
 
 		static function FerretizeInstance ($instance, $metadata=false)
 		{
-				echo "pintant la instancia al ferretizer\n";
-				print_r($instance);
+				//echo "pintant la instancia al ferretizer\n";
+				//print_r($instance);
 				$una_instancia=array();
 				
-				if (empty($instance['id']) || empty($instance['class_id']) || empty($instance['status'])) return null;
+				if (empty($instance['id']) || empty($instance['class_id'])) 
+				{
+						self::debug("Se debe extraer como mínimo id y class_id de la instancia para poder usar el Ferretizer\n");
+						return null;
+				}
 				
 				$una_instancia['id']=$instance['id'];
 				if (isset($instance['link']))	$una_instancia['link']=$instance['link'];
