@@ -112,6 +112,10 @@ class Ferretizer
 				if (isset($instance['relation1']))
 				{
 						$relation=$instance['relation1'][0];
+						
+						echo("DINS DE LA PRIMERA RELATION\n");
+						print_r($relation);
+						
 						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
 				}
 				if (isset($instance['relation2']))

@@ -987,7 +987,7 @@ class EditoraData
 		
 		static function get_parents ($rel_id, $inst_id, $args, $parent_args)
 		{
-				self::debug("EditoraData::get_children\n");
+				self::debug("EditoraData::get_parents\n");
 				self::debug("inst_id=$inst_id rel_id=$rel_id\n");
 				$args=self::parse_args($args, $parent_args);
 				
