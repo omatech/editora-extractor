@@ -247,9 +247,6 @@ class Ferretizer
 
 		static function Ferretize ($data, $metadata=false)
 		{
-				print_r("ARRIBO AL FERRETIZER\n");
-
-				
 				if (isset($data['class'])) return self::FerretizeClass($data['class'], $metadata);
 				if (isset($data['search'])) return self::FerretizeSearch($data['search'], $metadata);
 				if (isset($data['instances_list'])) return self::FerretizeInstancesList($data['instances_list'], $metadata);
