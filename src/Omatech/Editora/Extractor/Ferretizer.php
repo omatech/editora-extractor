@@ -56,7 +56,10 @@ class Ferretizer
 							if ($inner_inst)
 							{
 								//echo "Entro!\n";
-							  $una_rel['instances'][]=self::FerretizeInstance($inner_inst, $metadata);
+							  //$una_rel['instances'][]=self::FerretizeInstance($inner_inst, $metadata);								
+								$tmp_inst=self::FerretizeInstance($inner_inst, $metadata);
+								if ($tmp_inst) $una_rel['instances'][]=$tmp_inst;
+								
 							}
 						}
 				}
