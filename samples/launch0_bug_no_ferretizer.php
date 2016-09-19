@@ -35,7 +35,7 @@ $params = ['id' =>100005, 'lang' => 'ca', 'debug'=>false , 'metadata' => true];
 
 
 $extractor=new Extractor($conn);
-$instance=$extractor->extract($query, $params, 'array', false);
+$instance=$extractor->extract($query, $params, 'array', true);
 
 echo '<pre>';
 print_r($instance);
