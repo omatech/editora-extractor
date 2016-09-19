@@ -9,11 +9,30 @@ use Omatech\Editora\Extractor\Ferretizer;
 class Extractor 
 {		
 
-		public function __construct($conn)
+		public function __constructor($conn)
 		{				
+				if (is_array($conn))
+				{
+						$config = new \Doctrine\DBAL\Configuration();
+						//..
+						$connectionParams = array(
+								'dbname' => $conn['dbname'],
+								'user' => $conn['dbuser'],
+								'password' => $conn['dbpass'],
+								'host' => $conn['dbhost'],
+								'driver' => 'pdo_mysql',
+								'charset' => 'utf8'
+						);
+						$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);						
+				}
 				EditoraData::set_connection($conn);
 		}
 		
+		public function __construct($dbname, $dbuser, $dbpass, $dbhost)
+		{				
+				self::init($conn);
+		}
+
 		public function extract ($query, $params, $output='array', $ferretizer=true)
 		{// output array as "array", default or json
 				$result=GraphQL::execute(EditoraSchema::build(), $query, null, null, $params);
