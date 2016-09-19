@@ -9,7 +9,7 @@ require_once __DIR__.'/../conf/bootstrap.php';
 
 use Omatech\Editora\Extractor\Extractor;
 
-$inst_id=100002;
+$inst_id=100068;
 $lang='ca';
 
 $params = ['id' => $inst_id, 'lang' => $lang, 'debug'=>false, 'preview' => false, 'metadata' => true];
