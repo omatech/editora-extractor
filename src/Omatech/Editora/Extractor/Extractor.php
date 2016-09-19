@@ -9,7 +9,7 @@ use Omatech\Editora\Extractor\Ferretizer;
 class Extractor 
 {		
 
-		public function __constructor($conn)
+		public function __construct($conn)
 		{				
 				if (is_array($conn))
 				{
@@ -28,11 +28,6 @@ class Extractor
 				EditoraData::set_connection($conn);
 		}
 		
-		public function __construct($dbname, $dbuser, $dbpass, $dbhost)
-		{				
-				self::init($conn);
-		}
-
 		public function extract ($query, $params, $output='array', $ferretizer=true)
 		{// output array as "array", default or json
 				$result=GraphQL::execute(EditoraSchema::build(), $query, null, null, $params);
