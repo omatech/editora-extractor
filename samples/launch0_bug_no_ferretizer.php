@@ -12,7 +12,7 @@ use Omatech\Editora\Extractor\Extractor;
 $inst_id=100068;
 $lang='ca';
 
-$params = ['id' => $inst_id, 'lang' => $lang, 'debug'=>false, 'preview' => false, 'metadata' => true];
+$params = ['id' => $inst_id, 'lang' => $lang, 'debug'=>true, 'preview' => false, 'metadata' => true];
 $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean, $preview:Boolean) {
 			instance(id: $id, lang: $lang, debug: $debug, preview:$preview) {id nom_intern link class_id all_values {atri_tag text_val num_val}
 
