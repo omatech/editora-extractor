@@ -961,7 +961,7 @@ class EditoraData
 				self::debug("inst_id=$inst_id rel_id=$rel_id\n");
 				$args=self::parse_args($args, $parent_args);
 				
-				$sql="select i.id 
+				$sql="select i.id, i.class_id 
 				from omp_relation_instances ri
 				, omp_instances i
 				, omp_classes c
@@ -991,7 +991,7 @@ class EditoraData
 				self::debug("inst_id=$inst_id rel_id=$rel_id\n");
 				$args=self::parse_args($args, $parent_args);
 				
-				$sql="select i.id
+				$sql="select i.id, i.class_id
 				from omp_relation_instances ri
 				, omp_instances i
 				, omp_classes c
