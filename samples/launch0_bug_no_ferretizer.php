@@ -9,7 +9,7 @@ require_once __DIR__.'/../conf/bootstrap.php';
 
 use Omatech\Editora\Extractor\Extractor;
 
-$params = ['id' =>100005, 'lang' => 'ca', 'debug'=>true , 'metadata' => true];
+$params = ['id' =>100005, 'lang' => 'ca', 'debug'=>false , 'metadata' => true];
 	$query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean) {
 				instance(id: $id, lang: $lang, debug: $debug) {
 						id nom_intern link class_id
@@ -35,7 +35,7 @@ $params = ['id' =>100005, 'lang' => 'ca', 'debug'=>true , 'metadata' => true];
 
 
 $extractor=new Extractor($conn);
-$instance=$extractor->extract($query, $params);
+$instance=$extractor->extract($query, $params, 'array', false);
 
 echo '<pre>';
 print_r($instance);
