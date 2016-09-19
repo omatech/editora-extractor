@@ -65,8 +65,8 @@ class Ferretizer
 
 		static function FerretizeInstance ($instance, $metadata=false)
 		{
-				//echo "pintant la instancia al ferretizer\n";
-				//print_r($instance);
+				echo "pintant la instancia al ferretizer\n";
+				print_r($instance);
 				$una_instancia=array();
 				
 				if (empty($instance['id']) || empty($instance['class_id']) || empty($instance['status'])) return null;
@@ -244,8 +244,7 @@ class Ferretizer
 		static function Ferretize ($data, $metadata=false)
 		{
 				print_r("ARRIBO AL FERRETIZER\n");
-				print_r($data['instance']);
-				die;
+
 				
 				if (isset($data['class'])) return self::FerretizeClass($data['class'], $metadata);
 				if (isset($data['search'])) return self::FerretizeSearch($data['search'], $metadata);
