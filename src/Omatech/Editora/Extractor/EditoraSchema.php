@@ -163,7 +163,7 @@ class EditoraSchema
                         $insts=EditoraData::getRelated($relation['direction'], $relation['id'], $relation['inst_id'], $relation['args'], null);
 												//echo "Instancies despres del GetRelated\n";
 												//print_r($insts);
-												if ($insts && !empty($instances[0])) return $insts;
+												if ($insts && !empty($insts[0])) return $insts;
 												return null;
                     },
 								],
