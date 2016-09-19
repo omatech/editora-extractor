@@ -69,7 +69,7 @@ class Ferretizer
 				//print_r($instance);
 				$una_instancia=array();
 				
-				if (empty($instance['id']) || empty($instance['class_id'])) 
+				if (empty($instance['id']) || empty($instance['class_id']) || !is_numeric($instance['id']) || !is_numeric($instance['class_id'])) 
 				{
 						self::debug("Se debe extraer como mínimo id y class_id de la instancia para poder usar el Ferretizer\n");
 						return null;
