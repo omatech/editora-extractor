@@ -776,7 +776,7 @@ class EditoraData
 				self::debug("!!!order: ".self::$order."\n");
 				self::debug("!!!order_direction: ".self::$order_direction."\n");
 				
- 				$order_sql="order by (i.id, ".self::$ids.")";
+ 				$order_sql="order by FIELD(i.id, ".self::$ids.")";
  
 				
 				if (isset(self::$order)) 
