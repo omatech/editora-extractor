@@ -417,7 +417,7 @@ class EditoraData
     static function getInstanceList($args, $parent_args=false)
     {// $ids = IDs of the class
 		// $lang = ALL | es | ca | en ...
-		// $order = order class instances by order criteria, update_date|publishing_begins|inst_id|key_fields default publishing_begins
+		// $order = order class instances by order criteria, ids|update_date|publishing_begins|inst_id|key_fields default ids
 		// $order_direction = direction of the order by clause, desc|asc defaults to asc
 				self::debug("EditoraData::getInstanceList\n");
 				$args=self::parse_args($args, $parent_args);
@@ -792,6 +792,10 @@ class EditoraData
 						if (strtolower(self::$order)=='key_fields')
 						{
 								$order_sql="order by i.key_fields";
+						}
+						if (strtolower(self::$order)=='publishing_begins')
+						{
+								$order_sql="order by i.publishing_begins";
 						}
 				}
 				
