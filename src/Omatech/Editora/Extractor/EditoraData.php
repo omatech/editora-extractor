@@ -771,11 +771,14 @@ class EditoraData
 				self::debug("EditoraData::getInstancesList\n");
 
 				$args=self::parse_args($args, $parent_args);
-				
+
+$order_sql="";				
+/*
 				self::debug("!!!order: ".self::$order."\n");
 				self::debug("!!!order_direction: ".self::$order_direction."\n");
 				
-				$order_sql="order by i.publishing_begins";
+ 				$order_sql="order by i.publishing_begins";
+ 
 				
 				if (isset(self::$order)) 
 				{
@@ -798,7 +801,7 @@ class EditoraData
 						$order_sql.=" desc";
 				}
 
-
+*/
 				//$sql="select i.id
 				$sql="select i.*, c.name class_name, c.tag class_tag, i.key_fields nom_intern, i.update_date, ifnull(unix_timestamp(i.update_date),0) update_timestamp  
 				from omp_instances i
