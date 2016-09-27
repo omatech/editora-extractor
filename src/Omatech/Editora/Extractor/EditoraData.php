@@ -639,7 +639,11 @@ class EditoraData
 												if ($subval=='D')
 												{
 														$attrs[$attr_key]['text_val']=$attrs[$attr_key]['date_val'];
-												}												
+												}
+												if (($subval=='F' || $subval=='I') && substr($attrs[$attr_key]['date_val'],0,8)=='uploads/')
+												{// Backwards compatibility with editoras that save uploads/ instead of /uploads/
+														$attrs[$attr_key]['text_val']='/'.$attrs[$attr_key]['text_val'];
+												}
 										}
 										/*
 										if ($subkey=='text_val' && $subval!='')
