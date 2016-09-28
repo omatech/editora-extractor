@@ -1152,7 +1152,67 @@ class EditoraSchema
                     },
                 ],
 
+								'relation11' => [
+                    'type' => Type::listOf($RelationType),
+                    'description' => 'The children of the instance.',
+                    'args' => [
+                        'tag' => [
+                            'name' => 'tag',
+                            'description' => 'tag of the relation',
+                            'type' => new NonNull(Type::String())
+                        ],
+                        'alias' => [
+                            'name' => 'alias',
+                            'description' => 'alias of the relation',
+                            'type' => Type::String()
+                        ],
+                        'limit' => [
+                            'name' => 'limit',
+                            'description' => 'number of children to get, default 1000',
+                            'type' => Type::Int()
+                        ],
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
+						'filter' => [
+                            'name' => 'filter',
+                            'description' => 'filter some fields all|detail|resume default all',
+                            'type' => Type::String()
+                        ],
+                        'direction' => [
+                            'name' => 'direction',
+                            'description' => 'force a direction, by default is children, use parents if you want to override',
+                            'type' => Type::String()
+                        ],
+                        'lang' => [
+                            'name' => 'lang',
+                            'description' => 'Language of the extraction',
+                            'type' => Type::String()
+                        ],
 											
+												'preview' => [
+														'type' => Type::boolean(),
+														'description' => 'Preview true or false, default false',
+												],
+												'preview_date' => [
+														'type' => Type::string(),
+														'description' => 'Preview date in %Y%m%d%H%i%S format',
+												],											
+                    ],
+                    'resolve' => function ($instance, $args) {
+												if (isset($instance) && isset($instance['id']) && isset($instance['class_id']) && isset($instance['args']))
+												{
+                          $related=EditoraData::getRelations($instance['id'], $instance['class_id'], $args, $instance['args']);
+												  //print_r($related);
+												  if ($related) return $related;
+												}
+												return null;
+                    },
+                ],
+						
 											
 											
             ],

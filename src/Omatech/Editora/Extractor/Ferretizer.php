@@ -163,6 +163,11 @@ class Ferretizer
 						$relation=$instance['relation10'][0];
 						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
 				}
+				if (isset($instance['relation11']))
+				{
+						$relation=$instance['relation11'][0];
+						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
+				}
 
 				return $una_instancia;
 		}
