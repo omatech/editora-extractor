@@ -36,7 +36,7 @@ class ExtractorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('extractor', function ($app) {
+        $this->app->singleton('Extractor', function ($app) {
             return new Extractor($app['conn_doctrine']);
         });
     }
