@@ -54,7 +54,7 @@ class Extractor
 				
 				if ($params['debug'])
 				{
-						self::$debug_messages=EditoraData::$debug_messages;
+						$this->debug_messages=EditoraData::$debug_messages;
 				}
 				
 				if ($output=='json')
