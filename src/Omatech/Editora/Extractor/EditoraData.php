@@ -13,6 +13,7 @@ class EditoraData
 		private static $order=null;
 		private static $order_direction=null;
 		private static $debug=false;
+		public static $debug_messages='';
 
 		private static $preview=false;
 		private static $preview_date='NOW()';
@@ -58,32 +59,15 @@ class EditoraData
 		
 		static function debug($str)
 		{
-				global $debug;
 				if (self::$debug)
 				{
 						if (is_array($str))
 						{
-								//$self::$debug_info.=print_r($str, true);
-								if ($debug)
-								{
-										$debug->debug(print_r($str, true));
-								}
-								else
-								{
-										print_r($str);
-								}
+								self::$debug_messages.=print_r($str, true);
 						}
 						else
 						{// cas normal, es un string
-								//$self::$debug_info.=$str;
-								if ($debug)
-								{
-										$debug->debug($str);
-								}
-								else
-								{
-										echo($str);
-								}
+								self::$debug_messages.=$str;
 						}
 				}
 		}
@@ -680,7 +664,7 @@ class EditoraData
 					$attrs['args']=$args;
 					
 					self::debug(self::$type_of_cache.":: insertamos el objeto $memcache_key \n");
-					self::debug(print_r($attrs, true));
+					self::debug($attrs);
 					self::setCache($memcache_key, $attrs);
 				}
 				return $attrs;

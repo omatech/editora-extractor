@@ -8,6 +8,7 @@ use Omatech\Editora\Extractor\Ferretizer;
 
 class Extractor 
 {		
+		public $debug_messages='';
 
 		public function __construct($conn)
 		{				
@@ -49,6 +50,11 @@ class Extractor
 						{// todo ok, preparamos el output
 								$result=$ferretizer_result;
 						}
+				}
+				
+				if ($params['debug'])
+				{
+						self::$debug_messages=EditoraData::debug_messages;
 				}
 				
 				if ($output=='json')
