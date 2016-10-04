@@ -55,6 +55,7 @@ $res=$extractor->extract($query, $params, 'array', false);
 
 if ($params['debug'])
 {
+		echo "DEBUG\n";
 		echo $extractor->debug_messages;
 }
 
