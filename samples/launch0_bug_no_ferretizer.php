@@ -37,6 +37,12 @@ $params = ['id' =>100005, 'lang' => 'ca', 'debug'=>false , 'metadata' => true];
 $extractor=new Extractor($conn);
 $instance=$extractor->extract($query, $params, 'array', true);
 
+if ($params['debug'])
+{
+		echo "DEBUG\n";
+		echo $extractor->debug_messages;
+}
+
 echo '<pre>';
 print_r($instance);
 echo '</pre>';

@@ -33,6 +33,13 @@ $params = [
  
 $extractor=new Extractor($conn);
 $res=$extractor->extract($query, $params, 'array', false);
+
+if ($params['debug'])
+{
+		echo "DEBUG\n";
+		echo $extractor->debug_messages;
+}
+
 if ($res)
 {
 		echo "HA FUNCIONAT!!!";

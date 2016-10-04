@@ -33,6 +33,12 @@ $query ='query FetchListQuery ($ids:String, $lang:String, $debug:Boolean) {
 $extractor=new Extractor($conn);
 $instance=$extractor->extract($query, $params, 'array', true);
 
+if ($params['debug'])
+{
+		echo "DEBUG\n";
+		echo $extractor->debug_messages;
+}
+
 echo '<pre>';
 print_r($instance);
 echo '</pre>';

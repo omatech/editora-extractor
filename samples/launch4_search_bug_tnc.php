@@ -32,6 +32,13 @@ $query='query FetchSearchQuery ($query:String, $class_id:Int, $lang:String, $deb
 
 $extractor=new Extractor($conn);
 $res=$extractor->extract($query, $params);
+
+if ($params['debug'])
+{
+		echo "DEBUG\n";
+		echo $extractor->debug_messages;
+}
+
 if ($res)
 {
 		echo "HA FUNCIONAT!!!";

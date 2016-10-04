@@ -39,6 +39,13 @@ $show_metadata=true;
 
 $extractor=new Extractor($conn);
 $res=$extractor->extract($query, $params, 'array', true);
+
+if ($params['debug'])
+{
+		echo "DEBUG\n";
+		echo $extractor->debug_messages;
+}
+
 if ($res)
 {
 		echo "HA FUNCIONAT!!!";
