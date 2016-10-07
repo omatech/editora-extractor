@@ -21,13 +21,6 @@ class ExtractorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app['conn_doctrine'] = [
-            'dbname' => env('DB_DATABASE', 'forge'),
-            'dbuser' => env('DB_USERNAME', 'forge'),
-            'dbpass' => env('DB_PASSWORD', ''),
-            'dbhost' => env('DB_HOST', 'localhost'),
-        ];
-
     }
 
     /**
@@ -37,7 +30,12 @@ class ExtractorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('Extractor', function ($app) {
-            return new Extractor($app['conn_doctrine']);
+            return new Extractor([
+            'dbname' => env('DB_DATABASE', 'forge'),
+            'dbuser' => env('DB_USERNAME', 'forge'),
+            'dbpass' => env('DB_PASSWORD', ''),
+            'dbhost' => env('DB_HOST', 'localhost'),
+        ]);
         });
     }
 }
