@@ -52,7 +52,18 @@ class EditoraData
 				where id=$id
 				";
 				$row=self::$conn->fetchAssoc($sql);
-				if (!$row) return null;
+				if (!$row)
+				{// quizas no tenemos el idioma pero provamos de obtener el value sin traducir
+						$sql="select value
+						from omp_lookups_values 
+						where id=$id
+						";
+						$row=self::$conn->fetchAssoc($sql);
+						if (!$row)
+						{
+							return null;
+						}
+				}
 				
 				return $row['value'];
 		}
