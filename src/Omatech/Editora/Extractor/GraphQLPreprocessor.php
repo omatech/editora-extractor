@@ -16,7 +16,7 @@ class GraphQLPreprocessor {
 		}
 		
 		public static function generate($query, $end = true, $counter = 1) {
-				$graphql = "";
+				$graphql = $top_args = $top_filter_snippet= "";
 
 				if (isset($query['top_args'])) {
 						$top_args = $query['top_args'];
