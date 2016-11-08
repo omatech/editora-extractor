@@ -38,7 +38,14 @@ class GraphQLPreprocessor {
 								if (is_array($query['relations'][$key])) {
 										foreach ($query['relations'][$key] as $key2 => $value2) {
 												if ($key2 !== 'relations' && $key2 !== 'filters') {
-														$graphql .= ", " . $key2 . ':"' . $value2 . '"';
+														if (is_numeric($value2))
+														{
+																$graphql .= ", " . $key2 . ':'.$value2;
+														}
+														else
+														{
+																$graphql .= ", " . $key2 . ':"'.$value2.'"';																
+														}
 												}
 										}
 								}
