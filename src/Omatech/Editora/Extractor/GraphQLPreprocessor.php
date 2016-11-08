@@ -21,7 +21,6 @@ class GraphQLPreprocessor {
 											instances {
 													id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
 													all_values (lang: $lang) {atri_tag text_val num_val}
-											}
 								';
 						  
         }
@@ -39,7 +38,7 @@ class GraphQLPreprocessor {
                 }
 
                 $graphql .= ') {id tag direction limit
-                                instances {id nom_intern link class_id class_tag class_name all_values';
+                                instances {id nom_intern link class_id class_tag class_name update_timestamp all_values';
                 if(isset($query['relations'][$key]['filters'])) {
                     $graphql .= ' (filter: "fields:"';
                     foreach ($query['relations'][$key]['filters'] as $key => $value) {
@@ -48,7 +47,7 @@ class GraphQLPreprocessor {
                     $graphql = substr($graphql, 0, -1);
                     $graphql .= '")';
                 }
-                $graphql .= ' {atri_tag text_val}';
+                $graphql .= ' {atri_tag text_val num_val}';
                 $graphql .= self::generate($value, false, 1);
                 $graphql .= '}';
             }
@@ -62,7 +61,7 @@ class GraphQLPreprocessor {
 				}
 				
         if($end == true) {
-            $graphql .= "\n}";
+            $graphql .= "\n}\n";
             $graphql = trim($graphql);
         }
         return $graphql;
