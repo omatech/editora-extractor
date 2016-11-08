@@ -95,8 +95,8 @@ class GraphQLPreprocessor {
 
 				$graphql .= "\n}";
 
-				if (isset($query['type']) && $query['type'] === 'class') {
-						// close extra bracket in case of class
+				if (isset($query['type']) && ($query['type'] === 'class' || $query['type'] === 'search'))
+				{// close extra bracket in case of class or search
 						$graphql .= "\n}";
 				}
 
