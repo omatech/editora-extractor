@@ -17,7 +17,7 @@ $params = [
 	, 'metadata' => true
 ];
 
-$magic = ["class_id" => $id,
+$magic = ["class_id" => 140,
 		"type"      => "class",
 		"relations" => ["pages"]
 ];
