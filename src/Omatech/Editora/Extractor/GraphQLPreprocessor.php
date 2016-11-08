@@ -24,7 +24,7 @@ class GraphQLPreprocessor {
 				
 				if (isset($query['top_instance_all_values_filters'])) 
 				{
-						$graphql.=get_filter_snippet($query['top_instance_all_values_filters']);										
+						$top_filter_snippet=self::get_filter_snippet($query['top_instance_all_values_filters']);										
 				}
 				
 				
@@ -32,7 +32,7 @@ class GraphQLPreprocessor {
 						$graphql = '
                 query FetchGraphQuery ($id:Int, $lang:String, $debug:Boolean, $preview:Boolean) {
                     instance(id: $id, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') 
-										{id nom_intern link class_id class_tag class_name all_values {atri_tag text_val num_val}';
+										{id nom_intern link class_id class_tag class_name all_values '.$top_filter_snippet.' {atri_tag text_val num_val}';
 				}
 				
 				if (isset($query['type']) && $query['type'] === 'class') {
@@ -43,7 +43,7 @@ class GraphQLPreprocessor {
 										  class_id tag
 											instances {
 													id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-													all_values (lang: $lang) {atri_tag text_val num_val}
+													all_values  '.$top_filter_snippet.' {atri_tag text_val num_val}
 								';
 				}
 				
@@ -55,7 +55,7 @@ class GraphQLPreprocessor {
 										  class_id tag
 											instances {
 													id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-													all_values (lang: $lang) {atri_tag text_val num_val}
+													all_values  '.$top_filter_snippet.'  {atri_tag text_val num_val}
 								';
 				}
 
@@ -84,7 +84,7 @@ class GraphQLPreprocessor {
 								
 								if (isset($query['relations'][$key]['filters'])) 
 								{
-										$graphql.=get_filter_snippet ($query['relations'][$key]['filters']);										
+										$graphql.=self::get_filter_snippet ($query['relations'][$key]['filters']);										
 								}
 								
 								$graphql .= ' {atri_tag text_val num_val}';
