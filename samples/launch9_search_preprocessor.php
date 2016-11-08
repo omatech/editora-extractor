@@ -25,6 +25,7 @@ $magic =
 ]
 ;
 $query=GraphQLPreprocessor::generate($magic);
+echo $query;
 
 /*
 $query='query FetchSearchQuery ($query:String, $class_id:Int, $lang:String, $debug:Boolean, $preview:Boolean) 
