@@ -19,11 +19,9 @@ $params = [
 	, 'metadata' => true	
 ];
 
-$magic = 
-["type" => "search"
+$magic = ["type" => "search"
 ,"top_instance_all_values_filters"=>["title","subtitle"]
-]
-;
+];
 $query=GraphQLPreprocessor::generate($magic);
 echo $query;
 
