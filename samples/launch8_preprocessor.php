@@ -19,7 +19,8 @@ $params = [
 
 $magic = ["class_id" => 140,
 		"type"      => "class",
-		"relations" => ["pages"]
+	  "top_args" => ', order:"key_fields", order_direction:"desc"',
+		"relations" => ["pages"=>["limit"=>10]]
 ];
 
 $query=GraphQLPreprocessor::generate($magic);
