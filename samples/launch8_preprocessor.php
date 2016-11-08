@@ -22,7 +22,7 @@ $magic = ["class_id" => $id,
 		"relations" => ["pages"]
 ];
 
-$query=GraphQLPreprocessor($magic);
+$query=GraphQLPreprocessor::generate($magic);
 
 echo $query;die;
 /*$query='query FetchClassQuery ($class_id:Int, $debug:Boolean, $lang:String) 
