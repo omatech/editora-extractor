@@ -8,6 +8,7 @@ require_once __DIR__.'/../conf/config.php';
 require_once __DIR__.'/../conf/bootstrap.php';
 
 use Omatech\Editora\Extractor\Extractor;
+use Omatech\Editora\Extractor\GraphQLPreprocessor;
 
 $params = [
 	'class_id' => '80'
