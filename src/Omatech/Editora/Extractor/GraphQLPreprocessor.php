@@ -13,14 +13,15 @@ class GraphQLPreprocessor {
 				
 				if (isset($query['type']) && $query['type'] === 'instance') {
 						$graphql = '
-                query FetchGraphQuery ($id:Int, $lang:String, $debug:Boolean, $preview:Boolean' . $top_args . ') {
-                    instance(id: $id, lang: $lang, debug: $debug, preview: $preview) {id nom_intern link class_id class_tag class_name all_values {atri_tag text_val num_val}';
+                query FetchGraphQuery ($id:Int, $lang:String, $debug:Boolean, $preview:Boolean) {
+                    instance(id: $id, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') 
+										{id nom_intern link class_id class_tag class_name all_values {atri_tag text_val num_val}';
 				}
 				
 				if (isset($query['type']) && $query['type'] === 'class') {
 						$graphql = '
-                query FetchGraphQuery ($class_id:Int, $debug:Boolean, $lang:String, $preview:Boolean' . $top_args . ') {
-                    class(class_id: $class_id, lang: $lang, debug: $debug, preview: $preview) 
+                query FetchGraphQuery ($class_id:Int, $debug:Boolean, $lang:String, $preview:Boolean) {
+                    class(class_id: $class_id, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') 
 										{
 										  class_id tag
 											instances {
