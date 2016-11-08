@@ -21,11 +21,11 @@ $magic = ["class_id" => $id,
 		"type"      => "class",
 		"relations" => ["pages"]
 ];
+
+$query=GraphQLPreprocessor($magic);
+
 echo $query;die;
-
-$query=GraphQLPreprocessor();
-
- /*$query='query FetchClassQuery ($class_id:Int, $debug:Boolean, $lang:String) 
+/*$query='query FetchClassQuery ($class_id:Int, $debug:Boolean, $lang:String) 
 {
   class(class_id: $class_id, lang: $lang, debug: $debug, order:"key_fields", order_direction:"desc") 
 	{
