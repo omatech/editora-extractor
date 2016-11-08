@@ -24,7 +24,7 @@ $magic = ["class_id" => 140,
 
 $query=GraphQLPreprocessor::generate($magic);
 
-echo $query;die;
+echo $query;
 /*$query='query FetchClassQuery ($class_id:Int, $debug:Boolean, $lang:String) 
 {
   class(class_id: $class_id, lang: $lang, debug: $debug, order:"key_fields", order_direction:"desc") 
