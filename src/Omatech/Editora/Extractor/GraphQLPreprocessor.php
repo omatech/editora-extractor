@@ -53,7 +53,7 @@ class GraphQLPreprocessor {
 								$graphql .= ') {id tag direction limit
                                 instances {id nom_intern link class_id class_tag class_name update_timestamp all_values';
 								if (isset($query['relations'][$key]['filters'])) {
-										$graphql .= ' (filter: "fields:"';
+										$graphql .= ' (filter: "fields:';
 										foreach ($query['relations'][$key]['filters'] as $key => $value) {
 												$graphql .= $value . '|';
 										}
