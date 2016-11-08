@@ -17,10 +17,14 @@ $params = [
 	, 'metadata' => true
 ];
 
-$magic = ["class_id" => 140,
-		"type"      => "class",
+$magic = ["type" => "class",
 	  "top_args" => ', order:"key_fields", order_direction:"desc"',
-		"relations" => ["pages"=>["limit"=>10, "filters"=>["title","niceurl"]]]
+		"relations" => 
+	    ["pages"=>
+	      ["limit"=>10
+				, "filters"=>["title","niceurl"]
+				]
+			]
 ];
 
 $query=GraphQLPreprocessor::generate($magic);

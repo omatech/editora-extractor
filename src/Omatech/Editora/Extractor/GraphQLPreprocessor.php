@@ -4,12 +4,29 @@ namespace Omatech\Editora\Extractor;
 
 class GraphQLPreprocessor {
 
+		private static function get_filter_snippet ($array)
+		{
+				$graphql = ' (filter: "fields:';
+				foreach ($array as $key => $value) {
+						$graphql .= $value . '|';
+				}
+				$graphql = substr($graphql, 0, -1);
+				$graphql .= '")';
+				return $graphql;
+		}
+		
 		public static function generate($query, $end = true, $counter = 1) {
 				$graphql = "";
 
 				if (isset($query['top_args'])) {
 						$top_args = $query['top_args'];
 				}
+				
+				if (isset($query['top_instance_all_values_filters'])) 
+				{
+						$graphql.=get_filter_snippet($query['top_instance_all_values_filters']);										
+				}
+				
 				
 				if (isset($query['type']) && $query['type'] === 'instance') {
 						$graphql = '
@@ -30,6 +47,18 @@ class GraphQLPreprocessor {
 								';
 				}
 				
+				if (isset($query['type']) && $query['type'] === 'search') {
+						$graphql = '
+                query FetchGraphQuery ($query:String, $class_id:Int, $debug:Boolean, $lang:String, $preview:Boolean) {
+                    search (query: $query,class_id: $class_id, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') 
+										{
+										  class_id tag
+											instances {
+													id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
+													all_values (lang: $lang) {atri_tag text_val num_val}
+								';
+				}
+
 				if (isset($query['relations'])) {
 						foreach ($query['relations'] as $key => $value) {
 								$tag = (is_numeric($key)) ? $value : $key;
@@ -52,14 +81,12 @@ class GraphQLPreprocessor {
 
 								$graphql .= ') {id tag direction limit
                                 instances {id nom_intern link class_id class_tag class_name update_timestamp all_values';
-								if (isset($query['relations'][$key]['filters'])) {
-										$graphql .= ' (filter: "fields:';
-										foreach ($query['relations'][$key]['filters'] as $key => $value) {
-												$graphql .= $value . '|';
-										}
-										$graphql = substr($graphql, 0, -1);
-										$graphql .= '")';
+								
+								if (isset($query['relations'][$key]['filters'])) 
+								{
+										$graphql.=get_filter_snippet ($query['relations'][$key]['filters']);										
 								}
+								
 								$graphql .= ' {atri_tag text_val num_val}';
 								$graphql .= self::generate($value, false, 1);
 								$graphql .= '}';
