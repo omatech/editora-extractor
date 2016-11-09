@@ -113,62 +113,14 @@ class Ferretizer
 						}
 				}
 				
-				if (isset($instance['relation1']))
+				foreach (range(1,50) as $i)
 				{
-						$relation=$instance['relation1'][0];						
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
+						if (isset($instance["relation$i"]))
+						{
+								$relation=$instance["relation$i"][0];						
+								$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
+						}		
 				}
-				if (isset($instance['relation2']))
-				{
-						$relation=$instance['relation2'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-				if (isset($instance['relation3']))
-				{
-						$relation=$instance['relation3'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-				if (isset($instance['relation4']))
-				{
-						$relation=$instance['relation4'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-				if (isset($instance['relation5']))
-				{
-						$relation=$instance['relation5'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-				if (isset($instance['relation6']))
-				{
-						$relation=$instance['relation6'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-				if (isset($instance['relation7']))
-				{
-						$relation=$instance['relation7'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-				if (isset($instance['relation8']))
-				{
-						$relation=$instance['relation8'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-				if (isset($instance['relation9']))
-				{
-						$relation=$instance['relation9'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-				if (isset($instance['relation10']))
-				{
-						$relation=$instance['relation10'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-				if (isset($instance['relation11']))
-				{
-						$relation=$instance['relation11'][0];
-						$una_instancia['relations'][$relation['tag']]=self::FerretizeRel($relation, $metadata);
-				}
-
 				return $una_instancia;
 		}
 		
