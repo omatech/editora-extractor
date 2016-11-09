@@ -1214,9 +1214,6 @@ class EditoraSchema
                 ],
 						
 
-											
-											
-											
 								'relation12' => [
                     'type' => Type::listOf($RelationType),
                     'description' => 'The children of the instance.',
@@ -1278,6 +1275,7 @@ class EditoraSchema
                     },
                 ],
 
+											
 											
 								'relation13' => [
                     'type' => Type::listOf($RelationType),
