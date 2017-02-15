@@ -56,6 +56,7 @@ class Extractor
 				{
 						$this->debug_messages=EditoraData::$debug_messages;
 				}
+				EditoraData::reset_values();
 				
 				if ($output=='json')
 				{
