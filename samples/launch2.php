@@ -39,7 +39,7 @@ $params = [
 }';
 
 $extractor=new Extractor($conn);
-$res=$extractor->extract($query, $params);
+$res=$extractor->extract($query, $params, 'array', true);
 
 if ($params['debug'])
 {
