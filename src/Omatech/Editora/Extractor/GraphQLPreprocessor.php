@@ -35,6 +35,13 @@ class GraphQLPreprocessor {
 										{id nom_intern link class_id class_tag class_name all_values '.$top_filter_snippet.' {atri_tag text_val num_val}';
 				}
 				
+				if (isset($query['type']) && $query['type'] === 'instance_list') {
+						$graphql = '
+                query FetchGraphQuery ($ids:String, $lang:String, $debug:Boolean, $preview:Boolean) {
+                    instance_list(ids: $ids, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') 
+										{id nom_intern link class_id class_tag class_name all_values '.$top_filter_snippet.' {atri_tag text_val num_val}';
+				}
+
 				if (isset($query['type']) && $query['type'] === 'class') {
 						$graphql = '
                 query FetchGraphQuery ($class_id:Int, $debug:Boolean, $lang:String, $preview:Boolean) {
