@@ -12,7 +12,7 @@ use Omatech\Editora\Extractor\Extractor;
 $params = [
 	'class_id' => '140'
 	, 'lang' => 'ca'
-	, 'debug' => true
+	, 'debug' => false
 	, 'metadata' => true
 ];
 
