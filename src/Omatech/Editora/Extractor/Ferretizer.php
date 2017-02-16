@@ -143,8 +143,11 @@ class Ferretizer
 				{
 						foreach ($class['instances'] as $inner_inst)
 						{
-						  $tmp_inst=self::FerretizeInstance($inner_inst, $metadata);
-							if ($tmp_inst) $una_class['instances'][]=$tmp_inst;
+							if (isset($inner_inst['nom_intern']))
+							{// controlem que no sigui un element buit, apons 20170216
+						    $tmp_inst=self::FerretizeInstance($inner_inst, $metadata);
+							  if ($tmp_inst) $una_class['instances'][]=$tmp_inst;
+							}
 						}
 				}
 				return $una_class;
