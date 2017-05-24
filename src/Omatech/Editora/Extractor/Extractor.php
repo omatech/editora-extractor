@@ -44,17 +44,20 @@ class Extractor
 						
 						if (!$ferretizer_result)
 						{// en caso de error
-								print_r($result);
+								//print_r($result);
+							$extra_error_message=print_r($result, true);
+							$result=false;
 						}
 						else
 						{// todo ok, preparamos el output
-								$result=$ferretizer_result;
+							$result=$ferretizer_result;
 						}
 				}
 				
 				if ($params['debug'])
 				{
 						$this->debug_messages=EditoraData::$debug_messages;
+						$this->debug_messages.=$extra_error_message;
 				}
 				EditoraData::reset_values();
 				
