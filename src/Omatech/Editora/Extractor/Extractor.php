@@ -32,6 +32,7 @@ class Extractor
 		public function extract ($query, $params, $output='array', $ferretizer=true)
 		{// output array as "array", default or json
 				$result=GraphQL::execute(EditoraSchema::build(), $query, null, null, $params);
+				$extra_error_message='';
 				
 				if ($ferretizer)
 				{
