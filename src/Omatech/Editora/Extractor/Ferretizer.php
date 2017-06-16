@@ -167,7 +167,7 @@ class Ferretizer
 						}
 				}
 
-				if (isset($instances_list['instances']))
+				if (isset($instances_list['instances']) && count($instances_list['instances'])>0)
 				{
 						foreach ($instances_list['instances'] as $inner_inst)
 						{
