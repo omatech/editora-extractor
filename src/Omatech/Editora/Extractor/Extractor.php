@@ -41,6 +41,7 @@ class Extractor
 						{
 								$show_metadata=true;
 						}
+						print_r($result['data']);die;
 						$ferretizer_result=Ferretizer::Ferretize($result['data'], $show_metadata);
 						
 						if (!$ferretizer_result)
