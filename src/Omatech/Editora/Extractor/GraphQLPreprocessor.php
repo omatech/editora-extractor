@@ -32,7 +32,7 @@ class GraphQLPreprocessor {
 						$graphql = '
                 query FetchGraphQuery ($id:Int, $lang:String, $debug:Boolean, $preview:Boolean) {
                     instance(id: $id, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') 
-										{id nom_intern link class_id class_tag class_name all_values '.$top_filter_snippet.' {atri_tag text_val num_val}';
+										{id nom_intern link publishing_begins class_id class_tag class_name all_values '.$top_filter_snippet.' {atri_tag text_val num_val}';
 				}
 				
 				if (isset($query['type']) && $query['type'] === 'instances_list') 
@@ -40,7 +40,7 @@ class GraphQLPreprocessor {
 					$graphql = '
 					query FetchListQuery ($ids:String, $lang:String, $debug:Boolean, $preview:Boolean) {
 						instances_list(ids: $ids, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') {
-							instances{id nom_intern link class_id class_tag class_name all_values '.$top_filter_snippet.' {atri_tag text_val num_val}
+							instances{id nom_intern link publishing_begins class_id class_tag class_name all_values '.$top_filter_snippet.' {atri_tag text_val num_val}
 					}';
 				}
 
