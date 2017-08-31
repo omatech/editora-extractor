@@ -96,8 +96,12 @@ class Ferretizer {
                 } elseif (isset($attr_value['num_val']) && $attr_value['num_val'] != '') {
                     $real_value = $attr_value['num_val'];
                 }
+								else
+								{
+									$real_value=null;
+								}
                 //echo "--- Al ferretizer tag=".$attr_value['atri_tag']." value=$real_value\n";
-                if (isset($attr_value['atri_tag']) && (isset($real_value))) {
+                if (isset($attr_value['atri_tag'])) {
                     $una_instancia[$attr_value['atri_tag']] = $real_value;
                 }
             }
