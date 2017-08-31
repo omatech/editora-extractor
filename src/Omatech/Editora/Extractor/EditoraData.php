@@ -580,6 +580,181 @@ class EditoraData {
 		return $attrs;
 	}
 
+
+	static function getValuesEvenNull($id, $update_timestamp, $args, $parent_args) {// $id = inst_id 
+		// $lang = ALL | es | ca | en ...
+		// $filter = detail | resume | only-X | except-Y  | fields:fieldname1|fieldname2
+		// where 
+		// "detail" are values of attributes marked as detail='Y' in this particular class
+		// "resume"  are values of attributes marked as detail='N' in this particular class
+		// "small" are values less than 200 characters long
+		// "only-X" are values only of the attribute_type=X
+		// "except-Y"  are values excluding attribute_type=Y
+		// "thinnier-than-i" are values that is length is less than i 
+		// "bigger-than-i" are values that is length is bigger than i 
+		self::debug("EditoraData::getValuesEvenNull\n");
+		self::debug("id=$id update_timestamp=$update_timestamp\n");
+		$args = self::parse_args($args, $parent_args);
+
+		$insert_in_cache = false;
+		$memcache_key = self::$conn->getDatabase() . ':' . $id . ':' . serialize($args);
+		self::debug("MEMCACHE:: using key $memcache_key instance update_timestamp=$update_timestamp\n");
+		if (!self::$preview) {// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
+			if (self::setupCache()) {
+				$memcache_value = self::$mc->get($memcache_key);
+				if ($memcache_value) {// existe, retornamos directamente si la info esta actualizada
+					self::debug(self::$type_of_cache . ":: instance last updated at $update_timestamp !!!!\n");
+					self::debug(self::$type_of_cache . ":: value for key $memcache_key\n");
+					self::debug(print_r($memcache_value, true));
+					if (isset($memcache_value['cache_timestamp'])) {// tenim el timestamp a l'objecte
+						if ($update_timestamp < $memcache_value['cache_timestamp']) {// l'objecte es fresc, el retornem
+							$memcache_value['cache_timestamp'] = time();
+							$memcache_value['cache_status'] = 'hit';
+							self::debug(self::$type_of_cache . ":: HIT lo renovamos!!!\n");
+							self::setCache($memcache_key, $memcache_value);
+							return $memcache_value;
+						} else {// no es fresc, l'esborrem i donem ordres de refrescar-lo												
+							self::debug(self::$type_of_cache . ":: purgamos el objeto ya que $update_timestamp es mayor o igual a " . $memcache_value['cache_timestamp'] . "\n");
+							self::$mc->delete($memcache_key);
+							$insert_in_cache = true;
+						}
+					} else {// no te el format correcte, l'expirem
+						self::debug(self::$type_of_cache . ":: purgamos el objeto ya que no tiene cache_timestamp\n");
+						self::$mc->delete($memcache_key);
+						$insert_in_cache = true;
+					}
+				} else {// no lo tenemos lo insertamos al final
+					$insert_in_cache = true;
+				}
+			}
+		}
+
+		$filter = 'all';
+		if (isset($args['filter']))
+			$filter = $args['filter'];
+
+		//echo $filter;die;
+		$add_sql = '';
+		if ($filter == 'detail') {
+			$add_sql = "
+						and ca.detail='Y'
+						";
+		}
+		if ($filter == 'resume') {
+			$add_sql = "
+						and ca.detail='N'
+						";
+		}
+		if (substr($filter, 0, 5) == 'only-') {
+			$add_sql = "
+						and a.type='" . substr($filter, 5) . "'
+						";
+		}
+		if (substr($filter, 0, 7) == 'except-') {
+			$add_sql = "
+						and a.type!='" . substr($filter, 7) . "'
+						";
+		}
+
+		if (substr($filter, 0, 7) == 'fields:') {
+			$field_list_str = substr($filter, 7);
+			$fields_arr = explode('|', $field_list_str);
+
+			$add_sql = "
+						and a.tag in ('" . implode("','", $fields_arr) . "')
+						";
+		}
+
+
+
+		$sql = "select a.name atri_name, a.tag atri_tag, a.type atri_type, a.language atri_language, ca.detail is_detail, i.update_date, ifnull(unix_timestamp(i.update_date),0) update_timestamp 
+				from omp_attributes a
+				, omp_class_attributes ca
+				, omp_instances i
+				where i.id=$id
+				and a.language in ('ALL', '" . self::$lang . "')
+				and i.class_id=ca.class_id
+				and a.id=ca.atri_id
+				$add_sql
+				";
+		self::debug($sql);
+		//$attrs=Model::get_data($sql);
+
+		$attrs = self::$conn->fetchAll($sql);
+		foreach ($attrs as $attr_key => $attr_val) {
+			if (is_array($attr_val)) {
+				$value_row_or_null_array=$this->get_value_row_or_null_array($attrs['inst_id'], $attrs['atri_id']);
+				$attrs[$attr_key]['id']=$value_row_or_null_array['id'];
+				$attrs[$attr_key]['text_val']=$value_row_or_null_array['text_val'];
+				$attrs[$attr_key]['num_val']=$value_row_or_null_array['num_val'];
+				$attrs[$attr_key]['date_val']=$value_row_or_null_array['date_val'];
+				$attrs[$attr_key]['img_info']=$value_row_or_null_array['img_info'];
+				
+				foreach ($attr_val as $subkey => $subval) {// apliquem la transformació per canviar nls a brs
+					//echo "key=$attr_key subkey=$subkey val=$subval\n";
+					
+					if ($subkey == 'atri_type') 
+					{// casos especials depenent del atri_type
+						if ($subval == 'A') {
+							$attrs[$attr_key]['text_val'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $attrs[$attr_key]['text_val']);
+						}
+						if ($subval == 'L') {
+							$attrs[$attr_key]['text_val'] = self::get_lookup_value($attrs[$attr_key]['num_val']);
+						}
+						if ($subval == 'D') {
+							$attrs[$attr_key]['text_val'] = $attrs[$attr_key]['date_val'];
+						}
+						if (($subval == 'F' || $subval == 'I') && substr($attrs[$attr_key]['text_val'], 0, 8) == 'uploads/') {// Backwards compatibility with editoras that save uploads/ instead of /uploads/
+							$attrs[$attr_key]['text_val'] = '/' . $attrs[$attr_key]['text_val'];
+						}
+					}
+					/*
+					  if ($subkey=='text_val' && $subval!='')
+					  {
+					  if ($attrs[$attr_key]['atri_type']!='T' && $attrs[$attr_key]['atri_type']!='K')
+					  {
+					  $attrs[$attr_key][$subkey]=str_replace(array("\r\n", "\r", "\n"), "<br />", $subval);
+					  }
+					  }
+
+					 */
+				}
+			}
+		}
+
+		if ($insert_in_cache) {
+			$attrs['cache_timestamp'] = time();
+			$attrs['cache_status'] = 'miss';
+			$attrs['args'] = $args;
+
+			self::debug(self::$type_of_cache . ":: insertamos el objeto $memcache_key \n");
+			self::debug($attrs);
+			self::setCache($memcache_key, $attrs);
+		}
+		return $attrs;
+	}
+	
+	function get_value_row_or_null_array($inst_id, $atri_id)
+	{
+		$sql="select *
+			from omp_values
+			where inst_id=$inst_id
+			and atri_id=$atri_id
+			limit 1
+			";
+		self::debug($sql);	
+		$values = self::$conn->fetchAssoc($sql);
+		if (!$values)
+		{
+			$values['id']=null;
+			$values['text_val']=null;
+			$values['date_val']=null;
+			$values['num_val']=null;
+			$values['img_info']=null;
+		}
+		return $values;
+	}
+
 	static function getRelations($inst_id, $class_id, $args, $parent_args) {// $inst_id = inst_id 
 		// $args is an array with
 		// lang = ALL | es | ca | en ...

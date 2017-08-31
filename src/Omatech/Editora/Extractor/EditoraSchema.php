@@ -494,7 +494,7 @@ class EditoraSchema
                     'args' => [
                         'filter' => [
                             'name' => 'filter',
-                            'description' => 'filter some fields all|detail|resume default all',
+                            'description' => 'filter some fields all|detail|resume|only-X|except-Y|small|thinnier-than-X|bigger-than-Y|fields:fieldname1|fieldname2 default all',
                             'type' => Type::String()
                         ],
                         'lang' => [
@@ -516,6 +516,41 @@ class EditoraSchema
 												if (isset($instance) && isset($instance['id']) && isset($instance['update_timestamp']) && isset($instance['args']))
 												{
 											    $attrs=EditoraData::getValues($instance['id'], $instance['update_timestamp'], $args, $instance['args']);	
+												  //print_r($attrs);
+												
+												  if ($attrs) return $attrs;
+												}
+												return null;
+                    },
+                ],
+                'all_values_even_null' => [
+                    'type' => Type::listOf($ValueType),
+                    'description' => 'The attributes of the instance.',
+                    'args' => [
+                        'filter' => [
+                            'name' => 'filter',
+                            'description' => 'filter some fields all|detail|resume|only-X|except-Y|fields:fieldname1|fieldname2 default all',
+                            'type' => Type::String()
+                        ],
+                        'lang' => [
+                            'name' => 'lang',
+                            'description' => 'Language of the extraction',
+                            'type' => Type::String()
+                        ],
+                        'debug' => [
+                            'name' => 'debug',
+                            'description' => 'Sets the debug flag if true',
+                            'type' => Type::boolean()
+                        ],
+
+                    ],
+                    'resolve' => function ($instance, $args) {
+												//print_r($args);
+												//echo "Instance in EditoraSchema vaig a treure els values\n";
+												//print_r($instance);
+												if (isset($instance) && isset($instance['id']) && isset($instance['update_timestamp']) && isset($instance['args']))
+												{
+											    $attrs=EditoraData::getValuesEvenNull($instance['id'], $instance['update_timestamp'], $args, $instance['args']);	
 												  //print_r($attrs);
 												
 												  if ($attrs) return $attrs;
