@@ -683,7 +683,7 @@ class EditoraData {
 		$attrs = self::$conn->fetchAll($sql);
 		foreach ($attrs as $attr_key => $attr_val) {
 			if (is_array($attr_val)) {
-				$value_row_or_null_array=$this->get_value_row_or_null_array($attrs['inst_id'], $attrs['atri_id']);
+				$value_row_or_null_array=self::get_value_row_or_null_array($attrs['inst_id'], $attrs['atri_id']);
 				$attrs[$attr_key]['id']=$value_row_or_null_array['id'];
 				$attrs[$attr_key]['text_val']=$value_row_or_null_array['text_val'];
 				$attrs[$attr_key]['num_val']=$value_row_or_null_array['num_val'];
