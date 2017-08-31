@@ -86,6 +86,22 @@ class Ferretizer {
                 }
             }
         }
+				
+				
+        if (isset($instance['all_values_even_null'])) {
+            $real_value='';
+            foreach ($instance['all_values'] as $attr_key => $attr_value) {
+                if (isset($attr_value['text_val']) && $attr_value['text_val'] != '') {
+                    $real_value = $attr_value['text_val'];
+                } elseif (isset($attr_value['num_val']) && $attr_value['num_val'] != '') {
+                    $real_value = $attr_value['num_val'];
+                }
+                //echo "--- Al ferretizer tag=".$attr_value['atri_tag']." value=$real_value\n";
+                if (isset($attr_value['atri_tag']) && (isset($real_value))) {
+                    $una_instancia[$attr_value['atri_tag']] = $real_value;
+                }
+            }
+        }
 
         foreach (range(1, 50) as $i) {
             if (isset($instance["relation$i"])) {
