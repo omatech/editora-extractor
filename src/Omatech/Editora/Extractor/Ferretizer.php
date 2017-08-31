@@ -90,7 +90,7 @@ class Ferretizer {
 				
         if (isset($instance['all_values_even_null'])) {
             $real_value='';
-            foreach ($instance['all_values'] as $attr_key => $attr_value) {
+            foreach ($instance['all_values_even_null'] as $attr_key => $attr_value) {
                 if (isset($attr_value['text_val']) && $attr_value['text_val'] != '') {
                     $real_value = $attr_value['text_val'];
                 } elseif (isset($attr_value['num_val']) && $attr_value['num_val'] != '') {
