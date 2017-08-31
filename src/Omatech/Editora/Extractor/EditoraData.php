@@ -667,7 +667,7 @@ class EditoraData {
 
 
 
-		$sql = "select a.name atri_name, a.tag atri_tag, a.type atri_type, a.language atri_language, ca.detail is_detail, i.update_date, ifnull(unix_timestamp(i.update_date),0) update_timestamp 
+		$sql = "select i.id inst_id, a.id atri_id, a.name atri_name, a.tag atri_tag, a.type atri_type, a.language atri_language, ca.detail is_detail, i.update_date, ifnull(unix_timestamp(i.update_date),0) update_timestamp 
 				from omp_attributes a
 				, omp_class_attributes ca
 				, omp_instances i
