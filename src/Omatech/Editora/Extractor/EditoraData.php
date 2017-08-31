@@ -587,11 +587,8 @@ class EditoraData {
 		// where 
 		// "detail" are values of attributes marked as detail='Y' in this particular class
 		// "resume"  are values of attributes marked as detail='N' in this particular class
-		// "small" are values less than 200 characters long
 		// "only-X" are values only of the attribute_type=X
 		// "except-Y"  are values excluding attribute_type=Y
-		// "thinnier-than-i" are values that is length is less than i 
-		// "bigger-than-i" are values that is length is bigger than i 
 		self::debug("EditoraData::getValuesEvenNull\n");
 		self::debug("id=$id update_timestamp=$update_timestamp\n");
 		$args = self::parse_args($args, $parent_args);
