@@ -76,8 +76,8 @@ $params = [
             ]
         ];
 
-				echo \Omatech\Editora\Extractor\GraphQLPreprocessor::generate($query, true);	
-				die;
+				$query=\Omatech\Editora\Extractor\GraphQLPreprocessor::generate($query, true);	
+	
 
 $extractor=new Extractor($conn);
 $res=$extractor->extract($query, $params, 'array', true);
