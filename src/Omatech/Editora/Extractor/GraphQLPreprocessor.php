@@ -7,7 +7,7 @@ class GraphQLPreprocessor {
 		private static function get_filter_snippet ($array)
 		{
 				$graphql = ' (filter: "fields:';
-				foreach ($array as $key => $value) {
+				foreach ($array as $key => $value) { 
 						$graphql .= $value . '|';
 				}
 				$graphql = substr($graphql, 0, -1);
