@@ -15,8 +15,16 @@ class GraphQLPreprocessor {
 				return $graphql;
 		}
 		
-		public static function generate($query, $end = true, $counter = 1) {
+		public static function generate($query, $extract_null_values=false, $end = true, $counter = 1) {
 				$graphql = $top_args = $top_filter_snippet= "";
+				if ($extract_null_values)
+				{
+					$all_values='all_values_even_null';
+				}
+				else
+				{
+					$all_values='all_values';
+				}
 
 				if (isset($query['top_args'])) {
 						$top_args = $query['top_args'];
@@ -32,7 +40,7 @@ class GraphQLPreprocessor {
 						$graphql = '
                 query FetchGraphQuery ($id:Int, $lang:String, $debug:Boolean, $preview:Boolean) {
                     instance(id: $id, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') 
-										{id nom_intern link publishing_begins class_id class_tag class_name all_values '.$top_filter_snippet.' {atri_tag text_val num_val}';
+										{id nom_intern link publishing_begins class_id class_tag class_name '.$all_values.' '.$top_filter_snippet.' {atri_tag text_val num_val}';
 				}
 				
 				if (isset($query['type']) && $query['type'] === 'instances_list') 
@@ -40,7 +48,7 @@ class GraphQLPreprocessor {
 					$graphql = '
 					query FetchListQuery ($ids:String, $lang:String, $debug:Boolean, $preview:Boolean) {
 						instances_list(ids: $ids, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') {
-							instances{id nom_intern link publishing_begins class_id class_tag class_name all_values '.$top_filter_snippet.' {atri_tag text_val num_val}
+							instances{id nom_intern link publishing_begins class_id class_tag class_name '.$all_values.' '.$top_filter_snippet.' {atri_tag text_val num_val}
 					}';
 				}
 
@@ -53,7 +61,7 @@ class GraphQLPreprocessor {
 										  class_id tag
 											instances {
 													id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-													all_values  '.$top_filter_snippet.' {atri_tag text_val num_val}
+													'.$all_values.'  '.$top_filter_snippet.' {atri_tag text_val num_val}
 								';
 				}
 				
@@ -65,7 +73,7 @@ class GraphQLPreprocessor {
 										  class_id tag
 											instances {
 													id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-													all_values  '.$top_filter_snippet.'  {atri_tag text_val num_val}
+													'.$all_values.'  '.$top_filter_snippet.'  {atri_tag text_val num_val}
 								';
 				}
 
@@ -90,7 +98,7 @@ class GraphQLPreprocessor {
 								}
 
 								$graphql .= ') {id tag direction limit
-                                instances {id nom_intern link class_id class_tag class_name update_timestamp all_values';
+                                instances {id nom_intern link class_id class_tag class_name update_timestamp '.$all_values;
 								
 								if (isset($query['relations'][$key]['filters'])) 
 								{
@@ -98,7 +106,7 @@ class GraphQLPreprocessor {
 								}
 								
 								$graphql .= ' {atri_tag text_val num_val}';
-								$graphql .= self::generate($value, false, 1);
+								$graphql .= self::generate($value, $extract_null_values, false, 1);
 								$graphql .= '}';
 						}
 				}
