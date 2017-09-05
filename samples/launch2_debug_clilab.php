@@ -94,11 +94,3 @@ if ($res)
 		print_r($res);
 }
 
-foreach ($res['instances'] as $element)
-{
-		if (isset($element['title']))
-		{
-		  echo $element['title']."\n";
-		}
-}
-

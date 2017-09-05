@@ -731,7 +731,7 @@ class EditoraData {
 		return $attrs;
 	}
 	
-	function get_value_row_or_null_array($inst_id, $atri_id)
+	static function get_value_row_or_null_array($inst_id, $atri_id)
 	{
 		$sql="select *
 			from omp_values
