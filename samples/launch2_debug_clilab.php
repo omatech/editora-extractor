@@ -10,7 +10,7 @@ require_once __DIR__.'/../conf/bootstrap.php';
 use Omatech\Editora\Extractor\Extractor;
 
 $params = [
-	'class_id' => '1'
+	'inst_id' => '1'
 	, 'lang' => 'ca'
 	, 'debug' => true
 	, 'metadata' => true
