@@ -82,7 +82,7 @@ $params = [
 	'id' => '2'
 	, 'lang' => 'ca'
 	, 'debug' => true
-	, 'metadata' => true
+	, 'metadata' => false
 ];
 
 $query = [
