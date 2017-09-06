@@ -9,6 +9,19 @@ require_once __DIR__.'/../conf/bootstrap.php';
 
 use Omatech\Editora\Extractor\Extractor;
 
+$params = [
+	'class_id' => '14'
+	, 'lang' => 'ca'
+	, 'debug' => false
+	, 'metadata' => true
+];
+
+$query = [
+            "type" => "class",
+//            "args" => ['order_direction' => 'desc', 'limit' => 3],
+            "top_args" => ',order_direction: "desc",limit:4'
+        ];
+
 /*
 $params = [
 	'id' => '1'
@@ -78,6 +91,7 @@ $query = [
         ];
 */
 
+/*
 $params = [
 	'id' => '2'
 	, 'lang' => 'ca'
@@ -98,6 +112,8 @@ $query = [
         ]]
     ]
 ];
+
+*/
 
 				$query=\Omatech\Editora\Extractor\GraphQLPreprocessor::generate($query, true);	
 	
