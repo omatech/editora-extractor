@@ -9,6 +9,7 @@ require_once __DIR__.'/../conf/bootstrap.php';
 
 use Omatech\Editora\Extractor\Extractor;
 
+/*
 $params = [
 	'id' => '1'
 	, 'lang' => 'ca'
@@ -75,7 +76,28 @@ $query = [
                 'Home_paginas' => ['limit' => 1]
             ]
         ];
+*/
 
+$params = [
+	'id' => '2'
+	, 'lang' => 'ca'
+	, 'debug' => true
+	, 'metadata' => true
+];
+
+$query = [
+    "type"      => "instance",
+    "relations" => [
+        "globals_icona",
+        "global_portal" => ["relations" => [
+            "portal_subseccio" => [
+                "relations" => [
+                    "Subseccio_paginaSubSeccio" =>["limit" => 1]
+                ]
+                ,"limit" => 1]
+        ]]
+    ]
+];
 
 				$query=\Omatech\Editora\Extractor\GraphQLPreprocessor::generate($query, true);	
 	
