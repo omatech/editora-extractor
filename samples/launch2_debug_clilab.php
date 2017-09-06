@@ -81,8 +81,8 @@ $query = [
 $params = [
 	'id' => '2'
 	, 'lang' => 'ca'
-	, 'debug' => true
-	, 'metadata' => false
+	, 'debug' => false
+	, 'metadata' => true
 ];
 
 $query = [
