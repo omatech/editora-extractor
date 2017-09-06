@@ -17,7 +17,7 @@ $params = [
 ];
 
 
-        $query = [
+$query = [
             "type"      => "instance",
             "relations" => [
                 'Home_blocs'=> [
@@ -75,6 +75,7 @@ $params = [
                 'Home_paginas' => ['limit' => 1]
             ]
         ];
+
 
 				$query=\Omatech\Editora\Extractor\GraphQLPreprocessor::generate($query, true);	
 	
