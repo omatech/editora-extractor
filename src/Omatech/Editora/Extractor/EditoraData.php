@@ -437,26 +437,20 @@ class EditoraData {
 		$memcache_key = self::$conn->getDatabase() . ':' . $id . ':' . serialize($args);
 		self::debug("MEMCACHE:: using key $memcache_key instance update_timestamp=$update_timestamp\n");
 		if (!self::$preview) {// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
-			self::debug("MEMCACHE:: Preview false\n");
 			if (self::setupCache()) {
-				self::debug("MEMCACHE:: setupCache true\n");
 				$memcache_value = self::$mc->get($memcache_key);
 				if ($memcache_value) {// existe, retornamos directamente si la info esta actualizada
-					self::debug("MEMCACHE:: value not empty\n");
 					self::debug(self::$type_of_cache . ":: instance last updated at $update_timestamp !!!!\n");
 					self::debug(self::$type_of_cache . ":: value for key $memcache_key\n");
 					self::debug(print_r($memcache_value, true));
 					if (isset($memcache_value['cache_timestamp'])) {// tenim el timestamp a l'objecte
-						self::debug("MEMCACHE:: cache_timestamp not empty\n");
 						if ($update_timestamp < $memcache_value['cache_timestamp']) {// l'objecte es fresc, el retornem
-							self::debug("MEMCACHE:: update_timestamp < cache_timestamp\n");
 							$memcache_value['cache_timestamp'] = time();
 							$memcache_value['cache_status'] = 'hit';
 							self::debug(self::$type_of_cache . ":: HIT lo renovamos!!!\n");
 							self::setCache($memcache_key, $memcache_value);
 							return $memcache_value;
-						} else {// no es fresc, l'esborrem i donem ordres de refrescar-lo	
-							self::debug("MEMCACHE:: update_timestamp >= cache_timestamp\n");
+						} else {// no es fresc, l'esborrem i donem ordres de refrescar-lo												
 							self::debug(self::$type_of_cache . ":: purgamos el objeto ya que $update_timestamp es mayor o igual a " . $memcache_value['cache_timestamp'] . "\n");
 							self::$mc->delete($memcache_key);
 							$insert_in_cache = true;
@@ -467,8 +461,7 @@ class EditoraData {
 						$insert_in_cache = true;
 					}
 				} else {// no lo tenemos lo insertamos al final
-						self::debug("MEMCACHE:: no lo tenemos, insertaremos al final\n");
-						$insert_in_cache = true;
+					$insert_in_cache = true;
 				}
 			}
 		}
