@@ -322,7 +322,8 @@ class EditoraData {
 		return $row;
 	}
 
-	static function getClass($args, $parent_args = false) {// $class_id = ID of the class
+	static function getClass($args, $parent_args = false) {
+		// $class_id = ID of the class
 		// $tag = Tag of the class
 		// NOTE: you must specify tag or id of the class mandatory-li
 		// $lang = ALL | es | ca | en ...
