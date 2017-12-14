@@ -763,6 +763,7 @@ class EditoraData {
 				";
 				self::debug($sql);	
 				$lookup_id = self::$conn->fetchColumn($sql);
+				$values['id']=-1;
 				$values['num_val']=$lookup_id;
 			}
 		}
