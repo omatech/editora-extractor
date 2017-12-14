@@ -30,14 +30,14 @@ $params = [
  $query='query FetchHomeQuery ($id:Int, $lang:String, $debug:Boolean) {
   instance(id: $id, lang: $lang, debug: $debug) {
 		id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-    all_values (filter: "small") {atri_tag text_val}
+    all_values_even_null (filter: "small") {atri_tag text_val}
 		
     relation1 (tag: "carrousel", limit:2, alias: "mycarrousel")
 		{
 		  id tag direction limit
 			instances {
 				id nom_intern link publishing_begins status creation_date class_name class_tag class_id update_timestamp
-				all_values (filter: "fields:title|subtitle_t") {atri_tag text_val}
+				all_values_even_null (filter: "fields:title|subtitle_t") {atri_tag text_val}
 			}
 		}
 		
@@ -46,7 +46,7 @@ $params = [
 		  id tag direction limit
 			instances {
 			  id nom_intern link
-				all_values (filter: "small") {atri_tag, text_val}
+				all_values_even_null (filter: "small") {atri_tag, text_val}
 			}
 		}
 
@@ -55,7 +55,7 @@ $params = [
 		  id tag direction limit
 			instances {
 			  id nom_intern link publishing_begins status creation_date
-				all_values {atri_tag text_val}
+				all_values_even_null {atri_tag text_val}
 			}
 		}
   }
