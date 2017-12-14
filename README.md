@@ -18,7 +18,9 @@ You need a valid connection to an editora database using Doctrine/DBAL
 
 ### Instance
 
-Get the instance information with the needed relations
+Get the instance information with the needed relations.
+
+For example fetch the inst_id=1 (Home) and get the relations called "carrousel", "news" and "people".
 
 $params = [
 	'id' => '1'
@@ -63,6 +65,7 @@ $params = [
 
 $extractor=new Extractor($conn);
 $res=$extractor->extract($query, $params, 'array', false);
+// $res now contains an array with the tree of the content
 
 ### Call to extractor
 
