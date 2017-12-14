@@ -748,7 +748,7 @@ class EditoraData {
 			$values['date_val']=null;
 			$values['num_val']=null;
 			$values['img_info']=null;						
-			if ($type=='L')
+/*			if ($type=='L')
 			{
 				$sql="SELECT lv.id 
 				FROM omp_lookups_values lv
@@ -766,6 +766,8 @@ class EditoraData {
 				$values['id']=-1;
 				$values['num_val']=$lookup_id;
 			}
+ * 
+ */
 		}
 		return $values;
 	}
