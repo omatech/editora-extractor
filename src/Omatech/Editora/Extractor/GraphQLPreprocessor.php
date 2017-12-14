@@ -49,7 +49,7 @@ class GraphQLPreprocessor {
 					query FetchListQuery ($ids:String, $lang:String, $debug:Boolean, $preview:Boolean) {
 						instances_list(ids: $ids, lang: $lang, debug: $debug, preview: $preview' . $top_args . ') {
 							instances{id nom_intern link publishing_begins class_id class_tag class_name '.$all_values.' '.$top_filter_snippet.' {atri_tag text_val num_val}
-					}';
+					';
 				}
 
 
@@ -113,7 +113,7 @@ class GraphQLPreprocessor {
 
 				$graphql .= "\n}";
 
-				if (isset($query['type']) && ($query['type'] === 'class' || $query['type'] === 'search'))
+				if (isset($query['type']) && ($query['type'] === 'class' || $query['type'] === 'search'|| $query['type'] === 'instances_list'))
 				{// close extra bracket in case of class or search
 						$graphql .= "\n}";
 				}
