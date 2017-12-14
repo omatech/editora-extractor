@@ -680,7 +680,7 @@ class EditoraData {
 		$attrs = self::$conn->fetchAll($sql);
 		foreach ($attrs as $attr_key => $attr_val) {
 			if (is_array($attr_val)) {
-				$value_row_or_null_array=self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id']);
+				$value_row_or_null_array=self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);
 				$attrs[$attr_key]['id']=$value_row_or_null_array['id'];
 				$attrs[$attr_key]['text_val']=$value_row_or_null_array['text_val'];
 				$attrs[$attr_key]['num_val']=$value_row_or_null_array['num_val'];
@@ -731,7 +731,7 @@ class EditoraData {
 		return $attrs;
 	}
 	
-	static function get_value_row_or_null_array($inst_id, $atri_id)
+	static function get_value_row_or_null_array($inst_id, $atri_id, $type)
 	{
 		$sql="select *
 			from omp_values
@@ -747,7 +747,24 @@ class EditoraData {
 			$values['text_val']=null;
 			$values['date_val']=null;
 			$values['num_val']=null;
-			$values['img_info']=null;
+			$values['img_info']=null;						
+			if ($type=='L')
+			{
+				$sql="SELECT lv.id 
+				FROM omp_lookups_values lv
+				, omp_lookups l
+				, omp_attributes a
+				where a.id=$atri_id
+				and a.lookup_id=l.id
+				and a.type='L'
+				and l.id=lv.lookup_id
+				order by lv.ordre
+				limit 1
+				";
+				self::debug($sql);	
+				$lookup_id = self::$conn->fetchColumn($sql);
+				$values['num_val']=$lookup_id;
+			}
 		}
 		return $values;
 	}
