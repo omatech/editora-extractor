@@ -581,7 +581,6 @@ class EditoraData {
 		return $attrs;
 	}
 
-
 	static function getValuesEvenNull($id, $update_timestamp, $args, $parent_args) {// $id = inst_id 
 		// $lang = ALL | es | ca | en ...
 		// $filter = detail | resume | only-X | except-Y  | fields:fieldname1|fieldname2
@@ -682,44 +681,31 @@ class EditoraData {
 		$attrs = self::$conn->fetchAll($sql);
 		foreach ($attrs as $attr_key => $attr_val) {
 			if (is_array($attr_val)) {
-				$value_row_or_null_array=self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);
-				if (!array_key_exists($attr_key, $attrs) || (isset($attrs[$attr_key]['id']) && $attrs[$attr_key]['id']==null))
-				{// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
-					$attrs[$attr_key]['id']=$value_row_or_null_array['id'];
-					$attrs[$attr_key]['text_val']=$value_row_or_null_array['text_val'];
-					$attrs[$attr_key]['num_val']=$value_row_or_null_array['num_val'];
-					$attrs[$attr_key]['date_val']=$value_row_or_null_array['date_val'];
-					$attrs[$attr_key]['img_info']=$value_row_or_null_array['img_info'];
-				}
-				
-				foreach ($attr_val as $subkey => $subval) {// apliquem la transformació per canviar nls a brs
-					//echo "key=$attr_key subkey=$subkey val=$subval\n";
-					
-					if ($subkey == 'atri_type') 
-					{// casos especials depenent del atri_type
-						if ($subval == 'A') {
-							$attrs[$attr_key]['text_val'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $attrs[$attr_key]['text_val']);
-						}
-						if ($subval == 'L') {
-							$attrs[$attr_key]['text_val'] = self::get_lookup_value($attrs[$attr_key]['num_val']);
-						}
-						if ($subval == 'D') {
-							$attrs[$attr_key]['text_val'] = $attrs[$attr_key]['date_val'];
-						}
-						if (($subval == 'F' || $subval == 'I') && substr($attrs[$attr_key]['text_val'], 0, 8) == 'uploads/') {// Backwards compatibility with editoras that save uploads/ instead of /uploads/
-							$attrs[$attr_key]['text_val'] = '/' . $attrs[$attr_key]['text_val'];
+				$value_row_or_null_array = self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);
+				if (!array_key_exists($attr_key, $attrs) || (isset($attrs[$attr_key]['id']) && $attrs[$attr_key]['id'] == null)) {// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
+					$attrs[$attr_key]['id'] = $value_row_or_null_array['id'];
+					$attrs[$attr_key]['text_val'] = $value_row_or_null_array['text_val'];
+					$attrs[$attr_key]['num_val'] = $value_row_or_null_array['num_val'];
+					$attrs[$attr_key]['date_val'] = $value_row_or_null_array['date_val'];
+					$attrs[$attr_key]['img_info'] = $value_row_or_null_array['img_info'];
+
+					foreach ($attr_val as $subkey => $subval) {// apliquem la transformació per canviar nls a brs
+						//echo "key=$attr_key subkey=$subkey val=$subval\n";
+						if ($subkey == 'atri_type') {// casos especials depenent del atri_type
+							if ($subval == 'A') {
+								$attrs[$attr_key]['text_val'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $attrs[$attr_key]['text_val']);
+							}
+							if ($subval == 'L') {
+								$attrs[$attr_key]['text_val'] = self::get_lookup_value($attrs[$attr_key]['num_val']);
+							}
+							if ($subval == 'D') {
+								$attrs[$attr_key]['text_val'] = $attrs[$attr_key]['date_val'];
+							}
+							if (($subval == 'F' || $subval == 'I') && substr($attrs[$attr_key]['text_val'], 0, 8) == 'uploads/') {// Backwards compatibility with editoras that save uploads/ instead of /uploads/
+								$attrs[$attr_key]['text_val'] = '/' . $attrs[$attr_key]['text_val'];
+							}
 						}
 					}
-					/*
-					  if ($subkey=='text_val' && $subval!='')
-					  {
-					  if ($attrs[$attr_key]['atri_type']!='T' && $attrs[$attr_key]['atri_type']!='K')
-					  {
-					  $attrs[$attr_key][$subkey]=str_replace(array("\r\n", "\r", "\n"), "<br />", $subval);
-					  }
-					  }
-
-					 */
 				}
 			}
 		}
@@ -735,27 +721,24 @@ class EditoraData {
 		}
 		return $attrs;
 	}
-	
-	static function get_value_row_or_null_array($inst_id, $atri_id, $type)
-	{
-		$sql="select *
+
+	static function get_value_row_or_null_array($inst_id, $atri_id, $type) {
+		$sql = "select *
 			from omp_values
 			where inst_id=$inst_id
 			and atri_id=$atri_id
 			limit 1
 			";
-		self::debug($sql);	
+		self::debug($sql);
 		$values = self::$conn->fetchAssoc($sql);
-		if (!$values)
-		{
-			$values['id']=null;
-			$values['text_val']=null;
-			$values['date_val']=null;
-			$values['num_val']=null;
-			$values['img_info']=null;						
-			if ($type=='L')
-			{
-				$sql="SELECT lv.id 
+		if (!$values) {
+			$values['id'] = null;
+			$values['text_val'] = null;
+			$values['date_val'] = null;
+			$values['num_val'] = null;
+			$values['img_info'] = null;
+			if ($type == 'L') {
+				$sql = "SELECT lv.id 
 				FROM omp_lookups_values lv
 				, omp_lookups l
 				, omp_attributes a
@@ -766,10 +749,10 @@ class EditoraData {
 				order by lv.ordre
 				limit 1
 				";
-				self::debug($sql);	
+				self::debug($sql);
 				$lookup_id = self::$conn->fetchColumn($sql);
-				$values['id']=-1;
-				$values['num_val']=$lookup_id;
+				$values['id'] = -1;
+				$values['num_val'] = $lookup_id;
 			}
 		}
 		return $values;
