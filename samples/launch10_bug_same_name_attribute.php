@@ -20,7 +20,7 @@ $params = [
 
 $magic = [
     "type"      => "instance"
-]
+];
 	/*
 $params = [
     'id'       => 441,
