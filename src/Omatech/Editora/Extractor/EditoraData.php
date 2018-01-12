@@ -685,12 +685,14 @@ class EditoraData {
 				
 				echo '!!! atri_id='.$attrs[$attr_key]['atri_id'].' amb tag '.$attrs[$attr_key]['atri_tag'].' amb valor '.$value_row_or_null_array['text_val']."\n";
 				
-				if (!array_key_exists($attr_key, $attrs) || (isset($attrs[$attr_key]['id']) && $attrs[$attr_key]['id'] == null)) {// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
+				if (!isset($attrs[$attr_key]['atri_tag']) || (isset($attrs[$attr_key]['atri_tag'])) && $attrs[$attr_key]['atri_tag']==null)
+				{// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
 					$attrs[$attr_key]['id'] = $value_row_or_null_array['id'];
 					$attrs[$attr_key]['text_val'] = $value_row_or_null_array['text_val'];
 					$attrs[$attr_key]['num_val'] = $value_row_or_null_array['num_val'];
 					$attrs[$attr_key]['date_val'] = $value_row_or_null_array['date_val'];
 					$attrs[$attr_key]['img_info'] = $value_row_or_null_array['img_info'];
+					$attrs[$attr_key]['tag'] = $attrs[$attr_key]['atri_tag'];
 
 					foreach ($attr_val as $subkey => $subval) {// apliquem la transformació per canviar nls a brs
 						//echo "key=$attr_key subkey=$subkey val=$subval\n";
