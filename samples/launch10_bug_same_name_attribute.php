@@ -10,8 +10,18 @@ require_once __DIR__.'/../conf/bootstrap.php';
 use Omatech\Editora\Extractor\Extractor;
 use Omatech\Editora\Extractor\GraphQLPreprocessor;
 
+$params = [
+    'id'       => 480,
+    'preview'  => true,
+    'lang'  => 'en',
+    'metadata'  => true,
+    'debug'    => true
+];
 
-
+$magic = [
+    "type"      => "instance"
+]
+	/*
 $params = [
     'id'       => 441,
     'preview'  => true,
@@ -76,7 +86,7 @@ $magic = [
     ]
 ];
 
-
+*/
 
 $query=GraphQLPreprocessor::generate($magic, true);
 echo $query;
