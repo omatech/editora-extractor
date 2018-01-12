@@ -683,7 +683,7 @@ class EditoraData {
 		foreach ($attrs as $attr_key => $attr_val) {
 			if (is_array($attr_val)) {
 				$value_row_or_null_array=self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);
-				if (!array_key_exists($attr_key, $attrs) || $attrs[$attr_key]['id']==null)
+				if (!array_key_exists($attr_key, $attrs) || (isset($attrs[$attr_key]['id']) && $attrs[$attr_key]['id']==null))
 				{// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
 					$attrs[$attr_key]['id']=$value_row_or_null_array['id'];
 					$attrs[$attr_key]['text_val']=$value_row_or_null_array['text_val'];
