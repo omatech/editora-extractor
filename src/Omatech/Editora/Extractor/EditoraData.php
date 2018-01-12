@@ -685,7 +685,7 @@ class EditoraData {
 				
 				echo '!!! atri_id='.$attrs[$attr_key]['atri_id'].' amb tag '.$attrs[$attr_key]['atri_tag'].' amb valor '.$value_row_or_null_array['text_val']."\n";
 				
-				if (!isset($attrs[$attr_key]['atri_tag']) || (isset($attrs[$attr_key]['atri_tag'])) && $attrs[$attr_key]['atri_tag']==null)
+				if (!isset($attrs[$attr_key]['tag']) || (isset($attrs[$attr_key]['tag'])) && $attrs[$attr_key]['tag']==null)
 				{// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
 					$attrs[$attr_key]['id'] = $value_row_or_null_array['id'];
 					$attrs[$attr_key]['text_val'] = $value_row_or_null_array['text_val'];
