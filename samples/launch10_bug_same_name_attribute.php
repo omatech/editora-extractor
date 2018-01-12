@@ -77,7 +77,7 @@ $magic = [
 
 
 
-$query=GraphQLPreprocessor::generate($magic);
+$query=GraphQLPreprocessor::generate($magic, true);
 echo $query;
 
 
