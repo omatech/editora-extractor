@@ -681,10 +681,8 @@ class EditoraData {
 		$attrs = self::$conn->fetchAll($sql);
 		foreach ($attrs as $attr_key => $attr_val) {
 			if (is_array($attr_val)) {
-				$value_row_or_null_array = self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);
-				
-				echo '!!! atri_id='.$attrs[$attr_key]['atri_id'].' amb tag '.$attrs[$attr_key]['atri_tag'].' amb valor '.$value_row_or_null_array['text_val']."\n";
-				
+				$value_row_or_null_array = self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);	
+				//echo '!!! atri_id='.$attrs[$attr_key]['atri_id'].' amb tag '.$attrs[$attr_key]['atri_tag'].' amb valor '.$value_row_or_null_array['text_val']."\n";				
 				if (!isset($attrs[$attr_key]['tag']) || (isset($attrs[$attr_key]['tag'])) && $attrs[$attr_key]['tag']==null)
 				{// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
 					$attrs[$attr_key]['id'] = $value_row_or_null_array['id'];
