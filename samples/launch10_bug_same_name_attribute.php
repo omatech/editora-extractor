@@ -21,72 +21,7 @@ $params = [
 $magic = [
     "type"      => "instance"
 ];
-	/*
-$params = [
-    'id'       => 441,
-    'preview'  => true,
-    'lang'  => 'en',
-    'metadata'  => true,
-    'debug'    => true
-];
 
-$magic = [
-    "type"      => "instance",
-    "relations" => [
-        "Page_blocks"=>[
-            "alias"=>"blocks",
-            "relations" =>[
-                "Grouplinksfiles_fileslinks"=>[
-                    "relations" =>[
-                        "Link_destinationpages"
-                    ]
-
-                ],
-                "Listiconelement_Iconelements"=>[
-                    "relations"=>[
-                        "Iconelement_destinationpages"=>[
-                            "relations" =>[
-                                "Link_destinationpages"
-                            ]
-                        ],
-                        "Iconelement_filesdestinationpage"
-                    ]
-                ],
-                "Banner_filesdestinationpage" =>[
-                    "relations" =>[
-                        "Link_destinationpages"
-                    ]
-                ],
-                "Groupblockjob_Blockjoboutstanding"=>[
-                    "relations"=>[
-                        "Blockjob_destinationpages"=>[
-                            "relations" =>[
-                                "Link_destinationpages"
-                            ]
-                        ]
-                    ]
-                ],
-                "Groupblockjob_Blockjob"=>[
-                    "relations"=>[
-                        "Blockjob_destinationpages"=>[
-                            "relations" =>[
-                                "Link_destinationpages"
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        "Subpages",
-        //Padre
-        "Section_Pages"=>[
-            "limit"=>1,
-            'filter'=>'fields:title|niceurl',
-        ]
-    ]
-];
-
-*/
 
 $query=GraphQLPreprocessor::generate($magic, true);
 echo $query;

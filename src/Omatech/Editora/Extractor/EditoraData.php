@@ -673,7 +673,7 @@ class EditoraData {
 				and i.class_id=ca.class_id
 				and a.id=ca.atri_id
 				$add_sql
-				order by if(a.language='ALL',0,1), atri_id
+				order by if(a.language='ALL',1,0), atri_id
 				";
 		self::debug($sql);
 		//$attrs=Model::get_data($sql);
