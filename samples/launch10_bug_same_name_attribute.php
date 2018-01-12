@@ -15,6 +15,7 @@ use Omatech\Editora\Extractor\GraphQLPreprocessor;
 $params = [
     'id'       => 441,
     'preview'  => true,
+    'lang'  => 'en',
     'metadata'  => true,
     'debug'    => true
 ];
