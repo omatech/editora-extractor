@@ -674,6 +674,7 @@ class EditoraData {
 				and i.class_id=ca.class_id
 				and a.id=ca.atri_id
 				$add_sql
+				order by if(a.language='ALL',0,1), atri_id
 				";
 		self::debug($sql);
 		//$attrs=Model::get_data($sql);
@@ -682,11 +683,14 @@ class EditoraData {
 		foreach ($attrs as $attr_key => $attr_val) {
 			if (is_array($attr_val)) {
 				$value_row_or_null_array=self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);
-				$attrs[$attr_key]['id']=$value_row_or_null_array['id'];
-				$attrs[$attr_key]['text_val']=$value_row_or_null_array['text_val'];
-				$attrs[$attr_key]['num_val']=$value_row_or_null_array['num_val'];
-				$attrs[$attr_key]['date_val']=$value_row_or_null_array['date_val'];
-				$attrs[$attr_key]['img_info']=$value_row_or_null_array['img_info'];
+				if (!array_key_exists($attr_key, $attrs) || $attrs[$attr_key]['id']==null)
+				{// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
+					$attrs[$attr_key]['id']=$value_row_or_null_array['id'];
+					$attrs[$attr_key]['text_val']=$value_row_or_null_array['text_val'];
+					$attrs[$attr_key]['num_val']=$value_row_or_null_array['num_val'];
+					$attrs[$attr_key]['date_val']=$value_row_or_null_array['date_val'];
+					$attrs[$attr_key]['img_info']=$value_row_or_null_array['img_info'];
+				}
 				
 				foreach ($attr_val as $subkey => $subval) {// apliquem la transformació per canviar nls a brs
 					//echo "key=$attr_key subkey=$subkey val=$subval\n";
