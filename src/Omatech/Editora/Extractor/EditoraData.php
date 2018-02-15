@@ -677,14 +677,23 @@ class EditoraData {
 				";
 		self::debug($sql);
 		//$attrs=Model::get_data($sql);
+		//echo "Instancia $id\n";
+		$tags_with_value = [];
 
 		$attrs = self::$conn->fetchAll($sql);
 		foreach ($attrs as $attr_key => $attr_val) {
 			if (is_array($attr_val)) {
-				$value_row_or_null_array = self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);	
+				$value_row_or_null_array = self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);
 				//echo '!!! atri_id='.$attrs[$attr_key]['atri_id'].' amb tag '.$attrs[$attr_key]['atri_tag'].' amb valor '.$value_row_or_null_array['text_val']."\n";				
-				if (!isset($attrs[$attr_key]['tag']) || (isset($attrs[$attr_key]['tag'])) && $attrs[$attr_key]['tag']==null)
-				{// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
+//				if (!isset($attrs[$attr_key]['tag']) || (isset($attrs[$attr_key]['tag'])) && $attrs[$attr_key]['tag']==null)
+				if (!in_array($attrs[$attr_key]['atri_tag'], $tags_with_value)) {// caso en que no tenemos el tag del atributo previamente del idioma ALL o lo tenemos a null
+					if ($value_row_or_null_array['id'] != null) {
+						$tags_with_value[] = $attrs[$attr_key]['atri_tag'];
+					}
+					//echo "Hasta ahora tenemos:\n";
+					//print_r($tags_with_value);
+					//echo "\n";
+
 					$attrs[$attr_key]['id'] = $value_row_or_null_array['id'];
 					$attrs[$attr_key]['text_val'] = $value_row_or_null_array['text_val'];
 					$attrs[$attr_key]['num_val'] = $value_row_or_null_array['num_val'];
@@ -711,7 +720,20 @@ class EditoraData {
 					}
 				}
 			}
+
+			//echo "El array de resultado tiene:\n";
+			//print_r($attrs);
 		}
+
+		foreach ($attrs as $key => $attr) {// Eliminamos los elementos que no han conseguido tener tag
+			if (!isset($attr['tag'])) {
+				unset($attrs[$key]);
+			}
+		}
+
+		//echo "El array de resultado tiene:\n";
+		//print_r($attrs);
+
 
 		if ($insert_in_cache) {
 			$attrs['cache_timestamp'] = time();
