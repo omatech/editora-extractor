@@ -14,6 +14,7 @@ class EditoraData {
 	private static $order = null;
 	private static $order_direction = null;
 	private static $debug = false;
+	private static $avoid_cache = false;
 	public static $debug_messages = '';
 	private static $preview = false;
 	private static $preview_date = 'NOW()';
@@ -38,6 +39,7 @@ class EditoraData {
 		self::$order = null;
 		self::$order_direction = null;
 		self::$debug = false;
+		self::$avoid_cache = false;
 
 		self::$preview = false;
 		self::$preview_date = 'NOW()';
@@ -161,6 +163,17 @@ class EditoraData {
 		}
 		$final_args['debug'] = self::$debug;
 
+		
+		if (isset($args['avoid_cache'])) {
+			self::$avoid_cache = $args['avoid_cache'];
+		} else {
+			if (isset($parent_args['avoid_cache'])) {
+				self::$avoid_cache = $parent_args['avoid_cache'];
+			}
+		}
+		$final_args['avoid_cache'] = self::$avoid_cache;
+
+		
 
 
 		if (isset($args['preview'])) {
@@ -437,32 +450,35 @@ class EditoraData {
 		$insert_in_cache = false;
 		$memcache_key = self::$conn->getDatabase() . ':' . $id . ':' . serialize($args);
 		self::debug("MEMCACHE:: using key $memcache_key instance update_timestamp=$update_timestamp\n");
-		if (!self::$preview) {// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
-			if (self::setupCache()) {
-				$memcache_value = self::$mc->get($memcache_key);
-				if ($memcache_value) {// existe, retornamos directamente si la info esta actualizada
-					self::debug(self::$type_of_cache . ":: instance last updated at $update_timestamp !!!!\n");
-					self::debug(self::$type_of_cache . ":: value for key $memcache_key\n");
-					self::debug(print_r($memcache_value, true));
-					if (isset($memcache_value['cache_timestamp'])) {// tenim el timestamp a l'objecte
-						if ($update_timestamp < $memcache_value['cache_timestamp']) {// l'objecte es fresc, el retornem
-							$memcache_value['cache_timestamp'] = time();
-							$memcache_value['cache_status'] = 'hit';
-							self::debug(self::$type_of_cache . ":: HIT lo renovamos!!!\n");
-							self::setCache($memcache_key, $memcache_value);
-							return $memcache_value;
-						} else {// no es fresc, l'esborrem i donem ordres de refrescar-lo												
-							self::debug(self::$type_of_cache . ":: purgamos el objeto ya que $update_timestamp es mayor o igual a " . $memcache_value['cache_timestamp'] . "\n");
+		if (!self::$avoid_cache)
+		{
+			if (!self::$preview) {// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
+				if (self::setupCache()) {
+					$memcache_value = self::$mc->get($memcache_key);
+					if ($memcache_value) {// existe, retornamos directamente si la info esta actualizada
+						self::debug(self::$type_of_cache . ":: instance last updated at $update_timestamp !!!!\n");
+						self::debug(self::$type_of_cache . ":: value for key $memcache_key\n");
+						self::debug(print_r($memcache_value, true));
+						if (isset($memcache_value['cache_timestamp'])) {// tenim el timestamp a l'objecte
+							if ($update_timestamp < $memcache_value['cache_timestamp']) {// l'objecte es fresc, el retornem
+								$memcache_value['cache_timestamp'] = time();
+								$memcache_value['cache_status'] = 'hit';
+								self::debug(self::$type_of_cache . ":: HIT lo renovamos!!!\n");
+								self::setCache($memcache_key, $memcache_value);
+								return $memcache_value;
+							} else {// no es fresc, l'esborrem i donem ordres de refrescar-lo												
+								self::debug(self::$type_of_cache . ":: purgamos el objeto ya que $update_timestamp es mayor o igual a " . $memcache_value['cache_timestamp'] . "\n");
+								self::$mc->delete($memcache_key);
+								$insert_in_cache = true;
+							}
+						} else {// no te el format correcte, l'expirem
+							self::debug(self::$type_of_cache . ":: purgamos el objeto ya que no tiene cache_timestamp\n");
 							self::$mc->delete($memcache_key);
 							$insert_in_cache = true;
 						}
-					} else {// no te el format correcte, l'expirem
-						self::debug(self::$type_of_cache . ":: purgamos el objeto ya que no tiene cache_timestamp\n");
-						self::$mc->delete($memcache_key);
+					} else {// no lo tenemos lo insertamos al final
 						$insert_in_cache = true;
 					}
-				} else {// no lo tenemos lo insertamos al final
-					$insert_in_cache = true;
 				}
 			}
 		}
@@ -596,36 +612,39 @@ class EditoraData {
 		$insert_in_cache = false;
 		$memcache_key = self::$conn->getDatabase() . ':' . $id . ':' . serialize($args);
 		self::debug("MEMCACHE:: using key $memcache_key instance update_timestamp=$update_timestamp\n");
-		if (!self::$preview) {// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
-			if (self::setupCache()) {
-				$memcache_value = self::$mc->get($memcache_key);
-				if ($memcache_value) {// existe, retornamos directamente si la info esta actualizada
-					self::debug(self::$type_of_cache . ":: instance last updated at $update_timestamp !!!!\n");
-					self::debug(self::$type_of_cache . ":: value for key $memcache_key\n");
-					self::debug(print_r($memcache_value, true));
-					if (isset($memcache_value['cache_timestamp'])) {// tenim el timestamp a l'objecte
-						if ($update_timestamp < $memcache_value['cache_timestamp']) {// l'objecte es fresc, el retornem
-							$memcache_value['cache_timestamp'] = time();
-							$memcache_value['cache_status'] = 'hit';
-							self::debug(self::$type_of_cache . ":: HIT lo renovamos!!!\n");
-							self::setCache($memcache_key, $memcache_value);
-							return $memcache_value;
-						} else {// no es fresc, l'esborrem i donem ordres de refrescar-lo												
-							self::debug(self::$type_of_cache . ":: purgamos el objeto ya que $update_timestamp es mayor o igual a " . $memcache_value['cache_timestamp'] . "\n");
+		if (!self::$avoid_cache)
+		{
+			if (!self::$preview) {// si no estem fent preview, mirem si esta activada la memcache i si existeix la key
+				if (self::setupCache()) {
+					$memcache_value = self::$mc->get($memcache_key);
+					if ($memcache_value) {// existe, retornamos directamente si la info esta actualizada
+						self::debug(self::$type_of_cache . ":: instance last updated at $update_timestamp !!!!\n");
+						self::debug(self::$type_of_cache . ":: value for key $memcache_key\n");
+						self::debug(print_r($memcache_value, true));
+						if (isset($memcache_value['cache_timestamp'])) {// tenim el timestamp a l'objecte
+							if ($update_timestamp < $memcache_value['cache_timestamp']) {// l'objecte es fresc, el retornem
+								$memcache_value['cache_timestamp'] = time();
+								$memcache_value['cache_status'] = 'hit';
+								self::debug(self::$type_of_cache . ":: HIT lo renovamos!!!\n");
+								self::setCache($memcache_key, $memcache_value);
+								return $memcache_value;
+							} else {// no es fresc, l'esborrem i donem ordres de refrescar-lo												
+								self::debug(self::$type_of_cache . ":: purgamos el objeto ya que $update_timestamp es mayor o igual a " . $memcache_value['cache_timestamp'] . "\n");
+								self::$mc->delete($memcache_key);
+								$insert_in_cache = true;
+							}
+						} else {// no te el format correcte, l'expirem
+							self::debug(self::$type_of_cache . ":: purgamos el objeto ya que no tiene cache_timestamp\n");
 							self::$mc->delete($memcache_key);
 							$insert_in_cache = true;
 						}
-					} else {// no te el format correcte, l'expirem
-						self::debug(self::$type_of_cache . ":: purgamos el objeto ya que no tiene cache_timestamp\n");
-						self::$mc->delete($memcache_key);
+					} else {// no lo tenemos lo insertamos al final
 						$insert_in_cache = true;
 					}
-				} else {// no lo tenemos lo insertamos al final
-					$insert_in_cache = true;
 				}
 			}
 		}
-
+		
 		$filter = 'all';
 		if (isset($args['filter']))
 			$filter = $args['filter'];
