@@ -10,7 +10,6 @@ require_once __DIR__ . '/../conf/bootstrap.php';
 
 use Omatech\Editora\Extractor\Extractor;
 use Omatech\Editora\Extractor\GraphQLPreprocessor;
-use Omatech\Editora\Extractor\Extractor;
 
 $start = microtime(true);
 $params = ['id' => 25116, 'lang' => 'ca', 'debug' => true, 'metadata' => true];
