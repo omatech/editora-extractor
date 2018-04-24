@@ -1,12 +1,17 @@
 <?php
 
-$autoload_location = __DIR__ . '/../vendor/autoload.php';
-if (!is_file($autoload_location))
-	$autoload_location = '../../../autoload.php';
+$autoload_location = '/vendor/autoload.php';
+while (!is_file(__DIR__.$autoload_location)) { $autoload_location='/..'.$autoload_location;}
 
-require_once $autoload_location;
-require_once __DIR__ . '/../conf/config.php';
-require_once __DIR__ . '/../conf/bootstrap.php';
+$config_location = '/conf/config.php';
+while (!is_file(__DIR__.$config_location)) { $config_location='/..'.$config_location;}
+
+$bootstrap_location = '/conf/bootstrap.php';
+while (!is_file(__DIR__.$bootstrap_location)) { $bootstrap_location='/..'.$bootstrap_location;}
+
+require_once __DIR__.$autoload_location;
+require_once __DIR__.$config_location;
+require_once __DIR__.$bootstrap_location;
 
 use Omatech\Editora\Extractor\Extractor;
 use Omatech\Editora\Extractor\GraphQLPreprocessor;
