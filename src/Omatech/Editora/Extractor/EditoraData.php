@@ -328,7 +328,11 @@ class EditoraData {
 				$row['link'] = '/' . self::$lang . '/' . $niceurl_row['niceurl'];
 			}
 		} else {
-			$row['link'] = '/' . self::$id;
+            if (self::$lang == 'ALL') {
+                $row['link'] =  '/' . self::$id;
+            } else {
+                $row['link'] =  '/' . self::$lang .'/' . self::$id;
+            }
 		}
 
 		//print_r([$id=>$row]);
