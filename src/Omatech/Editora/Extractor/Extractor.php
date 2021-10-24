@@ -34,7 +34,7 @@ class Extractor
 				$result=GraphQL::execute(EditoraSchema::build(), $query, null, null, $params);
 				$extra_error_message='';
 				
-				if ($ferretizer)
+				if ($ferretizer && isset($result['data']))
 				{
 						$show_metadata=false;
 						if ($params['metadata'])
