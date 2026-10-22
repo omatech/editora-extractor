@@ -74,7 +74,7 @@ class EditoraData {
 				from omp_lookups_values 
 				where id=$id
 				";
-		$row = self::$conn->fetchAssoc($sql);
+		$row = self::$conn->fetchAssociative($sql);
 		if (!$row) {
 			return null;
 		}
@@ -308,7 +308,7 @@ class EditoraData {
 		self::debug("SQL a getInstance\n");
 		self::debug($sql);
 		//$row=Model::get_one($sql);
-		$row = self::$conn->fetchAssoc($sql);
+		$row = self::$conn->fetchAssociative($sql);
 		if (!$row)
 			return null;
 
@@ -320,7 +320,7 @@ class EditoraData {
 				where inst_id=" . self::$id . "
 				and language='" . self::$lang . "'";
 		//$niceurl_row=Model::get_one($sql);
-		$niceurl_row = self::$conn->fetchAssoc($sql);
+		$niceurl_row = self::$conn->fetchAssociative($sql);
 		if ($niceurl_row) {
 			if (self::$lang == 'ALL') {
 				$row['link'] = '/' . $niceurl_row['niceurl'];
@@ -364,7 +364,7 @@ class EditoraData {
 		//echo $sql;die;
 		self::debug($sql);
 		//$row=Model::get_one($sql);
-		$row = self::$conn->fetchAssoc($sql);
+		$row = self::$conn->fetchAssociative($sql);
 		if (!$row)
 			return null;
 		$row['args'] = $args;
@@ -420,7 +420,7 @@ class EditoraData {
 						";
 			//echo $sql;die;
 			//$row=Model::get_one($sql);
-			$row = self::$conn->fetchAssoc($sql);
+			$row = self::$conn->fetchAssociative($sql);
 		}
 
 
@@ -556,7 +556,7 @@ class EditoraData {
 		self::debug($sql);
 		//$attrs=Model::get_data($sql);
 
-		$attrs = self::$conn->fetchAll($sql);
+		$attrs = self::$conn->fetchAllAssociative($sql);
 		foreach ($attrs as $attr_key => $attr_val) {
 			if (is_array($attr_val)) {
 				foreach ($attr_val as $subkey => $subval) {// apliquem la transformació per canviar nls a brs
@@ -571,7 +571,7 @@ class EditoraData {
 						if ($subval == 'D') {
 							$attrs[$attr_key]['text_val'] = $attrs[$attr_key]['date_val'];
 						}
-						if (($subval == 'F' || $subval == 'I') && substr($attrs[$attr_key]['text_val'], 0, 8) == 'uploads/') {// Backwards compatibility with editoras that save uploads/ instead of /uploads/
+						if (($subval == 'F' || $subval == 'I') && substr((string) $attrs[$attr_key]['text_val'], 0, 8) == 'uploads/') {// Backwards compatibility with editoras that save uploads/ instead of /uploads/
 							$attrs[$attr_key]['text_val'] = '/' . $attrs[$attr_key]['text_val'];
 						}
 					}
@@ -703,7 +703,7 @@ class EditoraData {
 		//echo "Instancia $id\n";
 		$tags_with_value = [];
 
-		$attrs = self::$conn->fetchAll($sql);
+		$attrs = self::$conn->fetchAllAssociative($sql);
 		foreach ($attrs as $attr_key => $attr_val) {
 			if (is_array($attr_val)) {
 				$value_row_or_null_array = self::get_value_row_or_null_array($attrs[$attr_key]['inst_id'], $attrs[$attr_key]['atri_id'], $attrs[$attr_key]['atri_type']);
@@ -736,7 +736,7 @@ class EditoraData {
 							if ($subval == 'D') {
 								$attrs[$attr_key]['text_val'] = $attrs[$attr_key]['date_val'];
 							}
-							if (($subval == 'F' || $subval == 'I') && substr($attrs[$attr_key]['text_val'], 0, 8) == 'uploads/') {// Backwards compatibility with editoras that save uploads/ instead of /uploads/
+							if (($subval == 'F' || $subval == 'I') && substr((string) $attrs[$attr_key]['text_val'], 0, 8) == 'uploads/') {// Backwards compatibility with editoras that save uploads/ instead of /uploads/
 								$attrs[$attr_key]['text_val'] = '/' . $attrs[$attr_key]['text_val'];
 							}
 						}
@@ -778,8 +778,9 @@ class EditoraData {
 			limit 1
 			";
 		self::debug($sql);
-		$values = self::$conn->fetchAssoc($sql);
+		$values = self::$conn->fetchAssociative($sql);
 		if (!$values) {
+			$values = [];
 			$values['id'] = null;
 			$values['text_val'] = null;
 			$values['date_val'] = null;
@@ -798,7 +799,7 @@ class EditoraData {
 				limit 1
 				";
 				self::debug($sql);
-				$lookup_id = self::$conn->fetchColumn($sql);
+				$lookup_id = self::$conn->fetchOne($sql);
 				$values['id'] = -1;
 				$values['num_val'] = $lookup_id;
 			}
@@ -828,7 +829,7 @@ class EditoraData {
 				and r.tag='" . self::$tag . "'
 				";
 		//self::debug($sql);
-		$rel_row = self::$conn->fetchAssoc($sql);
+		$rel_row = self::$conn->fetchAssociative($sql);
 		if ($rel_row && $args['direction'] != 'parents') {// la instancia es pare, treiem els fills
 			$rel_row['direction'] = 'children';
 			$rel_row['limit'] = self::$limit;
@@ -848,7 +849,7 @@ class EditoraData {
 						";
 			//self::debug($sql);
 			//$rel_row=Model::get_one($sql);
-			$rel_row = self::$conn->fetchAssoc($sql);
+			$rel_row = self::$conn->fetchAssociative($sql);
 			if ($rel_row) {
 				$rel_row['direction'] = 'parents';
 				$rel_row['limit'] = self::$limit;
@@ -874,7 +875,7 @@ class EditoraData {
 		$args = self::parse_args($args, $parent_args);
 
 		$instances = array();
-		$rows = self::$conn->fetchAll($sql_of_instances);
+		$rows = self::$conn->fetchAllAssociative($sql_of_instances);
 		foreach ($rows as $row) {
 			$args['id'] = $row['id'];
 			$instance = self::getInstance($args, $parent_args);
@@ -937,7 +938,7 @@ class EditoraData {
 //				print_r($args);
 //				echo "$sql\n";
 		return self::getAllInstances($sql, $args, $parent_args);
-		//return self::$conn->fetchAll($sql);				
+		//return self::$conn->fetchAllAssociative($sql);				
 	}
 
 	static function getInstacesOfClass($class_id, $args, $parent_args) {
@@ -984,7 +985,7 @@ class EditoraData {
 //				print_r($args);
 //				echo "$sql\n";
 		return self::getAllInstances($sql, $args, $parent_args);
-		//return self::$conn->fetchAll($sql);				
+		//return self::$conn->fetchAllAssociative($sql);				
 	}
 
 	static function getInstacesOfSearch($query, $args, $parent_args) {
@@ -1038,7 +1039,7 @@ class EditoraData {
 		//print_r($args);
 		//echo "$sql\n";
 		return self::getAllInstances($sql, $args, $parent_args);
-		//return self::$conn->fetchAll($sql);				
+		//return self::$conn->fetchAllAssociative($sql);				
 	}
 
 	static function getRelated($direction, $rel_id, $inst_id, $args, $parent_args) {
@@ -1079,7 +1080,7 @@ class EditoraData {
 		self::debug($parent_args);
 		self::debug($sql . "\n");
 		return self::getAllInstances($sql, $args, $parent_args);
-		//return self::$conn->fetchAll($sql);				
+		//return self::$conn->fetchAllAssociative($sql);				
 	}
 
 	static function get_parents($rel_id, $inst_id, $args, $parent_args) {
@@ -1106,7 +1107,7 @@ class EditoraData {
 		self::debug($parent_args);
 		self::debug($sql . "\n");
 		return self::getAllInstances($sql, $args, $parent_args);
-		//return self::$conn->fetchAll($sql);
+		//return self::$conn->fetchAllAssociative($sql);
 	}
 
 }

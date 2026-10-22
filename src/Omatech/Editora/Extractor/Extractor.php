@@ -2,6 +2,10 @@
 namespace Omatech\Editora\Extractor;
 
 use GraphQL\GraphQL;
+use GraphQL\Language\AST\NamedTypeNode;
+use GraphQL\Language\AST\NonNullTypeNode;
+use GraphQL\Language\AST\OperationDefinitionNode;
+use GraphQL\Language\Parser;
 use Omatech\Editora\Extractor\EditoraData;
 use Omatech\Editora\Extractor\EditoraSchema;
 use Omatech\Editora\Extractor\Ferretizer;
@@ -21,6 +25,7 @@ class Extractor
 								'user' => $conn['dbuser'],
 								'password' => $conn['dbpass'],
 								'host' => $conn['dbhost'],
+								'port' => $conn['dbport'] ?? 3306,
 								'driver' => 'pdo_mysql',
 								'charset' => 'utf8mb4'
 						);
@@ -31,13 +36,13 @@ class Extractor
 		
 		public function extract ($query, $params, $output='array', $ferretizer=true)
 		{// output array as "array", default or json
-				$result=GraphQL::execute(EditoraSchema::build(), $query, null, null, $params);
+				$result=GraphQL::executeQuery(EditoraSchema::build(), $query, null, null, self::coerce_variables($query, $params))->toArray();
 				$extra_error_message='';
 				
 				if ($ferretizer && isset($result['data']))
 				{
 						$show_metadata=false;
-						if ($params['metadata'])
+						if (!empty($params['metadata']))
 						{
 								$show_metadata=true;
 						}
@@ -56,7 +61,7 @@ class Extractor
 						}
 				}
 				
-				if ($params['debug'])
+				if (!empty($params['debug']))
 				{
 						$this->debug_messages=EditoraData::$debug_messages;
 						$this->debug_messages.=$extra_error_message;
@@ -72,4 +77,32 @@ class Extractor
 						return $result;
 				}				
 		}		
+
+		// graphql-php 15 no accepta "123" per a una variable Int; adaptem els params als tipus declarats a la query
+		private static function coerce_variables($query, $params)
+		{
+				$variables=[];
+				foreach (Parser::parse($query)->definitions as $definition)
+				{
+						if (!$definition instanceof OperationDefinitionNode) continue;
+						foreach ($definition->variableDefinitions as $variable)
+						{
+								$name=$variable->variable->name->value;
+								if (!array_key_exists($name, $params)) continue;
+								$type=$variable->type instanceof NonNullTypeNode ? $variable->type->type : $variable->type;
+								$value=$params[$name];
+								if ($value!==null && $type instanceof NamedTypeNode)
+								{
+										switch ($type->name->value)
+										{
+												case 'Int': $value=is_numeric($value) ? (int)$value : null; break;
+												case 'Boolean': $value=(bool)$value; break;
+												case 'String': $value=is_scalar($value) ? (string)$value : $value; break;
+										}
+								}
+								$variables[$name]=$value;
+						}
+				}
+				return $variables;
+		}
 }

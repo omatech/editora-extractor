@@ -1,7 +1,7 @@
 <?php
 namespace Omatech\Editora\Extractor;
 
-use GraphQL\Schema;
+use GraphQL\Type\Schema;
 use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\NonNull;
