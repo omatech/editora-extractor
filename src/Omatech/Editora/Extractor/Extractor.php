@@ -79,6 +79,7 @@ class Extractor
 		}		
 
 		// graphql-php 15 no accepta "123" per a una variable Int; adaptem els params als tipus declarats a la query
+		// amb les mateixes regles que feia servir graphql-php 0.7 (parseValue d'Int, Boolean i String)
 		private static function coerce_variables($query, $params)
 		{
 				$variables=[];
@@ -95,9 +96,14 @@ class Extractor
 								{
 										switch ($type->name->value)
 										{
-												case 'Int': $value=is_numeric($value) ? (int)$value : null; break;
+												case 'Int':
+														if (is_bool($value) || (is_numeric($value) && $value<=PHP_INT_MAX && $value>=PHP_INT_MIN)) $value=(int)$value;
+														break; // si no és vàlid es deixa tal qual i graphql-php el rebutja, com la 0.7
 												case 'Boolean': $value=(bool)$value; break;
-												case 'String': $value=is_scalar($value) ? (string)$value : $value; break;
+												case 'String':
+														if (is_bool($value)) $value=$value ? 'true' : 'false';
+														elseif (is_scalar($value)) $value=(string)$value;
+														break;
 										}
 								}
 								$variables[$name]=$value;
