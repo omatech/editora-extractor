@@ -72,9 +72,9 @@ class EditoraData {
 	static function get_lookup_value($id) {
 		$sql = "select value
 				from omp_lookups_values 
-				where id=$id
+				where id=:id
 				";
-		$row = self::$conn->fetchAssociative($sql);
+		$row = self::$conn->fetchAssociative($sql, ['id' => $id]);
 		if (!$row) {
 			return null;
 		}
